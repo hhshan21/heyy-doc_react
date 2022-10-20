@@ -3,12 +3,17 @@ import React from "react";
 import "./App.css";
 import Footer from "../src/components/partials/footer/Footer";
 import SiteHeader from "./components/partials/siteHeader/SiteHeader";
+import Home from "./pages/home/Home";
 
 function App() {
   return (
     <div className="App">
       <SiteHeader />
-      <h1>Hello</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} /> */}
+      </Routes>
       <Footer />
     </div>
   );
