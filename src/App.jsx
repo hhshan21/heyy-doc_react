@@ -3,11 +3,11 @@ import React from "react";
 import "./App.css";
 import Footer from "../src/components/partials/footer/Footer";
 import SiteHeader from "./components/partials/siteHeader/SiteHeader";
-import Homepage from "./pages/homepage/Homepage";
-import Doctors from "./pages/doctors/Doctors";
-import MyBookings from "./pages/myBookings/MyBookings";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
+import Homepage from "./components/homepage/Homepage";
+import Doctors from "./components/doctors/Doctors";
+import MyBookings from "./components/myBookings/MyBookings";
+import Login from "./components/login/Login";
+import Register from "./components/register/Register";
 
 function App() {
   return (
