@@ -99,25 +99,33 @@ const SiteHeader = () => {
           <ul class="navbar-nav mr-auto ml-4">
             <li class="nav-item">
               <Link to="/doctors" style={{ textDecoration: "none" }}>
-                <a class="nav-link">DOCTORS</a>
+                <a class="nav-link" rel="noopener noreferrer">
+                  DOCTORS
+                </a>
               </Link>
             </li>
-            <li class="nav-item ml-4">
+            <li class="nav-item">
               <Link to="/myBookings" style={{ textDecoration: "none" }}>
-                <a class="nav-link">MY BOOKINGS</a>
+                <a class="nav-link" rel="noopener noreferrer">
+                  MY BOOKINGS
+                </a>
               </Link>
             </li>
           </ul>
-          <span class="navbar-text mr-4">
-            <ul class="navbar-nav mr-auto">
+          <span class="navbar-text">
+            <ul class="navbar-nav mr-auto ml-4">
               <li class="nav-item">
                 <Link to="/register" style={{ textDecoration: "none" }}>
-                  <a class="nav-link mr-4">REGISTER</a>
+                  <a class="nav-link" rel="noopener noreferrer">
+                    REGISTER
+                  </a>
                 </Link>
               </li>
               <li class="nav-item">
                 <Link to="/login" style={{ textDecoration: "none" }}>
-                  <a class="nav-link">LOGIN</a>
+                  <a class="nav-link" rel="noopener noreferrer">
+                    LOGIN
+                  </a>
                 </Link>
               </li>
             </ul>
