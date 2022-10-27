@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../assets/images/Logo.png";
+import logo from "../../../assets/images/LogoS.png";
 import "./siteHeader.css";
 import { useNavigate, useLocation } from "react-router-dom";
 // import { toast } from "react-toastify";
