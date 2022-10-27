@@ -1,17 +1,17 @@
 // import { useState } from "react";
-// import { Link } from "react-router-dom";
-// import Login from "../../login/Login";
-// import Register from "../../register/Register";
-// import logo from "../../../assets/images/house.png";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/images/Logo.png";
 import "./siteHeader.css";
-// import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 // import { toast } from "react-toastify";
 // import jwt_decode from "jwt-decode";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fontsource/lexend-deca";
 
 const SiteHeader = () => {
   // const [username, setUsername] = useState("");
-  // const location = useLocation();
-  // const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
   // const [navState, setNavState] = useState(false);
   // const [openLogin, setOpenLogin] = useState(false);
   // const [openRegister, setOpenRegister] = useState(false);
@@ -78,79 +78,53 @@ const SiteHeader = () => {
   // };
 
   return (
-    <div>Siteheader</div>
+    <div className="siteHeader">
+      <nav class="navbar navbar-expand-lg bg-white">
+        <Link to="/">
+          <img className="header__icon" src={logo} alt="Heyy Doc" />
+        </Link>
 
-    // <div>
-    //   <div className="header">
-    //     <Link to="/">
-    //       <img className="header__icon" src={logo} alt=" Airbnb" />
-    //     </Link>
-
-    //     <div className="header__center">
-    //       <input type="text" />
-    //     </div>
-
-    //     <div className="header__right">
-    //       {isAuth && (
-    //         <p style={{ marginRight: "2em", marginBottom: "0" }}>{username}</p>
-    //       )}
-    //       <span className="material-symbols-outlined" onClick={navStateToggle}>
-    //         {" "}
-    //         account_circle{" "}
-    //       </span>
-    //       {navState &&
-    //         (isAuth ? (
-    //           <div className="rightPop">
-    //             <p
-    //               className="rightPopText"
-    //               onClick={() => {
-    //                 navigate("users/my/trips");
-    //               }}
-    //             >
-    //               My trips
-    //             </p>
-    //             <p
-    //               className="rightPopText"
-    //               onClick={() => {
-    //                 navigate("users/my/listings");
-    //                 navStateToggle();
-    //               }}
-    //             >
-    //               My listings
-    //             </p>
-    //             <p
-    //               className="rightPopText"
-    //               onClick={() => {
-    //                 navigate("/users/my/profile");
-    //                 navStateToggle();
-    //               }}
-    //             >
-    //               My Profile
-    //             </p>
-    //             <p className="rightPopText" onClick={handleLogout}>
-    //               Logout
-    //             </p>
-    //           </div>
-    //         ) : (
-    //           <div className="rightPop">
-    //             <p className="rightPopText" onClick={handleOpenRegister}>
-    //               Register
-    //             </p>
-    //             <p className="rightPopText" onClick={handleOpenLogin}>
-    //               Login
-    //             </p>
-    //           </div>
-    //         ))}
-    //     </div>
-    //   </div>
-    //   {openLogin && <Login toggle={handleLoginToggle} />}
-    //   {openRegister && (
-    //     <Register
-    //       toggle={handleRegisterToggle}
-    //       afterRegister={handleAfterRegister}
-    //     />
-    //   )}
-    // </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto ml-4">
+            <li class="nav-item">
+              <Link to="/doctors" style={{ textDecoration: "none" }}>
+                <a class="nav-link">DOCTORS</a>
+              </Link>
+            </li>
+            <li class="nav-item ml-4">
+              <Link to="/myBookings" style={{ textDecoration: "none" }}>
+                <a class="nav-link">MY BOOKINGS</a>
+              </Link>
+            </li>
+          </ul>
+          <span class="navbar-text mr-4">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  <a class="nav-link mr-4">REGISTER</a>
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  <a class="nav-link">LOGIN</a>
+                </Link>
+              </li>
+            </ul>
+          </span>
+        </div>
+      </nav>
+    </div>
   );
 };
 
