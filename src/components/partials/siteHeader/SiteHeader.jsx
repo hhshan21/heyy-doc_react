@@ -78,9 +78,8 @@ const SiteHeader = () => {
   // };
 
   return (
-    <div>
-      <h1>This is the Siteheader</h1>
-    </div>
+    <div>Siteheader</div>
+
     // <div>
     //   <div className="header">
     //     <Link to="/">

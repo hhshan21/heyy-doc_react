@@ -1,4 +1,4 @@
-/* .header {
+.header {
   margin-top: 1rem;
   padding-bottom: 1em;
   display: flex;
@@ -54,7 +54,7 @@
   font-size: 14px;
   padding: 8px 0;
   border-radius: 8px;
-  z-index: 999; 
+  z-index: 999;
 }
 
 .rightPopText {
@@ -66,4 +66,3 @@
   color: #ffffff;
   background: rgba(0, 0, 0, 0.4);
 }
-*/
