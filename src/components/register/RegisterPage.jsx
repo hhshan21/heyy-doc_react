@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import RegisterForm from "./RegisterForm";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const [catchError, setCatchError] = useState(null);
