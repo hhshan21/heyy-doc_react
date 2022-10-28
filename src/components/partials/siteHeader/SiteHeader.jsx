@@ -79,13 +79,13 @@ const SiteHeader = () => {
 
   return (
     <div className="siteHeader">
-      <nav class="navbar navbar-expand-lg bg-white">
+      <nav className="navbar navbar-expand-lg bg-white">
         <Link to="/">
           <img className="header__icon" src={logo} alt="Heyy Doc" />
         </Link>
 
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarText"
@@ -93,39 +93,31 @@ const SiteHeader = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav mr-auto ml-4">
-            <li class="nav-item">
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav mr-auto ml-4">
+            <li className="nav-item">
               <Link to="/doctors" style={{ textDecoration: "none" }}>
-                <a class="nav-link" rel="noopener noreferrer">
-                  DOCTORS
-                </a>
+                DOCTORS
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/myBookings" style={{ textDecoration: "none" }}>
-                <a class="nav-link" rel="noopener noreferrer">
-                  MY BOOKINGS
-                </a>
+                MY BOOKINGS
               </Link>
             </li>
           </ul>
-          <span class="navbar-text">
-            <ul class="navbar-nav mr-auto ml-4">
-              <li class="nav-item">
+          <span className="navbar-text">
+            <ul className="navbar-nav mr-auto ml-4">
+              <li className="nav-item">
                 <Link to="/register" style={{ textDecoration: "none" }}>
-                  <a class="nav-link" rel="noopener noreferrer">
-                    REGISTER
-                  </a>
+                  REGISTER
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/login" style={{ textDecoration: "none" }}>
-                  <a class="nav-link" rel="noopener noreferrer">
-                    LOGIN
-                  </a>
+                  LOGIN
                 </Link>
               </li>
             </ul>

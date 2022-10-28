@@ -10,9 +10,8 @@ import "./RegisterForm.css";
 const RegisterForm = (props) => {
   // form validation rules
   const validationSchema = yup.object().shape({
-    firstname: yup.string().min(2, "Mininum 2 characters").required(),
-    lastname: yup.string().min(2, "Mininum 2 characters").required(),
-    // gender: yup.string().required("Gender is required"),
+    firstName: yup.string().min(1, "Mininum 1 character").required(),
+    lastName: yup.string().min(2, "Mininum 2 characters").required(),
     email: yup.string().email("Valid email is required").required(),
     password: yup
       .string()
@@ -30,8 +29,8 @@ const RegisterForm = (props) => {
 
   //actual input names
   const defaultValues = {
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmpassword: "",
@@ -43,7 +42,7 @@ const RegisterForm = (props) => {
   } = useForm({ resolver: yupResolver(validationSchema), defaultValues });
 
   const onSubmit = async (data) => {
-    console.log("From RegisterForm:", data);
+    console.log("In reg form:", data);
     props.data(data);
   };
 
@@ -58,10 +57,10 @@ const RegisterForm = (props) => {
         <div>
           <Box mb={3}>
             <Controller
-              name="firstname" //actual input
+              name="firstName" //actual input
               control={control} //take place of the register RHF
               render={({
-                //takes a function and rturn a react element
+                //takes a function and return a react element
                 field, //this error will be displyed in formstate errors
               }) => (
                 <TextField
@@ -70,12 +69,12 @@ const RegisterForm = (props) => {
                   label={"First Name:"} //label in the box
                   variant="outlined"
                   fullWidth
-                  autoComplete="firstname"
+                  autoComplete="firstName"
                   autoFocus
                   // error={!!error} //convert obj into a bool
                   // helperText={error ? error.message : null}
-                  error={errors.firstname ? true : false}
-                  helperText={errors.firstname?.message}
+                  error={errors.firstName ? true : false}
+                  helperText={errors.firstName?.message}
                   {...field}
                 />
               )}
@@ -83,7 +82,7 @@ const RegisterForm = (props) => {
           </Box>
           <Box mb={3}>
             <Controller
-              name="lastname" //actual input
+              name="lastName" //actual input
               control={control} //take place of the register RHF
               render={({
                 field, //this error will be displyed in formstate errors
@@ -92,12 +91,12 @@ const RegisterForm = (props) => {
                   label={"Last Name:"} //label in the box
                   variant="outlined"
                   fullWidth
-                  autoComplete="lastname"
+                  autoComplete="lastName"
                   autoFocus
                   // error={!!error} //convert obj into a bool
                   // helperText={error ? error.message : null}
-                  error={errors.lastname ? true : false}
-                  helperText={errors.lastname?.message}
+                  error={errors.lastName ? true : false}
+                  helperText={errors.lastName?.message}
                   {...field}
                 />
               )}
@@ -163,8 +162,8 @@ const RegisterForm = (props) => {
                   // helperText={error ? error.message : null}
                   error={errors.confirmpassword ? true : false}
                   helperText={errors.confirmpassword?.message}
-                  {...field}
                   type={confirmpasswordShow ? "text" : "confirmpassword"}
+                  {...field}
                 />
               )}
             />

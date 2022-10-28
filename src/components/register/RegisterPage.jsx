@@ -9,18 +9,18 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log("from loginpage:", data);
+    console.log("From reg form compononent in reg pg:", data);
     setCatchError(null);
     try {
       const res = await axios.post(
-        "https://ourairbnb.herokuapp.com/api/v1/user/register",
+        "https://heyy-doc-backend.herokuapp.com/api/v1/user/register",
         data
       );
       console.log("Server Respond:", res);
 
       if (res.status === 200 || res.status === 201) {
         //navigate to home
-        if (location.pathname === "/Register") {
+        if (location.pathname === "/register") {
           navigate("/");
         }
       }
