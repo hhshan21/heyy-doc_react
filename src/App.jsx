@@ -7,7 +7,7 @@ import Homepage from "./components/homepage/Homepage";
 import Doctors from "./components/doctors/Doctors";
 import MyBookings from "./components/myBookings/MyBookings";
 import Login from "./components/login/Login";
-import Register from "./components/register/Register";
+import Register from "./components/register/RegisterPage";
 
 function App() {
   return (
