@@ -2,10 +2,10 @@
   border-bottom: 1px solid lightgray;
 }
 
-.navbar-expand-lg .navbar-nav .nav-link {
-  color: #0cb4ea;
+.navbar-expand-lg .navbar-nav .nav-item {
   font-family: "Lexend Deca";
   font-weight: 900;
+  padding-right: 2rem;
 }
 
 .header__icon {
