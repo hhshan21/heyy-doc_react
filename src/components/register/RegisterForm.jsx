@@ -34,6 +34,7 @@ const RegisterForm = (props) => {
     email: "",
     password: "",
     confirmpassword: "",
+    drugAllergies: "",
   };
   const {
     control,
@@ -189,7 +190,7 @@ const RegisterForm = (props) => {
               )}
             />
           </Box>
-          <p>
+          <p style={{ fontSize: "110%" }}>
             Already have an account?{" "}
             <Link to="/login" style={{ color: "#0cb4ea" }}>
               Login here.
@@ -205,6 +206,7 @@ const RegisterForm = (props) => {
               fontWeight: "900",
               width: "50%",
               marginLeft: "25%",
+              fontSize: "110%",
             }}
           >
             CREATE ACCOUNT

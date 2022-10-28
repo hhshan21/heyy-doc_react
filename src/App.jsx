@@ -6,7 +6,7 @@ import SiteHeader from "./components/partials/siteHeader/SiteHeader";
 import Homepage from "./components/homepage/Homepage";
 import Doctors from "./components/doctors/Doctors";
 import MyBookings from "./components/myBookings/MyBookings";
-import Login from "./components/login/Login";
+import Login from "./components/login/LoginPage";
 import Register from "./components/register/RegisterPage";
 
 function App() {
