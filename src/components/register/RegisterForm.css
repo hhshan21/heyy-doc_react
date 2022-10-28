@@ -1,0 +1,20 @@
+.regForm {
+  width: 50%;
+  margin-left: 25%;
+  font-family: "Lexend Deca";
+}
+
+p {
+  text-align: center;
+}
+
+.regFormHeader {
+  color: #0cb4ea;
+  font-family: "Lexend Deca";
+  font-weight: 900;
+}
+
+.regBtn {
+  width: 50%;
+  margin-left: 25%;
+}
