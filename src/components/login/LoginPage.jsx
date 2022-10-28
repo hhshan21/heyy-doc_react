@@ -1,16 +1,25 @@
 import LoginForm from "../../components/login/LoginForm";
 import { useNavigate, useLocation } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const [cookies, setCookies] = useCookies(["auth_token"]);
+
+  useEffect(() => {
+    console.log("current cookies: ", cookies);
+    setCookies("auth_token", "love_mcspicy");
+    console.log("cookies after setting: ", cookies);
+  }, []);
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
     setCatchError(null);
+
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/user/login",
