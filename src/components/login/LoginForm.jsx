@@ -3,6 +3,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button, Box } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import "./LoginForm.css";
 
 const LoginForm = (props) => {
   // form validation rules
@@ -29,9 +31,9 @@ const LoginForm = (props) => {
   };
 
   return (
-    <div>
+    <div className="loginForm">
       <div>
-        <h1 className="text-center pb-3 m-0 mb-3">Login</h1>
+        <h1 className="text-center pb-3 m-0 mb-3 loginFormHeader">Login</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box mb={3}>
@@ -43,7 +45,7 @@ const LoginForm = (props) => {
               field, //this error will be displyed takes over form state errors
             }) => (
               <TextField
-                label={"email"} //label in the box
+                label={"Email:"} //label in the box
                 variant="outlined"
                 fullWidth
                 autoComplete="email"
@@ -66,7 +68,7 @@ const LoginForm = (props) => {
               field, //this error will be displyed takes over form state errors
             }) => (
               <TextField
-                label={"password"} //label in the box
+                label={"Password:"} //label in the box
                 variant="outlined"
                 fullWidth
                 autoComplete="password"
@@ -82,7 +84,24 @@ const LoginForm = (props) => {
             )}
           />
         </Box>
-        <Button type="submit" variant="contained">
+        <p style={{ fontSize: "110%" }}>
+          I do not have an{" "}
+          <Link to="/register" style={{ color: "#0cb4ea" }}>
+            account.
+          </Link>
+        </p>
+        <Button
+          type="submit"
+          variant="contained"
+          style={{
+            backgroundColor: "#0cb4ea",
+            fontFamily: "Lexend Deca",
+            fontWeight: "900",
+            width: "50%",
+            marginLeft: "25%",
+            fontSize: "110%",
+          }}
+        >
           Login
         </Button>
       </form>
