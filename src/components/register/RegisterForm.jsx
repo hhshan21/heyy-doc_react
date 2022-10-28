@@ -10,7 +10,7 @@ import "./RegisterForm.css";
 const RegisterForm = (props) => {
   // form validation rules
   const validationSchema = yup.object().shape({
-    firstname: yup.string().min(4, "Mininum 4 characters").required(),
+    firstname: yup.string().min(2, "Mininum 2 characters").required(),
     lastname: yup.string().min(2, "Mininum 2 characters").required(),
     // gender: yup.string().required("Gender is required"),
     email: yup.string().email("Valid email is required").required(),
@@ -22,25 +22,17 @@ const RegisterForm = (props) => {
       .string()
       .required("Confirm Password is required")
       .oneOf([yup.ref("password")], "Passwords must match"),
-    about_me: yup.string().required("About Me is required"),
   });
 
   const [passwordShow, setPasswordShow] = useState(false);
-  const togglePasswordVisiblity = () => {
-    setPasswordShow(passwordShow ? false : true);
-  };
+
   const [confirmpasswordShow, setConfirmPasswordShow] = useState(false);
-  const toggleConfirmPasswordVisiblity = () => {
-    setConfirmPasswordShow(confirmpasswordShow ? false : true);
-  };
 
   //actual input names
   const defaultValues = {
     firstname: "",
     lastname: "",
     email: "",
-    // gender: "",
-    about_me: "",
     password: "",
     confirmpassword: "",
   };
@@ -191,8 +183,8 @@ const RegisterForm = (props) => {
                   autoFocus
                   // error={!!error} //convert obj into a bool
                   // helperText={error ? error.message : null}
-                  error={errors.drugAllergies ? true : false}
-                  helperText={errors.drugAllergies?.message}
+                  // error={errors.drugAllergies ? true : false}
+                  // helperText={errors.drugAllergies?.message}
                   {...field}
                 />
               )}
