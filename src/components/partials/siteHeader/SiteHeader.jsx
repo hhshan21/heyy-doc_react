@@ -98,12 +98,21 @@ const SiteHeader = () => {
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav mr-auto ml-4">
             <li className="nav-item">
-              <Link to="/doctors" style={{ textDecoration: "none" }}>
+              <Link
+                to="/doctors"
+                style={{
+                  textDecoration: "none",
+                  color: "#0cb4ea",
+                }}
+              >
                 DOCTORS
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/myBookings" style={{ textDecoration: "none" }}>
+              <Link
+                to="/myBookings"
+                style={{ textDecoration: "none", color: "#0cb4ea" }}
+              >
                 MY BOOKINGS
               </Link>
             </li>
@@ -111,12 +120,18 @@ const SiteHeader = () => {
           <span className="navbar-text">
             <ul className="navbar-nav mr-auto ml-4">
               <li className="nav-item">
-                <Link to="/register" style={{ textDecoration: "none" }}>
+                <Link
+                  to="/register"
+                  style={{ textDecoration: "none", color: "#0cb4ea" }}
+                >
                   REGISTER
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/login" style={{ textDecoration: "none" }}>
+                <Link
+                  to="/login"
+                  style={{ textDecoration: "none", color: "#0cb4ea" }}
+                >
                   LOGIN
                 </Link>
               </li>
