@@ -13,20 +13,20 @@ const LoginPage = () => {
     setCatchError(null);
     try {
       const res = await axios.post(
-        "https://ourairbnb.herokuapp.com/api/v1/user/login",
+        "http://localhost:8000/api/v1/user/login",
         data
       );
       console.log("Server Respond:", res);
-      console.log("token", res.data.token);
+      // console.log("token", res.data.token);
 
-      if (res.status === 200 || res.status === 201) {
-        // store the token into localstorage / cookie
-        localStorage.setItem("user_token", res.data.token);
-        //navigate to home
-        if (location.pathname === "/login") {
-          location.length > 0 ? navigate(-1) : navigate("/");
-        }
-      }
+      // if (res.status === 200 || res.status === 201) {
+      //   // store the token into localstorage / cookie
+      //   localStorage.setItem("user_token", res.data.token);
+      //   //navigate to home
+      //   if (location.pathname === "/login") {
+      //     location.length > 0 ? navigate(-1) : navigate("/");
+      //   }
+      // }
     } catch (error) {
       console.log(error);
       // display an error
