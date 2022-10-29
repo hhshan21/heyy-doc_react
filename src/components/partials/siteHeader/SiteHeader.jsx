@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/lexend-deca";
-import RegisterPage from "../../register/RegisterPage";
+import RegisterPage from "../../../pages/register/RegisterPage";
 
 const SiteHeader = () => {
   const [username, setUsername] = useState("");
