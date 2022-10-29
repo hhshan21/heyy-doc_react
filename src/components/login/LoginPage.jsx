@@ -10,11 +10,11 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["auth_token"]);
 
-  useEffect(() => {
-    console.log("current cookies: ", cookies);
-    setCookies("auth_token", "love_mcspicy");
-    console.log("cookies after setting: ", cookies);
-  }, []);
+  // useEffect(() => {
+  //   console.log("current cookies: ", cookies);
+  //   setCookies("auth_token", "love_mcspicy");
+  //   console.log("cookies after setting: ", cookies);
+  // }, []);
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
@@ -26,21 +26,21 @@ const LoginPage = () => {
         data
       );
       console.log("Server Respond:", res);
-      // console.log("token", res.data.token);
+      console.log("token", res.data.token);
 
-      // if (res.status === 200 || res.status === 201) {
-      //   // store the token into localstorage / cookie
-      //   localStorage.setItem("user_token", res.data.token);
-      //   //navigate to home
-      //   if (location.pathname === "/login") {
-      //     location.length > 0 ? navigate(-1) : navigate("/");
-      //   }
-      // }
+      if (res.status === 200 || res.status === 201) {
+        // store the token into localstorage / cookie
+        localStorage.setItem("user_token", res.data.token);
+        //navigate to home
+        if (location.pathname === "/login") {
+          location.length > 0 ? navigate(-1) : navigate("/");
+        }
+      }
     } catch (error) {
       console.log(error);
       // display an error
-      // console.log(error.response.data.error);
-      // setCatchError(error.response.data.error);
+      console.log(error.response.data.error);
+      setCatchError(error.response.data.error);
     }
   };
   return (

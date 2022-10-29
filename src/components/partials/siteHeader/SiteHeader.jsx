@@ -55,14 +55,15 @@ const SiteHeader = () => {
   //   }
   // navStateToggle();
   // };
+
   const handleOpenLogin = () => {
     if (location.pathname !== "/register" && location.pathname !== "/login") {
-      setOpenLogin(true);
-      setOpenRegister(false);
+      // setOpenLogin(true);
+      // setOpenRegister(false);
     } else {
       navigate("/login");
     }
-    // navStateToggle();
+    navigate("/");
   };
 
   const handleLogout = () => {
@@ -159,6 +160,7 @@ const SiteHeader = () => {
                   <Link
                     to="/login"
                     style={{ textDecoration: "none", color: "#0cb4ea" }}
+                    onClick={handleOpenLogin}
                   >
                     LOGIN
                   </Link>
