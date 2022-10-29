@@ -7,12 +7,13 @@ import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/lexend-deca";
+import RegisterPage from "../../register/RegisterPage";
 
 const SiteHeader = () => {
   const [username, setUsername] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const [navState, setNavState] = useState(false);
+  // const [navState, setNavState] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openRegister, setOpenRegister] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
@@ -89,7 +90,7 @@ const SiteHeader = () => {
         </Link>
 
         <button
-          className="navbar-toggler"
+          className="navbar-toggler mr-3"
           type="button"
           data-toggle="collapse"
           data-target="#navbarText"
@@ -121,49 +122,50 @@ const SiteHeader = () => {
               </Link>
             </li>
           </ul>
-          (isAuth ? (
-          <span className="navbar-text">
-            <ul className="navbar-nav mr-auto ml-4">
-              <li className="nav-item">
-                <Link
-                  to="/my/profile"
-                  style={{ textDecoration: "none", color: "#0cb4ea" }}
-                >
-                  MY PROFILE
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/"
-                  style={{ textDecoration: "none", color: "#0cb4ea" }}
-                  onClick={handleLogout}
-                >
-                  LOGOUT
-                </Link>
-              </li>
-            </ul>
-          </span>
-          )
-          <span className="navbar-text">
-            <ul className="navbar-nav mr-auto ml-4">
-              <li className="nav-item">
-                <Link
-                  to="/register"
-                  style={{ textDecoration: "none", color: "#0cb4ea" }}
-                >
-                  REGISTER
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/login"
-                  style={{ textDecoration: "none", color: "#0cb4ea" }}
-                >
-                  LOGIN
-                </Link>
-              </li>
-            </ul>
-          </span>
+          {isAuth ? (
+            <span className="navbar-text">
+              <ul className="navbar-nav mr-auto ml-4">
+                <li className="nav-item">
+                  <Link
+                    to="/my/profile"
+                    style={{ textDecoration: "none", color: "#0cb4ea" }}
+                  >
+                    MY PROFILE
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "#0cb4ea" }}
+                    onClick={handleLogout}
+                  >
+                    LOGOUT
+                  </Link>
+                </li>
+              </ul>
+            </span>
+          ) : (
+            <span className="navbar-text">
+              <ul className="navbar-nav mr-auto ml-4">
+                <li className="nav-item">
+                  <Link
+                    to="/register"
+                    style={{ textDecoration: "none", color: "#0cb4ea" }}
+                  >
+                    REGISTER
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/login"
+                    style={{ textDecoration: "none", color: "#0cb4ea" }}
+                  >
+                    LOGIN
+                  </Link>
+                </li>
+              </ul>
+            </span>
+          )}
         </div>
       </nav>
     </div>
