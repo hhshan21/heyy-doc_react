@@ -6,8 +6,8 @@ import SiteHeader from "./components/partials/siteHeader/SiteHeader";
 import Homepage from "./components/homepage/Homepage";
 import Doctors from "./components/doctors/Doctors";
 import MyBookings from "./components/myBookings/MyBookings";
-import Login from "./components/login/LoginPage";
-import Register from "./components/register/RegisterPage";
+import LoginPage from "./components/login/LoginPage";
+import RegisterPage from "./components/register/RegisterPage";
 
 function App() {
   return (
@@ -16,8 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/doctors" element={<Doctors />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/myBookings" element={<MyBookings />} />
       </Routes>
       <Footer />
