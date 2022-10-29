@@ -2,19 +2,13 @@ import LoginForm from "../../components/login/LoginForm";
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
+import { date } from "yup/lib/locale";
 
 const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const [cookies, setCookies] = useCookies(["auth_token"]);
-
-  // useEffect(() => {
-  //   console.log("current cookies: ", cookies);
-  //   setCookies("auth_token", "love_mcspicy");
-  //   console.log("cookies after setting: ", cookies);
-  // }, []);
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
@@ -28,18 +22,28 @@ const LoginPage = () => {
       console.log("Server Respond:", res);
       console.log("token", res.data.token);
 
+      toast.success("Login successful!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       if (res.status === 200 || res.status === 201) {
         // store the token into localstorage / cookie
         localStorage.setItem("user_token", res.data.token);
         //navigate to home
-        if (location.pathname === "/login") {
-          location.length > 0 ? navigate(-1) : navigate("/");
-        }
+        // if (location.pathname === "/login") {
+        //   location.length > 0 ? navigate(-1) : navigate("/");
+        // }
+
+        navigate("/");
       }
     } catch (error) {
-      console.log(error);
       // display an error
-      console.log(error.response.data.error);
+      toast.error(error.response.data.error);
+      // console.log("error from LoginPage comp: ", error);
+
+      // console.log(
+      //   "error from LoginPage comp error.response.data.error: ",
+      //   error.response.data.error
+      // );
       setCatchError(error.response.data.error);
     }
   };

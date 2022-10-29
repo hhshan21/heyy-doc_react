@@ -14,6 +14,8 @@ import ShowProfile from "./components/profile/showProfile/ShowProfile";
 import EditProfile from "./components/profile/editProfile/EditProfile";
 import Auth from "./components/auth/Auth";
 import ShowDocAppointments from "./components/showDocAppointments/showDocAppointments";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -46,6 +48,7 @@ function App() {
           element={<Auth component={ShowDocAppointments} />}
         />
       </Routes>
+      <ToastContainer />
       <Footer />
     </div>
   );
