@@ -35,23 +35,25 @@ const SiteHeader = () => {
   //   checkAuth();
   // };
 
-  const handleLoginToggle = (value) => {
-    setOpenLogin(value);
-    //navStateToggle();
-  };
-  const handleRegisterToggle = (value) => {
-    value ? handleOpenLogin() : setOpenRegister(value);
-    //navStateToggle();
-  };
-  const handleOpenRegister = () => {
-    if (location.pathname !== "/register" && location.pathname !== "/login") {
-      setOpenRegister(true);
-      setOpenLogin(false);
-    } else {
-      navigate("/register");
-    }
-    // navStateToggle();
-  };
+  // const handleLoginToggle = (value) => {
+  //   setOpenLogin(value);
+  //navStateToggle();
+  // };
+
+  // const handleRegisterToggle = (value) => {
+  //   value ? handleOpenLogin() : setOpenRegister(value);
+  //navStateToggle();
+  // };
+
+  // const handleOpenRegister = () => {
+  //   if (location.pathname !== "/register" && location.pathname !== "/login") {
+  //     setOpenRegister(true);
+  //     setOpenLogin(false);
+  //   } else {
+  //     navigate("/register");
+  //   }
+  // navStateToggle();
+  // };
   const handleOpenLogin = () => {
     if (location.pathname !== "/register" && location.pathname !== "/login") {
       setOpenLogin(true);
@@ -119,6 +121,29 @@ const SiteHeader = () => {
               </Link>
             </li>
           </ul>
+          (isAuth ? (
+          <span className="navbar-text">
+            <ul className="navbar-nav mr-auto ml-4">
+              <li className="nav-item">
+                <Link
+                  to="/my/profile"
+                  style={{ textDecoration: "none", color: "#0cb4ea" }}
+                >
+                  MY PROFILE
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  style={{ textDecoration: "none", color: "#0cb4ea" }}
+                  onClick={handleLogout}
+                >
+                  LOGOUT
+                </Link>
+              </li>
+            </ul>
+          </span>
+          )
           <span className="navbar-text">
             <ul className="navbar-nav mr-auto ml-4">
               <li className="nav-item">
