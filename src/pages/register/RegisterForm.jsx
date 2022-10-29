@@ -34,7 +34,6 @@ const RegisterForm = (props) => {
     email: "",
     password: "",
     confirmpassword: "",
-    drugAllergies: "",
   };
   const {
     control,

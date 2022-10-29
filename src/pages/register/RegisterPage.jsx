@@ -12,6 +12,7 @@ const RegisterPage = () => {
   const onSubmit = async (data) => {
     console.log("From reg form compononent in reg pg:", data);
     setCatchError(null);
+
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/user/register",
@@ -19,6 +20,9 @@ const RegisterPage = () => {
       );
       console.log("Server Respond:", res);
 
+      toast.success("Welcome to Heyy Doc!!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       if (res.status === 200 || res.status === 201) {
         //navigate to home
         if (location.pathname === "/register") {
@@ -26,9 +30,10 @@ const RegisterPage = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log("error: ", error);
       // display an error
-      console.log(error.response.data.error);
+      // console.log(error.response.data.error);
+      toast.error(error.response.data.error);
       setCatchError(error.response.data.error);
     }
   };
