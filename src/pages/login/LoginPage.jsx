@@ -1,15 +1,13 @@
 import LoginForm from "./LoginForm";
 import { useNavigate, useLocation } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { date } from "yup/lib/locale";
-import { WindowSharp } from "@mui/icons-material";
 
 const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
-  const location = useLocation();
   const navigate = useNavigate();
+  // const location = useLocation();
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
@@ -31,7 +29,7 @@ const LoginPage = () => {
         localStorage.setItem("user_token", res.data.token);
 
         navigate("/");
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       // display an error
