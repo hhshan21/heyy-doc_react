@@ -1,86 +1,26 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../../../assets/images/LogoS.png";
-import "./siteHeader.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import jwt_decode from "jwt-decode";
+import logo from "../../../assets/images/LogoS.png";
+import RegisterPage from "../../../pages/register/RegisterPage";
+import "./siteHeader.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/lexend-deca";
-import RegisterPage from "../../../pages/register/RegisterPage";
 
-const SiteHeader = () => {
-  const [username, setUsername] = useState("");
-  const location = useLocation();
+const SiteHeader = (props) => {
   const navigate = useNavigate();
-  // const [navState, setNavState] = useState(false);
-  const [openLogin, setOpenLogin] = useState(false);
-  const [openRegister, setOpenRegister] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
-  // console.log("open siteheader ");
 
-  const checkAuth = () => {
-    const token = localStorage.getItem("user_token");
-    if (token) {
-      const user = jwt_decode(token);
-      setIsAuth(true);
-      setUsername(user.data.username);
-      console.log("token: ", token);
+  const logout = () => {
+    localStorage.removeItem("user_token");
+    props.setTokenState(null);
+    if (localStorage.getItem("user_token") !== null) {
+      toast.error("Logout unsuccessful, please try again");
     } else {
-      setIsAuth(false);
-    }
-  };
-
-  // const navStateToggle = () => {
-  //   setNavState((prevState) => !prevState);
-  //   checkAuth();
-  // };
-
-  // const handleLoginToggle = (value) => {
-  //   setOpenLogin(value);
-  //navStateToggle();
-  // };
-
-  // const handleRegisterToggle = (value) => {
-  //   value ? handleOpenLogin() : setOpenRegister(value);
-  //navStateToggle();
-  // };
-
-  // const handleOpenRegister = () => {
-  //   if (location.pathname !== "/register" && location.pathname !== "/login") {
-  //     setOpenRegister(true);
-  //     setOpenLogin(false);
-  //   } else {
-  //     navigate("/register");
-  //   }
-  // navStateToggle();
-  // };
-
-  const handleLogin = () => {
-    if (location.pathname !== "/register" && location.pathname !== "/login") {
-      navigate("/");
-      // setOpenLogin(true);
-      // setOpenRegister(false);
-    } else {
-      navigate("/login");
-    }
-  };
-
-  const handleLogout = () => {
-    const token = localStorage.getItem("user_token");
-    if (token) {
-      localStorage.removeItem("user_token");
-      //console.log("log out");
-      // navStateToggle();
+      toast.success("You are now logged out", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       navigate("/");
     }
-  };
-
-  const handleAfterRegister = (value) => {
-    toast.success("Account created, please login to continue", {
-      position: toast.POSITION.TOP_CENTER,
-    });
-    navigate("/");
   };
 
   return (
@@ -123,29 +63,7 @@ const SiteHeader = () => {
               </Link>
             </li>
           </ul>
-          {isAuth ? (
-            <span className="navbar-text">
-              <ul className="navbar-nav mr-auto ml-4">
-                <li className="nav-item">
-                  <Link
-                    to="/my/profile"
-                    style={{ textDecoration: "none", color: "#0cb4ea" }}
-                  >
-                    MY PROFILE
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/"
-                    style={{ textDecoration: "none", color: "#0cb4ea" }}
-                    onClick={handleLogout}
-                  >
-                    LOGOUT
-                  </Link>
-                </li>
-              </ul>
-            </span>
-          ) : (
+          {!props.tokenState ? (
             <span className="navbar-text">
               <ul className="navbar-nav mr-auto ml-4">
                 <li className="nav-item">
@@ -160,9 +78,30 @@ const SiteHeader = () => {
                   <Link
                     to="/login"
                     style={{ textDecoration: "none", color: "#0cb4ea" }}
-                    onClick={handleLogin}
                   >
                     LOGIN
+                  </Link>
+                </li>
+              </ul>
+            </span>
+          ) : (
+            <span className="navbar-text">
+              <ul className="navbar-nav mr-auto ml-4">
+                <li className="nav-item">
+                  <Link
+                    to="/my/profile"
+                    style={{ textDecoration: "none", color: "#0cb4ea" }}
+                  >
+                    MY PROFILE
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "#0cb4ea" }}
+                    onClick={logout}
+                  >
+                    LOGOUT
                   </Link>
                 </li>
               </ul>

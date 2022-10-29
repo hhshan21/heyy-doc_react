@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { date } from "yup/lib/locale";
+import { WindowSharp } from "@mui/icons-material";
 
 const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
@@ -28,22 +29,14 @@ const LoginPage = () => {
       if (res.status === 200 || res.status === 201) {
         // store the token into localstorage / cookie
         localStorage.setItem("user_token", res.data.token);
-        //navigate to home
-        // if (location.pathname === "/login") {
-        //   location.length > 0 ? navigate(-1) : navigate("/");
-        // }
 
         navigate("/");
+        window.location.reload();
       }
     } catch (error) {
       // display an error
       toast.error(error.response.data.error);
-      // console.log("error from LoginPage comp: ", error);
 
-      // console.log(
-      //   "error from LoginPage comp error.response.data.error: ",
-      //   error.response.data.error
-      // );
       setCatchError(error.response.data.error);
     }
   };

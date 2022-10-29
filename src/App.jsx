@@ -1,8 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Components
 import Footer from "../src/components/partials/footer/Footer";
 import SiteHeader from "./components/partials/siteHeader/SiteHeader";
+import Auth from "./components/auth/Auth";
+import jwt_decode from "jwt-decode";
+
+// Pages
 import Homepage from "./pages/homepage/Homepage";
 import Doctors from "./pages/doctors/Doctors";
 import ShowBookings from "./pages/bookings/showBookings/ShowBookings";
@@ -12,15 +20,33 @@ import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ShowProfile from "./pages/profile/showProfile/ShowProfile";
 import EditProfile from "./pages/profile/editProfile/EditProfile";
-import Auth from "./components/auth/Auth";
 import ShowDocAppointments from "./pages/showDocAppointments/showDocAppointments";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const [tokenState, setTokenState] = useState();
+  const [user, setUser] = useState();
+
+  const token = localStorage.getItem("user_token");
+  const tokenToSend = "Bearer " + token;
+
+  const getToken = async () => {
+    setTokenState(token);
+    if (tokenState) {
+      setUser(jwt_decode(tokenState).data.email);
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, [tokenState]);
+
   return (
     <div className="App">
-      <SiteHeader />
+      <SiteHeader
+        tokenState={tokenState}
+        user={user}
+        setTokenState={setTokenState}
+      />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/doctors" element={<Doctors />} />
