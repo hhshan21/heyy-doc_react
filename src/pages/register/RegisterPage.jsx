@@ -20,20 +20,20 @@ const RegisterPage = () => {
       );
       console.log("Server Respond:", res);
 
-      toast.success("Welcome to Heyy Doc!!", {
+      toast.success("Welcome to Heyy Doc! Please login", {
         position: toast.POSITION.TOP_CENTER,
       });
       if (res.status === 200 || res.status === 201) {
         //navigate to home
         if (location.pathname === "/register") {
-          navigate("/");
+          navigate("/login");
         }
       }
     } catch (error) {
       // console.log("error: ", error);
       // display an error
-      // console.log(error.response.data.error);
-      toast.error(error.response.data.error);
+      // console.log("error.response.data: ", error.response.data);
+      toast.error(error.response.data);
       setCatchError(error.response.data.error);
     }
   };
