@@ -1,30 +1,12 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
-import "./ShowBookings.css";
+import { useNavigate } from "react-router-dom";
+import "./BookingCard.css";
 import { Box, Card, CardContent, CardMedia } from "@mui/material";
 
-const MyBookings = () => {
-  const [bookings, setBookings] = useState([]);
-
-  const headerOptions = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
-  };
-
-  useEffect(() => {
-    const fetchApi = async () => {
-      const res = await axios.get(
-        "http://localhost:8000/api/v1/user/bookings",
-        {
-          headers: headerOptions,
-        }
-      );
-      const data = await res.data;
-      console.log("data: ", data);
-      setBookings(data);
-    };
-    fetchApi();
-  }, []);
+const BookingCard = (props) => {
+  const navigate = useNavigate();
+  console.log("hi from BookingCard props: ", props);
+  // const { id, firstName, lastName, imageUrl, doctorInfo } = props.data;
 
   return (
     <div className="myBookings">
@@ -57,4 +39,4 @@ const MyBookings = () => {
   );
 };
 
-export default MyBookings;
+export default BookingCard;

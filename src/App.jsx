@@ -13,12 +13,12 @@ import jwt_decode from "jwt-decode";
 // Pages
 import Homepage from "./pages/homepage/Homepage";
 import Doctors from "./pages/doctors/Doctors";
-import ShowBookings from "./pages/bookings/showBookings/ShowBookings";
+import BookingsPage from "./pages/bookingsPage/BookingsPage";
 import EditBooking from "./pages/bookings/editBooking/EditBooking";
 import CreateBooking from "./pages/bookings/createBooking/CreateBooking";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
-import ShowProfile from "./pages/profile/showProfile/ShowProfile";
+import ProfilePage from "./pages/profile/profilePage/ProfilePage";
 import EditProfile from "./pages/profile/editProfile/EditProfile";
 import ShowDocAppointments from "./pages/showDocAppointments/showDocAppointments";
 
@@ -52,14 +52,14 @@ function App() {
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/my/profile" element={<Auth component={ShowProfile} />} />
+        <Route path="/my/profile" element={<Auth component={ProfilePage} />} />
         <Route
           path="/my/profile/edit"
           element={<Auth component={EditProfile} />}
         />
         <Route
           path="/my/bookings"
-          element={<Auth component={ShowBookings} />}
+          element={<Auth component={BookingsPage} />}
         />
         <Route
           path="/my/bookings/create"

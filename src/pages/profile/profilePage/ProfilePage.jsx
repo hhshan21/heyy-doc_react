@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import style from "./showProfile.module.scss";
+import style from "./profilePage.module.scss";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

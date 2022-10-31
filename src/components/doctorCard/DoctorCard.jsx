@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import doc from "../../assets/images/male doctor.png";
 import { Card, Button } from "react-bootstrap";
 import styles from "./doctorCard.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
