@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./showProfile.module.scss";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ShowProfile = () => {
   const [profile, setProfile] = useState([]);
@@ -14,24 +15,22 @@ const ShowProfile = () => {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {
+      const res = await axios.get(`http://localhost:8000/api/v1/user/profile`, {
         headers: headerOptions,
       });
-      const data = await res.json();
-      console.log("data: ", data);
+      const data = await res.data;
+      // console.log("data: ", data);
       setProfile(data);
     };
     fetchApi();
   }, []);
 
-  console.log("profile: ", profile);
-
   return (
     <div className={style.mainContainer}>
       <>
         <div className={style.profileContainer}>
-          <div class="row p-2 ">
-            <div class="col-md-3">
+          <div className="row p-2 ">
+            <div className="col-md-3">
               <div className={style.imageBox}>
                 <div className="row">
                   <img
