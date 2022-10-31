@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
   const navigate = useNavigate();
-  // const location = useLocation();
+  const location = useLocation();
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
@@ -29,7 +29,6 @@ const LoginPage = () => {
         localStorage.setItem("user_token", res.data.token);
 
         navigate("/");
-        // window.location.reload();
       }
     } catch (error) {
       // display an error

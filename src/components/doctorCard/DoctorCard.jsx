@@ -6,10 +6,8 @@ import styles from "./doctorCard.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const DoctorCard = (props) => {
-  // console.log("DoctorCard props: ", props);
+  const navigate = useNavigate();
   const { id, firstName, lastName, imageUrl, doctorInfo } = props.data;
-
-  console.log("doctorInfo: ", doctorInfo);
 
   return (
     <Card
@@ -35,6 +33,7 @@ const DoctorCard = (props) => {
         </Card.Subtitle>
         <Card.Text>{doctorInfo.professionalProfile}</Card.Text>
         <Button
+          onClick={() => navigate("/my/bookings/create")}
           variant="contained"
           style={{
             backgroundColor: "#0cb4ea",
