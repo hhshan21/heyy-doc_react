@@ -15,7 +15,7 @@ import Homepage from "./pages/homepage/Homepage";
 import Doctors from "./pages/doctors/Doctors";
 import ShowBookings from "./pages/bookings/showBookings/ShowBookings";
 import EditBookings from "./pages/bookings/editBookings/EditBookings";
-import CreateBookings from "./pages/bookings/createBookings/CreateBookings";
+import MakeBookings from "./pages/bookings/makeBookings/MakeBookings";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ShowProfile from "./pages/profile/showProfile/ShowProfile";
@@ -63,7 +63,7 @@ function App() {
         />
         <Route
           path="/my/bookings/create"
-          element={<Auth component={CreateBookings} />}
+          element={<Auth component={MakeBookings} />}
         />
         <Route
           path="/my/bookings/:id"

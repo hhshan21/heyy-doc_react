@@ -1,0 +1,14 @@
+.doctorsHeader {
+  font-family: "Lexend Deca";
+  font-weight: bolder;
+  font-size: xx-large;
+  text-align: center;
+}
+
+.doctors-container {
+  display: flex;
+  gap: 2em;
+  flex-flow: row wrap;
+  padding: 0 1em;
+  justify-content: center;
+}
