@@ -56,16 +56,11 @@ const EditProfile = () => {
     try {
       const res = await axios.patch(
         `http://localhost:8000/api/v1/user/profile`,
-        // {
-        //   firstName: profile.firstName,
-        //   lastName: profile.lastName,
-        //   drugAllergies: profile.drugAllergies,
-        // },
-        // {
-        //   drugAllergies: "pepsi",
-        // },
-        // { drugAllergies: data.drugAllergies },
-
+        {
+          firstName: getValues().firstName,
+          lastName: getValues().lastName,
+          drugAllergies: getValues().drugAllergies,
+        },
         { headers: headerOptions }
       );
 
