@@ -1,0 +1,38 @@
+.mainContainer {
+  padding-top: 2rem;
+  height: 65vh;
+  display: flex;
+  justify-content: center;
+}
+
+.profileContainer {
+  height: 60%;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
+  transition: transform 100ms ease-in;
+  width: 70%;
+  padding: 10px;
+}
+
+.avatarImage {
+  width: 20em;
+  height: 10em;
+  padding: 1rem;
+}
+
+.nav-item {
+  font-size: 14px;
+  align-items: center;
+}
+
+.profileHead {
+  margin-left: 1rem;
+}
+
+.profileDetails {
+  column-width: auto;
+}
