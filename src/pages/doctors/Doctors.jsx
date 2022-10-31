@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../../components/banner/BannerDoc";
 import DoctorCard from "../../components/doctorCard/DoctorCard";
-import "./Doctors.css";
+import styles from "./Doctors.module.scss";
 
 const Doctors = (props) => {
   const [doctors, setDoctors] = useState([]);
@@ -22,8 +22,9 @@ const Doctors = (props) => {
 
   return (
     <div>
-      <Banner></Banner>Meet our Panel of Doctors
-      {doctorCards}
+      <Banner />
+      <div className={styles["doctorsHeader"]}>MEET OUR PANEL OF DOCTORS</div>
+      <div className={styles["doctors-container"]}>{doctorCards}</div>
     </div>
   );
 };

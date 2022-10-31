@@ -4,7 +4,7 @@
   font-family: "Lexend Deca";
 }
 
-p {
+.loginForm p {
   text-align: center;
 }
 
@@ -14,7 +14,7 @@ p {
   font-weight: 900;
 }
 
-.loginBtn {
+/* .loginBtn {
   width: 50%;
   margin-left: 25%;
-}
+} */
