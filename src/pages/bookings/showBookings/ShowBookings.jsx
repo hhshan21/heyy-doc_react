@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const MyBookings = () => {
@@ -10,10 +11,13 @@ const MyBookings = () => {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await fetch("http://localhost:8000/api/v1/user/bookings", {
-        headers: headerOptions,
-      });
-      const data = await res.json();
+      const res = await axios.get(
+        "http://localhost:8000/api/v1/user/bookings",
+        {
+          headers: headerOptions,
+        }
+      );
+      const data = await res.data;
       console.log("data: ", data);
       setBookings(data);
     };

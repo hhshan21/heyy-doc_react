@@ -1,7 +1,7 @@
 import React from "react";
 
 const EditBookings = () => {
-  return <div>EditBookings</div>;
+  return <div>Edit Bookings</div>;
 };
 
 export default EditBookings;
