@@ -56,10 +56,10 @@ const SiteHeader = (props) => {
             </li>
             <li className="nav-item">
               <Link
-                to="/myBookings"
+                to="/my/bookings/create"
                 style={{ textDecoration: "none", color: "#0cb4ea" }}
               >
-                MY BOOKINGS
+                MAKE A BOOKING
               </Link>
             </li>
           </ul>
@@ -93,6 +93,14 @@ const SiteHeader = (props) => {
                     style={{ textDecoration: "none", color: "#0cb4ea" }}
                   >
                     MY PROFILE
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/my/bookings"
+                    style={{ textDecoration: "none", color: "#0cb4ea" }}
+                  >
+                    MY BOOKINGS
                   </Link>
                 </li>
                 <li className="nav-item">
