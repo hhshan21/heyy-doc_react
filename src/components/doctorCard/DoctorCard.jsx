@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const DoctorCard = (props) => {
   // console.log("DoctorCard props: ", props);
-  const { id, firstName, lastName, doctorInfo } = props.data;
+  const { id, firstName, lastName, imageUrl, doctorInfo } = props.data;
 
   console.log("doctorInfo: ", doctorInfo);
 
@@ -16,9 +16,9 @@ const DoctorCard = (props) => {
       className={styles["card-container"]}
       style={{ width: "25rem", marginTop: "1em", marginBottom: "2em" }}
     >
-      <Card.Img variant="top" src={doc} className={styles["img"]} />
+      <Card.Img variant="top" src={imageUrl} className={styles["img"]} />
       <Card.Body>
-        <Card.Title>
+        <Card.Title style={{ fontWeight: "Bold" }}>
           Dr. {lastName} {firstName}
         </Card.Title>
         <Card.Subtitle style={{ marginBottom: "0.5em" }}>
@@ -28,10 +28,10 @@ const DoctorCard = (props) => {
           {doctorInfo.qualification}
         </Card.Subtitle>
         <Card.Subtitle style={{ marginBottom: "1em" }}>
-          {doctorInfo.language}
+          <p>Speaks: {doctorInfo.language}</p>
         </Card.Subtitle>
         <Card.Subtitle style={{ marginBottom: "1em" }}>
-          {doctorInfo.address}
+          <p>Address: {doctorInfo.address}</p>
         </Card.Subtitle>
         <Card.Text>{doctorInfo.professionalProfile}</Card.Text>
         <Button
