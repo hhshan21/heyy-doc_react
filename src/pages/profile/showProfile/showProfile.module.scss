@@ -1,3 +1,11 @@
+.showProfileHeader {
+  color: #0cb4ea;
+  font-family: "Lexend Deca";
+  font-weight: 900;
+  text-align: center;
+  margin-top: 0.8em;
+}
+
 .mainContainer {
   padding-top: 2rem;
   height: 65vh;
@@ -6,15 +14,15 @@
 }
 
 .profileContainer {
-  height: 60%;
+  height: 20em;
   min-height: 200px;
   display: flex;
   justify-content: center;
   margin: 10px;
   border-radius: 10px;
-  box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
+  border: 1px solid #979797;
   transition: transform 100ms ease-in;
-  width: 70%;
+  width: 40em;
   padding: 10px;
 }
 

@@ -51,7 +51,7 @@ const SiteHeader = (props) => {
                   color: "#0cb4ea",
                 }}
               >
-                DOCTORS
+                OUR DOCTORS
               </Link>
             </li>
             <li className="nav-item">

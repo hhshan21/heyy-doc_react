@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
@@ -45,7 +44,6 @@ const LoginPage = () => {
             <div>
               <p
                 style={{
-                  color: "red",
                   textAlign: "center",
                   marginBottom: "1em",
                 }}

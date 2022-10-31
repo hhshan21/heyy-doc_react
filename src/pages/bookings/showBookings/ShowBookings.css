@@ -1,0 +1,19 @@
+.myBookings {
+  font-family: "Lexend Deca";
+}
+
+.bookingCards {
+  display: flex;
+  gap: 2em;
+  flex-flow: row wrap;
+  padding: 0 1em;
+  justify-content: center;
+}
+
+.showBookingHeader {
+  color: #0cb4ea;
+  font-family: "Lexend Deca";
+  font-weight: 900;
+  text-align: center;
+  margin-top: 0.8em;
+}

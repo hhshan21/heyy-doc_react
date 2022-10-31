@@ -48,8 +48,6 @@ const EditProfile = () => {
     fetchApi();
   }, []);
 
-  console.log("getValues(): ", getValues());
-
   const onSubmit = async (e) => {
     e.preventDefault();
 

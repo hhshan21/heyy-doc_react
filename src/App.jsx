@@ -14,8 +14,8 @@ import jwt_decode from "jwt-decode";
 import Homepage from "./pages/homepage/Homepage";
 import Doctors from "./pages/doctors/Doctors";
 import ShowBookings from "./pages/bookings/showBookings/ShowBookings";
-import EditBookings from "./pages/bookings/editBookings/EditBookings";
-import MakeBookings from "./pages/bookings/makeBookings/MakeBookings";
+import EditBooking from "./pages/bookings/editBooking/EditBooking";
+import CreateBooking from "./pages/bookings/createBooking/CreateBooking";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ShowProfile from "./pages/profile/showProfile/ShowProfile";
@@ -63,11 +63,11 @@ function App() {
         />
         <Route
           path="/my/bookings/create"
-          element={<Auth component={MakeBookings} />}
+          element={<Auth component={CreateBooking} />}
         />
         <Route
           path="/my/bookings/:id"
-          element={<Auth component={EditBookings} />}
+          element={<Auth component={EditBooking} />}
         />
         <Route
           path="/my/appointments"
