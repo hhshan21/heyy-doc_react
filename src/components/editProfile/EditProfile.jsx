@@ -48,8 +48,6 @@ const EditProfile = () => {
     fetchApi();
   }, []);
 
-  console.log("getValues(): ", getValues());
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -83,8 +81,8 @@ const EditProfile = () => {
   return (
     <div className="editProfileForm">
       <div>
-        <h1 className="text-center pb-3 m-0 mb-3 editProfileFormHeader">
-          EDIT MY PROFILE
+        <h1 className="text-center pb-3 m-0 mb-3 mt-3 editProfileFormHeader">
+          Edit My Profile
         </h1>
       </div>
       <form onSubmit={onSubmit} className="mb-5">

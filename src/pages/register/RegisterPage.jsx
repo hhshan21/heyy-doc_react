@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-import RegisterForm from "./RegisterForm";
+import RegisterForm from "../../components/registerForm/RegisterForm";
 import { toast } from "react-toastify";
 
 const RegisterPage = () => {

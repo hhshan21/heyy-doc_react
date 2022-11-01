@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button, Box } from "@mui/material";
-import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "./RegisterForm.css";
+import "bootstrap";
 
 const RegisterForm = (props) => {
   // form validation rules
@@ -49,9 +49,7 @@ const RegisterForm = (props) => {
   return (
     <div className="regForm">
       <div>
-        <h1 className="text-center pb-3 m-0 mb-3 regFormHeader">
-          Create an Account
-        </h1>
+        <h1 className="text-center pb-3 m-0 mb-3 regFormHeader">Sign Up</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -208,7 +206,7 @@ const RegisterForm = (props) => {
               fontSize: "110%",
             }}
           >
-            CREATE ACCOUNT
+            SIGN UP
           </Button>
         </div>
       </form>
