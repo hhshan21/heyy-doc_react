@@ -5,6 +5,7 @@ import { Button, MenuItem, Box, TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
 import "./EditProfile.css";
+require("dotenv").config();
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -28,10 +29,11 @@ const EditProfile = () => {
     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
+  // "http://localhost:8000/api/v1/user/profile",
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        `http://localhost:8000/api/v1/user/profile`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/user/profile`,
 
         { headers: headerOptions }
       );
@@ -51,9 +53,11 @@ const EditProfile = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    // "http://localhost:8000/api/v1/user/profile",
     try {
       const res = await axios.patch(
-        `http://localhost:8000/api/v1/user/profile`,
+        "http://localhost:8000/api/v1/user/profile",
+
         {
           firstName: getValues().firstName,
           lastName: getValues().lastName,
