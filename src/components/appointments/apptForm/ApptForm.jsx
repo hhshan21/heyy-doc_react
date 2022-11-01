@@ -41,13 +41,13 @@ const ApptForm = (props) => {
     setEndDate(ranges.selection.endDate);
 
     // getting the startDate and endDate and push into array
-    const datesBetween = require("dates-between");
-    const dates = Array.from(
-      datesBetween(ranges.selection.startDate, ranges.selection.endDate)
-    );
+    // const datesBetween = require("dates-between");
+    // const dates = Array.from(
+    //   datesBetween(ranges.selection.startDate, ranges.selection.endDate)
+    // );
 
     // getting number of nights between startDate and endDate
-    const noOfNights = dates.length - 1;
+    // const noOfNights = dates.length - 1;
 
     // calculation of total price based on no. of nights
     const pricePerNight =
@@ -60,7 +60,7 @@ const ApptForm = (props) => {
     //     maximumFractionDigits: 2,
     // }).format(noOfNights * pricePerNight);
 
-    setTotalPrice(noOfNights * Number(pricePerNight));
+    // setTotalPrice(noOfNights * Number(pricePerNight));
   };
 
   // set no of guests state upon selecting the no of guests
@@ -116,7 +116,7 @@ const ApptForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit} className="bookingForm">
-      <div>
+      {/* <div>
         <Box mb={3}>
           <Controller
             name="firstName" //actual input
@@ -236,7 +236,7 @@ const ApptForm = (props) => {
             BOOK
           </Button>
         </div>
-      </div>
+      </div> */}
     </form>
   );
 };
