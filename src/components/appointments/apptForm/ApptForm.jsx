@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button, Box } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "./BookingForm.css";
+import "./ApptForm.css";
 import "bootstrap";
 
 const BookingForm = (props) => {
@@ -144,32 +144,11 @@ const BookingForm = (props) => {
           </Box>
           <Box mb={3}>
             <Controller
-              name="confirmpassword" //actual input
+              name="symptoms" //actual input
               control={control} //take place of the register RHF
               render={({ field }) => (
                 <TextField
-                  label={"Confirm Password:"} //label in the box
-                  variant="outlined"
-                  fullWidth
-                  autoComplete="confirmpassword"
-                  autoFocus
-                  // error={!!error} //convert obj into a bool
-                  // helperText={error ? error.message : null}
-                  error={errors.confirmpassword ? true : false}
-                  helperText={errors.confirmpassword?.message}
-                  type={confirmpasswordShow ? "text" : "confirmpassword"}
-                  {...field}
-                />
-              )}
-            />
-          </Box>
-          <Box mb={3}>
-            <Controller
-              name="drugAllergies" //actual input
-              control={control} //take place of the register RHF
-              render={({ field }) => (
-                <TextField
-                  label={"Drug allergies:"} //label in the box
+                  label={"Symptoms:"} //label in the box
                   variant="outlined"
                   rows={4}
                   //multiline={true}
@@ -184,12 +163,6 @@ const BookingForm = (props) => {
               )}
             />
           </Box>
-          <p style={{ fontSize: "110%" }}>
-            Already have an account?{" "}
-            <Link to="/login" style={{ color: "#0cb4ea" }}>
-              Login here.
-            </Link>
-          </p>
 
           <Button
             type="submit"
@@ -203,7 +176,7 @@ const BookingForm = (props) => {
               fontSize: "110%",
             }}
           >
-            SIGN UP
+            BOOK
           </Button>
         </div>
       </form>

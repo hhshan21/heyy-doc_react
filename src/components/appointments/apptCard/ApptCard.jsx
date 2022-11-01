@@ -2,12 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
 import { Diversity1 } from "@mui/icons-material";
-import "./MyBookingCard.css";
+import "./ApptCard.css";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
   console.log("hi from BookingCard props: ", props);
   const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
+
+  // compare dates to determine if its past booking or not
+  const currentDate = new Date();
+  const nextDate = new Date(currentDate.getTime() + 86400000);
+  const isNextDate = nextDate.toISOString().substring(0, 10);
+  console.log("isNextDate: ", isNextDate);
+  const checkDate = isNextDate > bookingDate;
+  console.log("checkDate: ", checkDate);
 
   const handleCancel = (e) => {
     navigate("/");
@@ -27,6 +35,19 @@ const BookingCard = (props) => {
           }}
           style={{ marginBottom: "2em", border: "1px solid #979797" }}
         >
+          {!checkDate ? (
+            <div className="container text-center">
+              <h5 className="cardHeader">
+                <strong>Upcoming Appointments</strong>
+              </h5>
+            </div>
+          ) : (
+            <div className="container text-center">
+              <h5 className="cardHeader">
+                <strong>Past Appointments</strong>
+              </h5>
+            </div>
+          )}
           <Grid container spacing={2}>
             <Grid item>
               <ButtonBase sx={{ width: 128, height: 128 }}>
@@ -66,36 +87,42 @@ const BookingCard = (props) => {
               </Grid> */}
             </Grid>
           </Grid>
-          <div className="bookingBtn">
-            <Button
-              onClick={handleCancel}
-              variant="contained"
-              style={{
-                backgroundColor: "#979797",
-                fontFamily: "Lexend Deca",
-                fontWeight: "900",
-                fontSize: "medium",
-                marginRight: "10%",
-              }}
-            >
-              CANCEL
-            </Button>
-            <Button
-              onClick={() => navigate("/my/bookings/create")}
-              variant="contained"
-              style={{
-                backgroundColor: "#0cb4ea",
-                fontFamily: "Lexend Deca",
-                fontWeight: "900",
-                width: "15%",
-                marginLeft: "15%",
-                fontSize: "medium",
-                color: "white",
-              }}
-            >
-              EDIT
-            </Button>
-          </div>
+          {!checkDate ? (
+            <div className="bookingBtn">
+              <Button
+                onClick={handleCancel}
+                variant="contained"
+                style={{
+                  backgroundColor: "#979797",
+                  fontFamily: "Lexend Deca",
+                  fontWeight: "900",
+                  fontSize: "medium",
+                  marginRight: "10%",
+                }}
+              >
+                CANCEL
+              </Button>
+              <Button
+                onClick={() => navigate("/my/bookings/create")}
+                variant="contained"
+                style={{
+                  backgroundColor: "#0cb4ea",
+                  fontFamily: "Lexend Deca",
+                  fontWeight: "900",
+                  width: "15%",
+                  marginLeft: "15%",
+                  fontSize: "medium",
+                  color: "white",
+                }}
+              >
+                EDIT
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <></>
+            </div>
+          )}
         </Paper>
       </div>
     </div>

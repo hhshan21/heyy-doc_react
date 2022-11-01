@@ -9,17 +9,18 @@ import Footer from "../src/components/partials/footer/Footer";
 import SiteHeader from "./components/partials/siteHeader/SiteHeader";
 import Auth from "./components/auth/Auth";
 import jwt_decode from "jwt-decode";
+import EditAppointment from "./components/appointments/editAppt/EditAppt";
+import EditProfile from "./components/editProfile/EditProfile";
 
 // Pages
 import Homepage from "./pages/home/Homepage";
 import Doctors from "./pages/doctors/DoctorsPage";
-import MyBookingsPage from "./pages/myBookings/MyBookingsPage";
-import EditBooking from "./components/bookings/editBooking/EditBooking";
-import MakeABookingPage from "./pages/makeABookingPage/MakeABookingPage";
+import AppointmentPage from "./pages/appointment/AppointmentPage";
+import MakeAnApptPage from "./pages/makeAnApptPage/MakeAnApptPage";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ProfilePage from "./pages/profile/ProfilePage";
-import EditProfile from "./components/editProfile/EditProfile";
+
 import ShowDocAppointments from "./pages/onlyDocView/OnlyDocView";
 
 function App() {
@@ -59,15 +60,15 @@ function App() {
         />
         <Route
           path="/my/bookings"
-          element={<Auth component={MyBookingsPage} />}
+          element={<Auth component={AppointmentPage} />}
         />
         <Route
           path="/my/bookings/create"
-          element={<Auth component={MakeABookingPage} />}
+          element={<Auth component={MakeAnApptPage} />}
         />
         <Route
           path="/my/bookings/:id"
-          element={<Auth component={EditBooking} />}
+          element={<Auth component={EditAppointment} />}
         />
         <Route
           path="/my/appointments"

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import BookingCard from "../../components/bookings/myBookingCard/MyBookingCard";
-import "./MyBookingsPage.css";
+import ApptCard from "../../components/appointments/apptCard/ApptCard";
+import "./AppointmentPage.css";
 
-const BookingsPage = () => {
-  const [bookings, setBookings] = useState([]);
+const AppointmentsPage = () => {
+  const [appointments, setAppointments] = useState([]);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -21,25 +21,25 @@ const BookingsPage = () => {
       );
       const data = await res.data;
       // console.log("data: ", data);
-      setBookings(data);
+      setAppointments(data);
     };
     fetchApi();
   }, []);
 
-  // console.log("bookings: ", bookings);
+  const allAppointments = appointments.bookings;
 
-  const allBookings = bookings.bookings;
-
-  const bookingCards = allBookings.map((booking) => (
-    <BookingCard key={booking.id} data={booking} />
+  const appointmentCards = allAppointments.map((appointment) => (
+    <ApptCard key={appointment.id} data={appointment} />
   ));
 
   return (
     <div>
-      <h1 className="text-center mt-3 mb-4 showBookingHeader">My Bookings</h1>
-      {bookingCards}
+      <h1 className="text-center mt-3 mb-4 showBookingHeader">
+        My Appointments
+      </h1>
+      {appointmentCards}
     </div>
   );
 };
 
-export default BookingsPage;
+export default AppointmentsPage;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import logo from "../../../assets/images/LogoS.png";
-import RegisterPage from "../../../pages/register/RegisterPage";
 import "./siteHeader.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/lexend-deca";
@@ -59,7 +58,7 @@ const SiteHeader = (props) => {
                 to="/my/bookings/create"
                 style={{ textDecoration: "none", color: "#0cb4ea" }}
               >
-                MAKE A BOOKING
+                MAKE AN APPOINTMENT
               </Link>
             </li>
           </ul>
@@ -100,7 +99,7 @@ const SiteHeader = (props) => {
                     to="/my/bookings"
                     style={{ textDecoration: "none", color: "#0cb4ea" }}
                   >
-                    MY BOOKINGS
+                    MY APPOINTMENTS
                   </Link>
                 </li>
                 <li className="nav-item">

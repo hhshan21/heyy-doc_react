@@ -1,9 +1,9 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-import BookingForm from "../../components/bookings/bookingForm/BookingForm";
+import BookingForm from "../../components/appointments/apptForm/ApptForm";
 import { toast } from "react-toastify";
-import "./MakeABookingPage.css";
+import "./MakeAnApptPage.css";
 
 const MakeABookingPage = () => {
   const [catchError, setCatchError] = useState(null);
@@ -16,7 +16,7 @@ const MakeABookingPage = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/register",
+        "http://localhost:8000/api/v1/user/bookings",
         data
       );
       console.log("Server Respond:", res);
@@ -43,7 +43,7 @@ const MakeABookingPage = () => {
     <div>
       <div className="createBooking">
         <h1 className="text-center pb-3 mb-3 createBookingHeader">
-          Make a Booking
+          Book a Doc
         </h1>
         <div className="p-3 mb-2">
           {catchError && (
