@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import doc from "../../assets/images/male doctor.png";
 import { Card, Button } from "react-bootstrap";
 import styles from "./doctorCard.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -33,7 +32,7 @@ const DoctorCard = (props) => {
         </Card.Subtitle>
         <Card.Text>{doctorInfo.professionalProfile}</Card.Text>
         <Button
-          onClick={() => navigate("/my/bookings/create")}
+          onClick={() => navigate("/my/appointments/create")}
           variant="contained"
           style={{
             backgroundColor: "#0cb4ea",

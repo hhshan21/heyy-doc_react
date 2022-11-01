@@ -9,18 +9,19 @@ import Footer from "../src/components/partials/footer/Footer";
 import SiteHeader from "./components/partials/siteHeader/SiteHeader";
 import Auth from "./components/auth/Auth";
 import jwt_decode from "jwt-decode";
+import EditAppointment from "./components/appointments/editAppt/EditAppt";
+import EditProfile from "./components/editProfile/EditProfile";
 
 // Pages
-import Homepage from "./pages/homepage/Homepage";
-import Doctors from "./pages/doctors/Doctors";
-import ShowBookings from "./pages/bookings/showBookings/ShowBookings";
-import EditBookings from "./pages/bookings/editBookings/EditBookings";
-import MakeBookings from "./pages/bookings/makeBookings/MakeBookings";
+import Homepage from "./pages/home/Homepage";
+import Doctors from "./pages/doctors/DoctorsPage";
+import MyAppointments from "./pages/myAppt/MyApptPage";
+import MakeAnApptPage from "./pages/makeAnApptPage/MakeAnApptPage";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
-import ShowProfile from "./pages/profile/showProfile/ShowProfile";
-import EditProfile from "./pages/profile/editProfile/EditProfile";
-import ShowDocAppointments from "./pages/showDocAppointments/showDocAppointments";
+import ProfilePage from "./pages/profile/ProfilePage";
+
+import DocAppointments from "./pages/onlyDocView/OnlyDocView";
 
 function App() {
   const [tokenState, setTokenState] = useState();
@@ -52,26 +53,26 @@ function App() {
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/my/profile" element={<Auth component={ShowProfile} />} />
+        <Route path="/my/profile" element={<Auth component={ProfilePage} />} />
         <Route
           path="/my/profile/edit"
           element={<Auth component={EditProfile} />}
         />
         <Route
-          path="/my/bookings"
-          element={<Auth component={ShowBookings} />}
-        />
-        <Route
-          path="/my/bookings/create"
-          element={<Auth component={MakeBookings} />}
-        />
-        <Route
-          path="/my/bookings/:id"
-          element={<Auth component={EditBookings} />}
-        />
-        <Route
           path="/my/appointments"
-          element={<Auth component={ShowDocAppointments} />}
+          element={<Auth component={MyAppointments} />}
+        />
+        <Route
+          path="/my/appointments/create"
+          element={<Auth component={MakeAnApptPage} />}
+        />
+        <Route
+          path="/my/appointments/:id"
+          element={<Auth component={EditAppointment} />}
+        />
+        <Route
+          path="/my/patientappointments"
+          element={<Auth component={DocAppointments} />}
         />
       </Routes>
       <ToastContainer />
