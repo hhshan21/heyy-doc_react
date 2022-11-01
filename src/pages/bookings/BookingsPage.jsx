@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import BookingCard from "../bookings/bookingCard/BookingCard";
+import BookingCard from "../../components/bookings/bookingCard/BookingCard";
 import "./BookingsPage.css";
 
 const BookingsPage = () => {
@@ -28,15 +28,15 @@ const BookingsPage = () => {
 
   // console.log("bookings: ", bookings);
 
-  const testing = bookings.bookings;
+  const allBookings = bookings.bookings;
 
-  const bookingCards = testing.map((booking) => (
+  const bookingCards = allBookings.map((booking) => (
     <BookingCard key={booking.id} data={booking} />
   ));
 
   return (
     <div>
-      <h1 className="text-center mt-3 mb-5 showBookingHeader">My Bookings</h1>
+      <h1 className="text-center mt-3 mb-4 showBookingHeader">My Bookings</h1>
       {bookingCards}
     </div>
   );

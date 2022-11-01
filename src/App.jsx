@@ -11,16 +11,16 @@ import Auth from "./components/auth/Auth";
 import jwt_decode from "jwt-decode";
 
 // Pages
-import Homepage from "./pages/homepage/Homepage";
-import Doctors from "./pages/doctors/Doctors";
-import BookingsPage from "./pages/bookingsPage/BookingsPage";
-import EditBooking from "./pages/bookings/editBooking/EditBooking";
-import CreateBooking from "./pages/bookings/createBooking/CreateBooking";
+import Homepage from "./pages/home/Homepage";
+import Doctors from "./pages/doctors/DoctorsPage";
+import BookingsPage from "./pages/bookings/BookingsPage";
+import EditBooking from "./components/bookings/editBooking/EditBooking";
+import CreateBooking from "./components/bookings/createBooking/CreateBooking";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
-import ProfilePage from "./pages/profile/profilePage/ProfilePage";
-import EditProfile from "./pages/profile/editProfile/EditProfile";
-import ShowDocAppointments from "./pages/showDocAppointments/showDocAppointments";
+import ProfilePage from "./pages/profile/ProfilePage";
+import EditProfile from "./components/editProfile/EditProfile";
+import ShowDocAppointments from "./pages/onlyDocView/OnlyDocView";
 
 function App() {
   const [tokenState, setTokenState] = useState();

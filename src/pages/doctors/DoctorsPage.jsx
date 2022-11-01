@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../../components/banner/BannerDoc";
 import DoctorCard from "../../components/doctorCard/DoctorCard";
-import styles from "./Doctors.module.scss";
+import styles from "./doctorsPage.module.scss";
 import axios from "axios";
 
 const Doctors = (props) => {

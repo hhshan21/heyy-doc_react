@@ -1,4 +1,4 @@
-import LoginForm from "./LoginForm";
+import LoginForm from "../../components/loginForm/LoginForm";
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
@@ -9,7 +9,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log("from loginpage:", data);
+    // console.log("from loginpage:", data);
     setCatchError(null);
 
     try {
@@ -17,8 +17,8 @@ const LoginPage = () => {
         "http://localhost:8000/api/v1/user/login",
         data
       );
-      console.log("Server Respond:", res);
-      console.log("token", res.data.token);
+      // console.log("Server Respond:", res);
+      // console.log("token", res.data.token);
 
       toast.success("Login successful!", {
         position: toast.POSITION.TOP_CENTER,

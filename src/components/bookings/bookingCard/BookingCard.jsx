@@ -6,7 +6,7 @@ import { Diversity1 } from "@mui/icons-material";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
-  console.log("hi from BookingCard props: ", props);
+  // console.log("hi from BookingCard props: ", props);
   const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
 
   const handleCancel = (e) => {
