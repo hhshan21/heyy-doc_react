@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import RegisterForm from "../../components/registerForm/RegisterForm";
 import { toast } from "react-toastify";
-require("dotenv").config();
+require("dotenv-webpack").config();
 
 const RegisterPage = () => {
   const [catchError, setCatchError] = useState(null);

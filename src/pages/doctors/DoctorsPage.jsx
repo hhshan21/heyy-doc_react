@@ -3,7 +3,7 @@ import Banner from "../../components/banner/BannerDoc";
 import DoctorCard from "../../components/doctorCard/DoctorCard";
 import styles from "./doctorsPage.module.scss";
 import axios from "axios";
-require("dotenv").config();
+require("dotenv-webpack").config();
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);

@@ -5,7 +5,7 @@ import { Button, MenuItem, Box, TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
 import "./EditProfile.css";
-require("dotenv").config();
+require("dotenv-webpack").config();
 
 const EditProfile = () => {
   const navigate = useNavigate();
