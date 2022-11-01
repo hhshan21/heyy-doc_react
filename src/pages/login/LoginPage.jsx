@@ -3,8 +3,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+require("dotenv").config();
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+  // props.tokenState
   const [catchError, setCatchError] = useState(null);
   const navigate = useNavigate();
 
@@ -12,9 +14,10 @@ const LoginPage = () => {
     // console.log("from loginpage:", data);
     setCatchError(null);
 
+    // "http://localhost:8000/api/v1/user/login"
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/login",
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/user/login`,
         data
       );
       // console.log("Server Respond:", res);

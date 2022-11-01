@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ApptForm from "../../components/appointments/apptForm/ApptForm";
 import "./MakeAnApptPage.css";
+require("dotenv").config();
 
 const MakeAnApptPage = () => {
   const [catchError, setCatchError] = useState(null);
@@ -15,11 +16,16 @@ const MakeAnApptPage = () => {
     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
-  useEffect(() => {
+  //http://localhost:8000/api/v1/doctors
+
+  https: useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get("http://localhost:8000/api/v1/doctors", {
-        headers: headerOptions,
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/doctors`,
+        {
+          headers: headerOptions,
+        }
+      );
       const data = await res.data;
       // console.log("data: ", data);
       setDoctors(data);
