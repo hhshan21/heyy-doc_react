@@ -12,7 +12,7 @@ const Doctors = () => {
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/user/doctors`
+        `https://heyy-doc-backend.herokuapp.com/api/v1/user/doctors`
       );
       const data = await res.data;
       // console.log("data: ", data);

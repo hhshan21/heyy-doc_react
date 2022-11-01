@@ -17,7 +17,7 @@ const LoginPage = (props) => {
     // "http://localhost:8000/api/v1/user/login"
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/user/login`,
+        `https://heyy-doc-backend.herokuapp.com/api/v1/user/login`,
         data
       );
       // console.log("Server Respond:", res);

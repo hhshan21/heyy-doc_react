@@ -21,7 +21,7 @@ const MakeAnApptPage = () => {
   https: useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/doctors`,
+        `https://heyy-doc-backend.herokuapp.com/api/v1/doctors`,
         {
           headers: headerOptions,
         }

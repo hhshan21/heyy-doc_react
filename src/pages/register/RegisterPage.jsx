@@ -16,7 +16,7 @@ const RegisterPage = () => {
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/register`,
+        `https://heyy-doc-backend.herokuapp.com/api/v1/register`,
         data
       );
       console.log("Server Respond:", res);
