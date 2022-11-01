@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ApptForm from "../../components/appointments/apptForm/ApptForm";
 import "./MakeAnApptPage.css";
-require("dotenv-webpack").config();
 
 const MakeAnApptPage = () => {
   const [catchError, setCatchError] = useState(null);
