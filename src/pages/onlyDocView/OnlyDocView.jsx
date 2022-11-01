@@ -1,7 +1,7 @@
 import React from "react";
 
-const showDocAppointments = () => {
+const OnlyDocView = () => {
   return <div>showDocAppointments</div>;
 };
 
-export default showDocAppointments;
+export default OnlyDocView;

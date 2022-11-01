@@ -4,10 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button, Box } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "./RegisterForm.css";
+import "./BookingForm.css";
 import "bootstrap";
 
-const RegisterForm = (props) => {
+const BookingForm = (props) => {
   // form validation rules
   const validationSchema = yup.object().shape({
     firstName: yup.string().min(1, "Mininum 1 character").required(),
@@ -47,10 +47,7 @@ const RegisterForm = (props) => {
   };
 
   return (
-    <div className="regForm">
-      <div>
-        <h1 className="text-center pb-3 m-0 mb-3 regFormHeader">Sign Up</h1>
-      </div>
+    <div className="bookingForm">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Box mb={3}>
@@ -214,4 +211,4 @@ const RegisterForm = (props) => {
   );
 };
 
-export default RegisterForm;
+export default BookingForm;

@@ -4,7 +4,7 @@ import DoctorCard from "../../components/doctorCard/DoctorCard";
 import styles from "./doctorsPage.module.scss";
 import axios from "axios";
 
-const Doctors = (props) => {
+const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {

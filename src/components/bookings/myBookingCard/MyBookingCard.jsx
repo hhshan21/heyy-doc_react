@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./BookingCard.css";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
 import { Diversity1 } from "@mui/icons-material";
+import "./MyBookingCard.css";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
-  // console.log("hi from BookingCard props: ", props);
+  console.log("hi from BookingCard props: ", props);
   const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
 
   const handleCancel = (e) => {

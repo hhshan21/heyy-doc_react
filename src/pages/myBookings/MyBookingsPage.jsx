@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import BookingCard from "../../components/bookings/bookingCard/BookingCard";
-import "./BookingsPage.css";
+import BookingCard from "../../components/bookings/myBookingCard/MyBookingCard";
+import "./MyBookingsPage.css";
 
 const BookingsPage = () => {
   const [bookings, setBookings] = useState([]);
