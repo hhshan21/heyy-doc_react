@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ApptCard from "../../components/appointments/apptCard/ApptCard";
 import "./MyApptPage.css";
-require("dotenv-webpack").config();
 
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);

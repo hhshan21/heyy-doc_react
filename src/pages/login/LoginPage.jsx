@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-require("dotenv-webpack").config();
 
 const LoginPage = (props) => {
   // props.tokenState
