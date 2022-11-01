@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import RegisterForm from "../../components/registerForm/RegisterForm";
 import { toast } from "react-toastify";
+require("dotenv").config();
 
 const RegisterPage = () => {
   const [catchError, setCatchError] = useState(null);
@@ -15,7 +16,7 @@ const RegisterPage = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/register",
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/register`,
         data
       );
       console.log("Server Respond:", res);

@@ -3,13 +3,17 @@ import Banner from "../../components/banner/BannerDoc";
 import DoctorCard from "../../components/doctorCard/DoctorCard";
 import styles from "./doctorsPage.module.scss";
 import axios from "axios";
+require("dotenv").config();
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
 
+  // "http://localhost:8000/api/v1/user/doctors",
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get("http://localhost:8000/api/v1/doctors");
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/user/doctors`
+      );
       const data = await res.data;
       // console.log("data: ", data);
       setDoctors(data);
@@ -20,7 +24,7 @@ const Doctors = () => {
   const doctorCards = doctors.map((doctor) => (
     <DoctorCard key={doctor.id} data={doctor} />
   ));
-  console.log("doctors: ", doctors);
+  // console.log("doctors: ", doctors);
 
   return (
     <div>

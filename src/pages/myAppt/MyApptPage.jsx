@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ApptCard from "../../components/appointments/apptCard/ApptCard";
 import "./MyApptPage.css";
+require("dotenv").config();
 
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
@@ -11,10 +12,12 @@ const AppointmentsPage = () => {
     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
+  //http://localhost:8000/api/v1/bookings
+
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        "http://localhost:8000/api/v1/user/bookings",
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/bookings`,
         {
           headers: headerOptions,
         }
