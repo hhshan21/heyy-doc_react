@@ -9,3 +9,16 @@
   padding: 0 1em;
   justify-content: center;
 }
+
+.doctorName {
+  font-weight: bolder;
+}
+
+.apptInfo {
+  font-weight: bold;
+}
+
+.bookingBtn {
+  margin-top: 1em;
+  text-align: center;
+}

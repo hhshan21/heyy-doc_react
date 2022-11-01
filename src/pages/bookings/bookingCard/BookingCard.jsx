@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BookingCard.css";
-import { Grid, Paper, Typography, ButtonBase } from "@mui/material";
+import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
+import { Diversity1 } from "@mui/icons-material";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
   console.log("hi from BookingCard props: ", props);
-  // const { id, firstName, lastName, imageUrl, doctorInfo } = props.data;
+  const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
+
+  const handleCancel = (e) => {
+    navigate("/");
+  };
 
   return (
     <div className="myBookings">
@@ -15,7 +20,7 @@ const BookingCard = (props) => {
           sx={{
             p: 2,
             margin: "auto",
-            maxWidth: 500,
+            maxWidth: 600,
             flexGrow: 1,
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,7 +32,7 @@ const BookingCard = (props) => {
               <ButtonBase sx={{ width: 128, height: 128 }}>
                 <img
                   alt="complex"
-                  src="/static/images/grid/complex.jpg"
+                  src={doctor.imageUrl}
                   style={{
                     margin: "auto",
                     display: "block",
@@ -40,29 +45,57 @@ const BookingCard = (props) => {
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
-                  <Typography gutterBottom variant="subtitle1" component="div">
-                    Standard license
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    Full resolution 1920x1080 • JPEG
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    ID: 1030114
-                  </Typography>
+                  <div className="doctorName">
+                    Dr. {doctor.lastName} {doctor.firstName}
+                  </div>
+                  <div>{doctor.doctorInfo.doctorType}</div>
+                  <div>{doctor.doctorInfo.address}</div>
                 </Grid>
                 <Grid item>
-                  <Typography sx={{ cursor: "pointer" }} variant="body2">
-                    Remove
-                  </Typography>
+                  <div className="apptInfo">Appointment Info</div>
+                  <div>Date: {bookingDate}</div>
+                  <div>Time: {bookingTime}</div>
+                  <div>Symptoms: {symptoms}</div>
                 </Grid>
               </Grid>
-              <Grid item>
-                <Typography variant="subtitle1" component="div">
-                  $19.00
-                </Typography>
-              </Grid>
+              {/* <Grid item>
+                <div className="apptInfo">Appointment Info</div>
+                <div>Date: {bookingDate}</div>
+                <div>Time: {bookingTime}</div>
+                <div>Symptoms: {symptoms}</div>
+              </Grid> */}
             </Grid>
           </Grid>
+          <div className="bookingBtn">
+            <Button
+              onClick={handleCancel}
+              variant="contained"
+              style={{
+                backgroundColor: "#979797",
+                fontFamily: "Lexend Deca",
+                fontWeight: "900",
+                fontSize: "medium",
+                marginRight: "10%",
+              }}
+            >
+              CANCEL
+            </Button>
+            <Button
+              onClick={() => navigate("/my/bookings/create")}
+              variant="contained"
+              style={{
+                backgroundColor: "#0cb4ea",
+                fontFamily: "Lexend Deca",
+                fontWeight: "900",
+                width: "15%",
+                marginLeft: "15%",
+                fontSize: "medium",
+                color: "white",
+              }}
+            >
+              EDIT
+            </Button>
+          </div>
         </Paper>
       </div>
     </div>
