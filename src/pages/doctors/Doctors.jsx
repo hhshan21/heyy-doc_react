@@ -20,6 +20,7 @@ const Doctors = (props) => {
   const doctorCards = doctors.map((doctor) => (
     <DoctorCard key={doctor.id} data={doctor} />
   ));
+  console.log("doctors: ", doctors);
 
   return (
     <div>

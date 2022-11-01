@@ -27,7 +27,7 @@ const ShowProfile = () => {
 
   return (
     <div>
-      <h1 className={style.showProfileHeader}>MY PROFILE</h1>
+      <h1 className={style.showProfileHeader}>My Profile</h1>
 
       <div className={style.mainContainer}>
         <>

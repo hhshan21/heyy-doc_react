@@ -49,9 +49,7 @@ const RegisterForm = (props) => {
   return (
     <div className="regForm">
       <div>
-        <h1 className="text-center pb-3 m-0 mb-3 regFormHeader">
-          Create an Account
-        </h1>
+        <h1 className="text-center pb-3 m-0 mb-3 regFormHeader">Sign Up</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -208,7 +206,7 @@ const RegisterForm = (props) => {
               fontSize: "110%",
             }}
           >
-            CREATE ACCOUNT
+            SIGN UP
           </Button>
         </div>
       </form>

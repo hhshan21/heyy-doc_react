@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BookingCard.css";
-import { Box, Card, CardContent, CardMedia } from "@mui/material";
+import { Grid, Paper, Typography, ButtonBase } from "@mui/material";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
@@ -10,30 +10,60 @@ const BookingCard = (props) => {
 
   return (
     <div className="myBookings">
-      <h1 className="text-center mt-3 mb-5 showBookingHeader">MY BOOKINGS</h1>
       <div className="bookingCards">
-        <Card
-          sx={{ display: "flex" }}
-          style={{
-            border: "1px solid #979797",
-            width: "40em",
-            justifyContent: "center",
-            marginBottom: "2em",
+        <Paper
+          sx={{
+            p: 2,
+            margin: "auto",
+            maxWidth: 500,
+            flexGrow: 1,
+            backgroundColor: (theme) =>
+              theme.palette.mode === "dark" ? "#1A2027" : "#fff",
           }}
+          style={{ marginBottom: "2em", border: "1px solid #979797" }}
         >
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <CardContent sx={{ flex: "1 0 auto" }}>Live From Space</CardContent>
-            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-              <div>Hello</div>
-            </Box>
-          </Box>
-          <CardMedia
-            component="img"
-            sx={{ width: 151 }}
-            image="/static/images/cards/live-from-space.jpg"
-            alt="Live from space album cover"
-          />
-        </Card>
+          <Grid container spacing={2}>
+            <Grid item>
+              <ButtonBase sx={{ width: 128, height: 128 }}>
+                <img
+                  alt="complex"
+                  src="/static/images/grid/complex.jpg"
+                  style={{
+                    margin: "auto",
+                    display: "block",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                  }}
+                />
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Typography gutterBottom variant="subtitle1" component="div">
+                    Standard license
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    Full resolution 1920x1080 • JPEG
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    ID: 1030114
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography sx={{ cursor: "pointer" }} variant="body2">
+                    Remove
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Typography variant="subtitle1" component="div">
+                  $19.00
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
       </div>
     </div>
   );

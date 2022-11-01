@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BookingCard from "../bookings/bookingCard/BookingCard";
+import "./BookingsPage.css";
 
 const BookingsPage = () => {
   const [bookings, setBookings] = useState([]);
@@ -25,9 +26,18 @@ const BookingsPage = () => {
     fetchApi();
   }, []);
 
+  const testing = bookings.bookings;
+
+  const bookingCards = testing.map((booking) => (
+    <BookingCard key={booking.id} data={booking} />
+  ));
+  // console.log("bookings.bookings: ", bookings.bookings);
+
   return (
     <div>
-      <BookingCard key={bookings.id} data={bookings} />
+      <h1 className="text-center mt-3 mb-5 showBookingHeader">My Bookings</h1>
+      {/* <BookingCard key={bookings.id} data={bookings} /> */}
+      {bookingCards}
     </div>
   );
 };
