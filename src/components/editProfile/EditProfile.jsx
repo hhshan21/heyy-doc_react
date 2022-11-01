@@ -28,6 +28,7 @@ const EditProfile = () => {
     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
+  // https://heyy-doc-backend.herokuapp.com/api/v1/user/profile
   // "http://localhost:8000/api/v1/user/profile",
   useEffect(() => {
     const fetchApi = async () => {
@@ -52,6 +53,7 @@ const EditProfile = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    //https://heyy-doc-backend.herokuapp.com/api/v1/user/profile
     // "http://localhost:8000/api/v1/user/profile",
     try {
       const res = await axios.patch(

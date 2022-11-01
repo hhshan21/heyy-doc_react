@@ -13,6 +13,9 @@ const ShowProfile = () => {
     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
+  //https://heyy-doc-backend.herokuapp.com/api/v1/user/profile
+  //http://localhost:8000/api/v1/user/profile
+
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(

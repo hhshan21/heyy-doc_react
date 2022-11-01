@@ -16,6 +16,7 @@ const MakeAnApptPage = () => {
   };
 
   //http://localhost:8000/api/v1/doctors
+  // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
 
   https: useEffect(() => {
     const fetchApi = async () => {

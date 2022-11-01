@@ -7,7 +7,9 @@ import axios from "axios";
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
 
-  // "http://localhost:8000/api/v1/user/doctors",
+  // https://heyy-doc-backend.herokuapp.com/api/v1/user/doctors
+  //http://localhost:8000/api/v1/user/doctors
+
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
