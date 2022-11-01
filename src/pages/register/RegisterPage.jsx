@@ -13,6 +13,9 @@ const RegisterPage = () => {
     console.log("From reg form compononent in reg pg:", data);
     setCatchError(null);
 
+    //https://heyy-doc-backend.herokuapp.com/api/v1/register
+    //http://localhost:8000/api/v1/register
+
     try {
       const res = await axios.post(
         `https://heyy-doc-backend.herokuapp.com/api/v1/register`,

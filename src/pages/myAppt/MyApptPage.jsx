@@ -11,6 +11,7 @@ const AppointmentsPage = () => {
     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
+  //https://heyy-doc-backend.herokuapp.com/api/v1/bookings
   //http://localhost:8000/api/v1/bookings
 
   useEffect(() => {
@@ -23,15 +24,13 @@ const AppointmentsPage = () => {
       );
       const data = await res.data;
       // console.log("data: ", data);
-      setAppointments(data);
+      setAppointments(data.bookings);
     };
     fetchApi();
   }, []);
 
-  const allAppointments = appointments.bookings;
-
   // ISSUE IS HERE
-  const appointmentCards = allAppointments.map((appointment) => (
+  const appointmentCards = appointments.map((appointment) => (
     <ApptCard key={appointment.id} data={appointment} />
   ));
 
