@@ -103,7 +103,7 @@ const BookingCard = (props) => {
                 CANCEL
               </Button>
               <Button
-                onClick={() => navigate("/my/bookings/create")}
+                onClick={() => navigate("/my/appointments/create")}
                 variant="contained"
                 style={{
                   backgroundColor: "#0cb4ea",

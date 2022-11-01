@@ -1,43 +1,63 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import BookingForm from "../../components/appointments/apptForm/ApptForm";
-import { toast } from "react-toastify";
+import ApptForm from "../../components/appointments/apptForm/ApptForm";
 import "./MakeAnApptPage.css";
 
-const MakeABookingPage = () => {
+const MakeAnApptPage = () => {
   const [catchError, setCatchError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const [doctors, setDoctors] = useState([]);
 
-  const onSubmit = async (data) => {
-    console.log("From reg form compononent in reg pg:", data);
-    setCatchError(null);
-
-    try {
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/user/bookings",
-        data
-      );
-      console.log("Server Respond:", res);
-
-      toast.success("Welcome to Heyy Doc! Please login", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      if (res.status === 200 || res.status === 201) {
-        //navigate to home
-        if (location.pathname === "/register") {
-          navigate("/login");
-        }
-      }
-    } catch (error) {
-      // console.log("error: ", error);
-      // display an error
-      // console.log("error.response.data: ", error.response.data);
-      toast.error(error.response.data);
-      setCatchError(error.response.data.error);
-    }
+  const headerOptions = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const res = await axios.get("http://localhost:8000/api/v1/doctors", {
+        headers: headerOptions,
+      });
+      const data = await res.data;
+      // console.log("data: ", data);
+      setDoctors(data);
+    };
+    fetchApi();
+  }, []);
+
+  // console.log("doctors: ", doctors);
+
+  // const onSubmit = async (data) => {
+  //   console.log("From reg form compononent in reg pg:", data);
+  //   setCatchError(null);
+
+  //   try {
+  //     const res = await axios.post(
+  //       "http://localhost:8000/api/v1/user/bookings",
+  //       data
+  //     );
+  //     console.log("Server Respond:", res);
+
+  //     toast.success("Successfully booked!", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //     });
+  //     if (res.status === 200 || res.status === 201) {
+  //       //navigate to home
+  //       // if (location.pathname === "/register") {
+  //       //   navigate("/login");
+  //       // }
+  //       navigate("/login");
+  //     }
+  //   } catch (error) {
+  //     // console.log("error: ", error);
+  //     // display an error
+  //     // console.log("error.response.data: ", error.response.data);
+  //     toast.error(error.response.data);
+  //     setCatchError(error.response.data.error);
+  //   }
+  // };
 
   return (
     <div>
@@ -59,11 +79,11 @@ const MakeABookingPage = () => {
               </p>
             </div>
           )}
-          <BookingForm data={onSubmit} />
+          <ApptForm data={doctors} />
         </div>
       </div>
     </div>
   );
 };
 
-export default MakeABookingPage;
+export default MakeAnApptPage;

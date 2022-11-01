@@ -55,7 +55,7 @@ const SiteHeader = (props) => {
             </li>
             <li className="nav-item">
               <Link
-                to="/my/bookings/create"
+                to="/my/appointments/create"
                 style={{ textDecoration: "none", color: "#0cb4ea" }}
               >
                 MAKE AN APPOINTMENT
@@ -96,7 +96,7 @@ const SiteHeader = (props) => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    to="/my/bookings"
+                    to="/my/appointments"
                     style={{ textDecoration: "none", color: "#0cb4ea" }}
                   >
                     MY APPOINTMENTS

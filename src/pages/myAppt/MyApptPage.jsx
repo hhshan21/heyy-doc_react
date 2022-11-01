@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ApptCard from "../../components/appointments/apptCard/ApptCard";
-import "./AppointmentPage.css";
+import "./MyApptPage.css";
 
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
@@ -28,6 +28,7 @@ const AppointmentsPage = () => {
 
   const allAppointments = appointments.bookings;
 
+  // ISSUE IS HERE
   const appointmentCards = allAppointments.map((appointment) => (
     <ApptCard key={appointment.id} data={appointment} />
   ));

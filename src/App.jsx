@@ -15,13 +15,13 @@ import EditProfile from "./components/editProfile/EditProfile";
 // Pages
 import Homepage from "./pages/home/Homepage";
 import Doctors from "./pages/doctors/DoctorsPage";
-import AppointmentPage from "./pages/appointment/AppointmentPage";
+import MyAppointments from "./pages/myAppt/MyApptPage";
 import MakeAnApptPage from "./pages/makeAnApptPage/MakeAnApptPage";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 
-import ShowDocAppointments from "./pages/onlyDocView/OnlyDocView";
+import DocAppointments from "./pages/onlyDocView/OnlyDocView";
 
 function App() {
   const [tokenState, setTokenState] = useState();
@@ -59,20 +59,20 @@ function App() {
           element={<Auth component={EditProfile} />}
         />
         <Route
-          path="/my/bookings"
-          element={<Auth component={AppointmentPage} />}
+          path="/my/appointments"
+          element={<Auth component={MyAppointments} />}
         />
         <Route
-          path="/my/bookings/create"
+          path="/my/appointments/create"
           element={<Auth component={MakeAnApptPage} />}
         />
         <Route
-          path="/my/bookings/:id"
+          path="/my/appointments/:id"
           element={<Auth component={EditAppointment} />}
         />
         <Route
-          path="/my/appointments"
-          element={<Auth component={ShowDocAppointments} />}
+          path="/my/patientappointments"
+          element={<Auth component={DocAppointments} />}
         />
       </Routes>
       <ToastContainer />
