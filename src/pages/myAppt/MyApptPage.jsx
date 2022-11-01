@@ -17,7 +17,7 @@ const AppointmentsPage = () => {
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/bookings`,
+        `https://heyy-doc-backend.herokuapp.com/api/v1/bookings`,
         {
           headers: headerOptions,
         }
