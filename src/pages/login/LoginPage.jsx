@@ -15,9 +15,12 @@ const LoginPage = (props) => {
     // console.log("from loginpage:", data);
     setCatchError(null);
 
+    //http://localhost:8000/api/v1/user/doctors
+    //https://heyy-doc-backend.herokuapp.com/api/v1/user/login
+
     try {
       const res = await axios.post(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/user/login`,
+        "http://localhost:8000/api/v1/user/login",
         data
       );
       // console.log("Server Respond:", res);
