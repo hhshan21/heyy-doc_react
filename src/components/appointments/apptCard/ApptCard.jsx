@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
 import { Diversity1 } from "@mui/icons-material";
 import "./ApptCard.css";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
@@ -17,8 +19,39 @@ const BookingCard = (props) => {
   const checkDate = isNextDate > bookingDate;
   console.log("checkDate: ", checkDate);
 
-  const handleCancel = (e) => {
-    navigate("/");
+  const headerOptions = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+  };
+
+  // to handle delete of appointment
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
+        { headers: headerOptions }
+      );
+
+      toast.success("Successfully deleted", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+
+      window.location.reload(false);
+    } catch (error) {
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
+
+  // to window confirmation of delete
+  const delConfirmation = (e) => {
+    if (window.confirm("Are you sure you want to delete the appointment?")) {
+      e.preventDefault();
+      handleDelete();
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -90,19 +123,6 @@ const BookingCard = (props) => {
           {!checkDate ? (
             <div className="bookingBtn">
               <Button
-                onClick={handleCancel}
-                variant="contained"
-                style={{
-                  backgroundColor: "#979797",
-                  fontFamily: "Lexend Deca",
-                  fontWeight: "900",
-                  fontSize: "medium",
-                  marginRight: "10%",
-                }}
-              >
-                CANCEL
-              </Button>
-              <Button
                 onClick={() => navigate("/my/appointments/create")}
                 variant="contained"
                 style={{
@@ -110,12 +130,25 @@ const BookingCard = (props) => {
                   fontFamily: "Lexend Deca",
                   fontWeight: "900",
                   width: "15%",
-                  marginLeft: "15%",
                   fontSize: "medium",
                   color: "white",
                 }}
               >
                 EDIT
+              </Button>
+              <Button
+                onClick={delConfirmation}
+                variant="contained"
+                style={{
+                  backgroundColor: "#0cb4ea",
+                  fontFamily: "Lexend Deca",
+                  fontWeight: "900",
+                  fontSize: "medium",
+                  marginLeft: "15%",
+                  marginRight: "10%",
+                }}
+              >
+                DELETE
               </Button>
             </div>
           ) : (

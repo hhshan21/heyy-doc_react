@@ -11,20 +11,35 @@ import "bootstrap";
 
 const ApptForm = (props) => {
   const navigate = useNavigate();
-  console.log("ApptForm props data: ", props.data);
-  // const params = useParams();
+  // console.log("ApptForm props data: ", props.data);
+  // console.log("props.data[0]: ", props.data[0]);
+  const doctors = props.data;
+  console.log("doctors: ", doctors);
+  const docFirstName = doctors.map((ele) => ele.firstName);
+  console.log("docFirstName: ", docFirstName);
+  const docLastName = doctors.map((ele) => ele.lastName);
+  console.log("docLastName: ", docLastName);
+  const doctorTime = doctors.map((ele) => ele.doctorTime);
+  console.log("doctorTime: ", doctorTime);
+  const slot = doctorTime.map((ele) => ele.slot);
+  console.log("slot: ", slot);
 
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(new Date());
+  // const [date, setDate] = useState(currentDate.getTime() + 86400000);
   // const [noOfGuests, setNoOfGuests] = useState(1);
   // const [totalPrice, setTotalPrice] = useState(0);
   // // const [unavailableDates, setUnavailableDates] = useState[[]]
   // const [formData, setFormData] = useState({
-  //   checkin_date: "",
-  //   checkout_date: "",
-  //   total_guests: "",
-  //   total_price: "",
+  //   firstName: "",
+  //   lastName: "",
+  //   appointmentDate: "",
+  //   appointmentTime: "",
+  //   symptoms: "",
   // });
+
+  // const isNextDate = nextDate.toISOString().substring(0, 10);
+  // console.log("isNextDate: ", isNextDate);
+  // const checkDate = isNextDate > bookingDate;
+  // console.log("checkDate: ", checkDate);
 
   // // an variable obj to store the checkin date and checkout date
   // const selectionRange = {
