@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Box } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { TextField, Button, Box, MenuItem } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import axios from "axios";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import "./ApptForm.css";
 import "bootstrap";
 
@@ -35,6 +32,7 @@ const ApptForm = (props) => {
   //http://localhost:8000/api/v1/doctors
   // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
 
+  // fetching doctors api here
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
@@ -58,13 +56,9 @@ const ApptForm = (props) => {
     setSymptoms(e.target.value);
   };
 
-  // form validation rules
-  const validationSchema = yup.object().shape({
-    symptoms: yup
-      .string()
-      .min(3, "Mininum 3 characters")
-      .required("Please indicate your symptoms"),
-  });
+  const handleDoctorChange = (e) => {
+    setSelectedDoctorId(e.target.value);
+  };
 
   // const onSubmit = async (data) => {
   //   console.log("In appt form:", data);
@@ -127,16 +121,24 @@ const ApptForm = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           <Box mb={3}>
-            {/* <select
-              value={docFullName}
-              onChange={(e) => setDocFullName(e.target.value)}
-            >
-              {docName.map((name) => (
-                <option value={name} key={name}>
-                  {name}
-                </option>
-              ))}
-            </select> */}
+            <div>
+              <TextField
+                id="outlined-select-currency"
+                select
+                label="Doctor Name"
+                value={selectedDoctorId}
+                onChange={handleDoctorChange}
+                helperText="Please select a Doctor"
+              >
+                {doctors.map((doctor) => {
+                  return (
+                    <MenuItem value={doctor.id} key={doctor.id}>
+                      {`Dr. ${doctor.lastName} ${doctor.firstName}`}
+                    </MenuItem>
+                  );
+                })}
+              </TextField>
+            </div>
           </Box>
           <Box mb={3}>
             <LocalizationProvider dateAdapter={AdapterLuxon}>
@@ -152,7 +154,13 @@ const ApptForm = (props) => {
                 value={apptDate.bookingDate}
                 renderInput={(params) => <TextField {...params} />}
               />
-              <div style={{ marginBottom: "1em", fontSize: "small" }}>
+              <div
+                style={{
+                  marginBottom: "1em",
+                  fontSize: "small",
+                  color: "rgba(0, 0, 0, 0.6)",
+                }}
+              >
                 Please select from tomorrow's date onwards
               </div>
             </LocalizationProvider>
@@ -180,65 +188,22 @@ const ApptForm = (props) => {
             /> */}
           </Box>
           <Box mb={3}>
-            {/* <div className="mb-3">
-              <input
-                className="symptoms"
-                placeholder="Please key in your symptoms"
-                required
-                type="text"
-                id="symptoms"
-                name="symptoms"
+            <div className="symptoms">
+              <TextField
+                sx={{ m: 1 }}
                 value={symptoms}
                 onChange={handleSymptomsChange}
-                style={{ row: "3" }}
-              ></input>
-              <div>
-                <label for="symptoms" style={{ fontSize: "small" }}>
-                  Symptoms (min 3 characters):
-                </label>
-              </div>
-            </div> */}
-            <Box>
-              <div className="symptoms">
-                <TextField
-                  sx={{ m: 1 }}
-                  value={symptoms}
-                  onChange={handleSymptomsChange}
-                  id="symptoms"
-                  label="Please key in your symptoms"
-                  multiline
-                  rows={4}
-                  helperText="Min. 3 characters"
-                  style={{
-                    width: "15em",
-                    marginBottom: "1em",
-                  }}
-                />
-              </div>
-            </Box>
-
-            {/* <Controller
-              name="symptoms" //actual input
-              control={control} //take place of the register RHF
-              render={({ field }) => (
-                <TextField
-                  label={"Symptoms:"} //label in the box
-                  variant="outlined"
-                  rows={4}
-                  required
-                  //multiline={true}
-                  fullWidth
-                  autoFocus
-                  // error={!!error} //convert obj into a bool
-                  // helperText={error ? error.message : null}
-                  // error={errors.drugAllergies ? true : false}
-                  // helperText={errors.drugAllergies?.message}
-                  {...field}
-                  error={errors.symptoms ? true : false}
-                  helperText={errors.symptoms?.message}
-                />
-              )}
-            /> */}
+                id="symptoms"
+                label="Please key in your symptoms"
+                multiline
+                rows={4}
+                helperText="Min. 3 characters"
+                style={{
+                  width: "25em",
+                  marginBottom: "1em",
+                }}
+              />
+            </div>
           </Box>
           <div className="apptFormBtn">
             <Button
