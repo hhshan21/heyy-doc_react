@@ -8,16 +8,16 @@ import axios from "axios";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
-  console.log("hi from BookingCard props: ", props);
+  // console.log("hi from BookingCard props: ", props);
   const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
 
   // compare dates to determine if its past booking or not
   const currentDate = new Date();
   const nextDate = new Date(currentDate.getTime() + 86400000);
   const isNextDate = nextDate.toISOString().substring(0, 10);
-  console.log("isNextDate: ", isNextDate);
+  // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
-  console.log("checkDate: ", checkDate);
+  // console.log("checkDate: ", checkDate);
 
   const headerOptions = {
     "Content-Type": "application/json",
