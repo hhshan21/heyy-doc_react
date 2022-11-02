@@ -9,7 +9,6 @@ const MakeAnApptPage = () => {
   const [catchError, setCatchError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const [doctors, setDoctors] = useState([]);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -19,25 +18,8 @@ const MakeAnApptPage = () => {
   //http://localhost:8000/api/v1/doctors
   // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
 
-  useEffect(() => {
-    const fetchApi = async () => {
-      const res = await axios.get(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/doctors`,
-        {
-          headers: headerOptions,
-        }
-      );
-      const data = await res.data;
-      // console.log("data: ", data);
-      setDoctors(data);
-    };
-    fetchApi();
-  }, []);
-
-  // console.log("doctors: ", doctors);
-
   const onSubmit = async (data) => {
-    console.log("From appt form compononent:", data);
+    console.log("From appt form compononent in appt page:", data);
     setCatchError(null);
 
     try {
@@ -82,7 +64,7 @@ const MakeAnApptPage = () => {
               </p>
             </div>
           )}
-          <ApptForm info={doctors} data={onSubmit} />
+          <ApptForm data={onSubmit} />
         </div>
       </div>
     </div>

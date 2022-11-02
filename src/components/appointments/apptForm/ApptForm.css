@@ -8,3 +8,12 @@
   margin-top: 1em;
   text-align: center;
 }
+
+.symptoms {
+  height: 5em;
+  width: 20em;
+  border: 1px solid #e6e6e6;
+  color: #333333;
+  font-size: 18px;
+  padding-bottom: 3em;
+}
