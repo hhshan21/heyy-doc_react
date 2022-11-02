@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
-import { Diversity1 } from "@mui/icons-material";
+import EditApptForm from "../editApptForm/EditApptForm";
+
 import "./ApptCard.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
+  const params = useParams();
   // console.log("hi from BookingCard props: ", props);
   const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
 
@@ -18,6 +20,7 @@ const BookingCard = (props) => {
   // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
   // console.log("checkDate: ", checkDate);
+  const [editTrip, setEditTrip] = useState([]);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -53,6 +56,19 @@ const BookingCard = (props) => {
       return false;
     }
   };
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const res = await axios.get(
+        `http://localhost:8000/api/v1/user/bookings/${params.id}`,
+        { headers: headerOptions }
+      );
+      const data = await res.data;
+
+      setEditTrip(data);
+    };
+    fetchApi();
+  }, []);
 
   return (
     <div className="myBookings">
@@ -122,8 +138,9 @@ const BookingCard = (props) => {
           </Grid>
           {!checkDate ? (
             <div className="bookingBtn">
+              {/* <div> */}
               <Button
-                onClick={() => navigate("/my/appointments/create")}
+                onClick={() => navigate(`/my/appointments/edit/${params.id}`)}
                 variant="contained"
                 style={{
                   backgroundColor: "#0cb4ea",
@@ -136,6 +153,8 @@ const BookingCard = (props) => {
               >
                 EDIT
               </Button>
+              {/* <EditApptForm data={editTrip} /> */}
+              {/* </div> */}
               <Button
                 onClick={delConfirmation}
                 variant="contained"
