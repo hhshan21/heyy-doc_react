@@ -180,10 +180,7 @@ const ApptForm = (props) => {
             /> */}
           </Box>
           <Box mb={3}>
-            <div className="mb-3">
-              <label for="symptoms" style={{ fontSize: "small" }}>
-                Symptoms (min 3 characters):
-              </label>
+            {/* <div className="mb-3">
               <input
                 className="symptoms"
                 placeholder="Please key in your symptoms"
@@ -195,7 +192,31 @@ const ApptForm = (props) => {
                 onChange={handleSymptomsChange}
                 style={{ row: "3" }}
               ></input>
-            </div>
+              <div>
+                <label for="symptoms" style={{ fontSize: "small" }}>
+                  Symptoms (min 3 characters):
+                </label>
+              </div>
+            </div> */}
+            <Box>
+              <div className="symptoms">
+                <TextField
+                  sx={{ m: 1 }}
+                  value={symptoms}
+                  onChange={handleSymptomsChange}
+                  id="symptoms"
+                  label="Please key in your symptoms"
+                  multiline
+                  rows={4}
+                  helperText="Min. 3 characters"
+                  style={{
+                    width: "15em",
+                    marginBottom: "1em",
+                  }}
+                />
+              </div>
+            </Box>
+
             {/* <Controller
               name="symptoms" //actual input
               control={control} //take place of the register RHF
