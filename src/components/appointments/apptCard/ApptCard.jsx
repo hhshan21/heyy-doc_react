@@ -1,25 +1,74 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
-import { Diversity1 } from "@mui/icons-material";
+import EditApptForm from "../editApptForm/EditApptForm";
+
 import "./ApptCard.css";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const BookingCard = (props) => {
   const navigate = useNavigate();
-  console.log("hi from BookingCard props: ", props);
+  const params = useParams();
+  // console.log("hi from BookingCard props: ", props);
   const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
 
   // compare dates to determine if its past booking or not
   const currentDate = new Date();
   const nextDate = new Date(currentDate.getTime() + 86400000);
   const isNextDate = nextDate.toISOString().substring(0, 10);
-  console.log("isNextDate: ", isNextDate);
+  // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
-  console.log("checkDate: ", checkDate);
+  // console.log("checkDate: ", checkDate);
+  const [editTrip, setEditTrip] = useState([]);
 
-  const handleCancel = (e) => {
-    navigate("/");
+  const headerOptions = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
+
+  // to handle delete of appointment
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
+        { headers: headerOptions }
+      );
+
+      toast.success("Successfully deleted", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+
+      window.location.reload(false);
+    } catch (error) {
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
+
+  // to window confirmation of delete
+  const delConfirmation = (e) => {
+    if (window.confirm("Are you sure you want to delete the appointment?")) {
+      e.preventDefault();
+      handleDelete();
+    } else {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const res = await axios.get(
+        `http://localhost:8000/api/v1/user/bookings/${params.id}`,
+        { headers: headerOptions }
+      );
+      const data = await res.data;
+
+      setEditTrip(data);
+    };
+    fetchApi();
+  }, []);
 
   return (
     <div className="myBookings">
@@ -89,33 +138,36 @@ const BookingCard = (props) => {
           </Grid>
           {!checkDate ? (
             <div className="bookingBtn">
+              {/* <div> */}
               <Button
-                onClick={handleCancel}
-                variant="contained"
-                style={{
-                  backgroundColor: "#979797",
-                  fontFamily: "Lexend Deca",
-                  fontWeight: "900",
-                  fontSize: "medium",
-                  marginRight: "10%",
-                }}
-              >
-                CANCEL
-              </Button>
-              <Button
-                onClick={() => navigate("/my/appointments/create")}
+                onClick={() => navigate(`/my/appointments/edit/${params.id}`)}
                 variant="contained"
                 style={{
                   backgroundColor: "#0cb4ea",
                   fontFamily: "Lexend Deca",
                   fontWeight: "900",
                   width: "15%",
-                  marginLeft: "15%",
                   fontSize: "medium",
                   color: "white",
                 }}
               >
                 EDIT
+              </Button>
+              {/* <EditApptForm data={editTrip} /> */}
+              {/* </div> */}
+              <Button
+                onClick={delConfirmation}
+                variant="contained"
+                style={{
+                  backgroundColor: "#0cb4ea",
+                  fontFamily: "Lexend Deca",
+                  fontWeight: "900",
+                  fontSize: "medium",
+                  marginLeft: "15%",
+                  marginRight: "10%",
+                }}
+              >
+                DELETE
               </Button>
             </div>
           ) : (

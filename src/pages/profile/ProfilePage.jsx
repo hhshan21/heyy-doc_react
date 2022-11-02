@@ -18,12 +18,9 @@ const ShowProfile = () => {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/user/profile`,
-        {
-          headers: headerOptions,
-        }
-      );
+      const res = await axios.get("http://localhost:8000/api/v1/user/profile", {
+        headers: headerOptions,
+      });
       const data = await res.data;
       // console.log("data: ", data);
       setProfile(data);

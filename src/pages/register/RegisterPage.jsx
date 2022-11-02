@@ -13,12 +13,12 @@ const RegisterPage = () => {
     console.log("From reg form compononent in reg pg:", data);
     setCatchError(null);
 
-    //https://heyy-doc-backend.herokuapp.com/api/v1/register
-    //http://localhost:8000/api/v1/register
+    //https://heyy-doc-backend.herokuapp.com/api/v1/user/register
+    //http://localhost:8000/api/v1/user/register
 
     try {
       const res = await axios.post(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/register`,
+        "http://localhost:8000/api/v1/user/register",
         data
       );
       console.log("Server Respond:", res);

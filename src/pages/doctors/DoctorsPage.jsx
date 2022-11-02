@@ -7,14 +7,12 @@ import axios from "axios";
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
 
-  // https://heyy-doc-backend.herokuapp.com/api/v1/user/doctors
-  //http://localhost:8000/api/v1/user/doctors
+  // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
+  //http://localhost:8000/api/v1/doctors
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/user/doctors`
-      );
+      const res = await axios.get("http://localhost:8000/api/v1/doctors");
       const data = await res.data;
       // console.log("data: ", data);
       setDoctors(data);

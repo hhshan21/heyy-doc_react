@@ -17,7 +17,7 @@ const AppointmentsPage = () => {
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/bookings`,
+        "http://localhost:8000/api/v1/user/bookings",
         {
           headers: headerOptions,
         }
@@ -29,7 +29,6 @@ const AppointmentsPage = () => {
     fetchApi();
   }, []);
 
-  // ISSUE IS HERE
   const appointmentCards = appointments.map((appointment) => (
     <ApptCard key={appointment.id} data={appointment} />
   ));

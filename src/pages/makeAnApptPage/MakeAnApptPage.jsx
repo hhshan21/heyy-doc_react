@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ApptForm from "../../components/appointments/apptForm/ApptForm";
 import "./MakeAnApptPage.css";
+import { toast } from "react-toastify";
 
 const MakeAnApptPage = () => {
   const [catchError, setCatchError] = useState(null);
@@ -18,7 +19,7 @@ const MakeAnApptPage = () => {
   //http://localhost:8000/api/v1/doctors
   // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
 
-  https: useEffect(() => {
+  useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
         `https://heyy-doc-backend.herokuapp.com/api/v1/doctors`,
@@ -35,35 +36,31 @@ const MakeAnApptPage = () => {
 
   // console.log("doctors: ", doctors);
 
-  // const onSubmit = async (data) => {
-  //   console.log("From reg form compononent in reg pg:", data);
-  //   setCatchError(null);
+  const onSubmit = async (data) => {
+    console.log("From appt form compononent:", data);
+    setCatchError(null);
 
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:8000/api/v1/user/bookings",
-  //       data
-  //     );
-  //     console.log("Server Respond:", res);
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/user/bookings",
+        { headers: headerOptions },
+        data
+      );
+      // console.log("Server Respond:", res);
 
-  //     toast.success("Successfully booked!", {
-  //       position: toast.POSITION.TOP_CENTER,
-  //     });
-  //     if (res.status === 200 || res.status === 201) {
-  //       //navigate to home
-  //       // if (location.pathname === "/register") {
-  //       //   navigate("/login");
-  //       // }
-  //       navigate("/login");
-  //     }
-  //   } catch (error) {
-  //     // console.log("error: ", error);
-  //     // display an error
-  //     // console.log("error.response.data: ", error.response.data);
-  //     toast.error(error.response.data);
-  //     setCatchError(error.response.data.error);
-  //   }
-  // };
+      toast.success("Successfully booked!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+
+      navigate("/my/appointments");
+    } catch (error) {
+      // console.log("error: ", error);
+      // display an error
+      // console.log("error.response.data: ", error.response.data);
+      toast.error(error.response.data);
+      setCatchError(error.response.data.error);
+    }
+  };
 
   return (
     <div>
@@ -85,7 +82,7 @@ const MakeAnApptPage = () => {
               </p>
             </div>
           )}
-          <ApptForm data={doctors} />
+          <ApptForm info={doctors} data={onSubmit} />
         </div>
       </div>
     </div>

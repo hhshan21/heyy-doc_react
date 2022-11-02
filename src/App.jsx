@@ -9,7 +9,6 @@ import Footer from "../src/components/partials/footer/Footer";
 import SiteHeader from "./components/partials/siteHeader/SiteHeader";
 import Auth from "./components/auth/Auth";
 import jwt_decode from "jwt-decode";
-import EditAppointment from "./components/appointments/editAppt/EditAppt";
 import EditProfile from "./components/editProfile/EditProfile";
 
 // Pages
@@ -20,6 +19,7 @@ import MakeAnApptPage from "./pages/makeAnApptPage/MakeAnApptPage";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import EditApptPage from "./pages/editApptPage/EditApptPage";
 
 import DocAppointments from "./pages/onlyDocView/OnlyDocView";
 
@@ -67,8 +67,8 @@ function App() {
           element={<Auth component={MakeAnApptPage} />}
         />
         <Route
-          path="/my/appointments/:id"
-          element={<Auth component={EditAppointment} />}
+          path="/my/appointments/edit/:id"
+          element={<Auth component={EditApptPage} />}
         />
         <Route
           path="/my/patientappointments"
