@@ -46,6 +46,11 @@ const ApptForm = (props) => {
       setDoctors(data);
     };
     fetchApi();
+    toast.promise(fetchApi, {
+      pending: "Please wait while we call our doctors!",
+      success: "Doctors' info have arrived!",
+      error: "error",
+    });
   }, []);
 
   const handleDateChange = (newApptDate) => {
@@ -65,6 +70,14 @@ const ApptForm = (props) => {
   //   props.data(data);
   // };
 
+  console.log("headerOptions: ", headerOptions);
+
+  const selectedDoctorTimeSlots = doctors
+    .find((doctor) => doctor.id === selectedDoctorId)
+    ?.doctorTime.split(",");
+
+  // console.log("selectedDoctorTimeSlots: ", selectedDoctorTimeSlots);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCatchError(null);
@@ -75,8 +88,9 @@ const ApptForm = (props) => {
         { headers: headerOptions },
         {
           data: {
-            doctor: selectedDoctorId,
+            doctorId: selectedDoctorId,
             bookingDate: apptDate,
+            bookingTime: selectedDoctorTimeSlots,
             symptoms: symptoms,
           },
         }
@@ -123,7 +137,7 @@ const ApptForm = (props) => {
           <Box mb={3}>
             <div>
               <TextField
-                id="outlined-select-currency"
+                id="doctorId"
                 select
                 label="Doctor Name"
                 value={selectedDoctorId}
@@ -144,7 +158,7 @@ const ApptForm = (props) => {
             <LocalizationProvider dateAdapter={AdapterLuxon}>
               <DesktopDatePicker
                 name="bookingDate"
-                label="Select your Appointment Date:"
+                label="Select your Appointment Date"
                 inputFormat="yyyy/MM/dd"
                 minDate={DateTime.now()
                   .plus({ days: 1 })
@@ -166,26 +180,23 @@ const ApptForm = (props) => {
             </LocalizationProvider>
           </Box>
           <Box mb={3}>
-            {/* <Controller
-              name="email" //actual input
-              control={control} //take place of the register RHF
-              render={({
-                field, //this error will be displyed in formstate errors
-              }) => (
-                <TextField
-                  label={"Email:"} //label in the box
-                  variant="outlined"
-                  fullWidth
-                  autoComplete="email"
-                  autoFocus
-                  // error={!!error} //convert obj into a bool
-                  // helperText={error ? error.message : null}
-                  error={errors.email ? true : false}
-                  helperText={errors.email?.message}
-                  {...field}
-                />
-              )}
-            /> */}
+            <div>
+              <TextField
+                id="bookingTime"
+                select
+                label="Appointment Time"
+                helperText="Please select a time"
+              >
+                {selectedDoctorTimeSlots &&
+                  selectedDoctorTimeSlots.map((timeslot) => {
+                    return (
+                      <MenuItem value={timeslot} key={timeslot}>
+                        {timeslot}
+                      </MenuItem>
+                    );
+                  })}
+              </TextField>
+            </div>
           </Box>
           <Box mb={3}>
             <div className="symptoms">
