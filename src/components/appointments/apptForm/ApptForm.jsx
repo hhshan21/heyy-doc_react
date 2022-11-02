@@ -7,7 +7,6 @@ import { Controller, useForm } from "react-hook-form";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
-import dayjs from "dayjs";
 import { DateTime } from "luxon";
 import "./ApptForm.css";
 import "bootstrap";
@@ -15,43 +14,33 @@ import "bootstrap";
 const ApptForm = (props) => {
   const navigate = useNavigate();
 
-  // console.log("ApptForm props data: ", props.data);
-
   const doctors = props.info;
-  console.log("doctors: ", doctors);
   const docFirstName = doctors.map((ele) => ele.firstName);
   console.log("docFirstName: ", docFirstName);
   const docLastName = doctors.map((ele) => ele.lastName);
   console.log("docLastName: ", docLastName);
-  const docName = docLastName.map((ele, ind) => ele + " " + docFirstName[ind]);
+  const docName = docLastName.map(
+    (ele, ind) => "Dr. " + ele + " " + docFirstName[ind]
+  );
   console.log("docName: ", docName);
   const doctorTime = doctors.map((ele) => ele.doctorTime);
   console.log("doctorTime: ", doctorTime);
   const slot = doctorTime.forEach((slot) => console.log("slot: ", slot));
   // console.log("slot: ", slot);
 
-  const currentDate = DateTime.now().setLocale("zh").toLocaleString();
   const tomorrow = DateTime.now()
     .plus({ days: 1 })
     .setLocale("zh")
     .toLocaleString();
-  console.log("currentDate: ", currentDate);
   console.log("tomorrow: ", tomorrow);
-  // const a = dayjs();
-  // console.log("a: ", a);
-  // const currentDate = dayjs().add(1, "day");
-  // console.log("b: ", currentDate);
-  const [selected, setSelected] = useState(docName[0]);
-  const [appointmentDate, setAppointmentDate] = useState(tomorrow);
+  const [docFullName, setDocFullName] = useState(docName[0]);
+  const [apptDate, setApptDate] = useState(tomorrow);
 
-  console.log("appointmentDate: ", appointmentDate);
-  // console.log("appointmentDate: ", appointmentDate.format("YYYY//DD"));
+  // console.log("appointmentDate: ", appointmentDate);
 
-  const handleDateChange = (newAppointmentDate) => {
-    setAppointmentDate(newAppointmentDate);
+  const handleDateChange = (newApptDate) => {
+    setApptDate({ ...apptDate, bookingDate: newApptDate });
   };
-
-  // console.log("doctors: ", doctors);
 
   // form validation rules
   const validationSchema = yup.object().shape({
@@ -103,26 +92,37 @@ const ApptForm = (props) => {
     <div className="apptForm">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <select
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-          >
-            {docName.map((name) => (
-              <option value={name} key={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-          <LocalizationProvider dateAdapter={AdapterLuxon}>
-            <DesktopDatePicker
-              name="bookingDate"
-              label="Select your Appointment Date:"
-              inputFormat="yyyy/MM/dd"
-              minDate={appointmentDate}
-              onChange={handleDateChange}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
+          <Box mb={3}>
+            <select
+              value={docFullName}
+              onChange={(e) => setDocFullName(e.target.value)}
+            >
+              {docName.map((name) => (
+                <option value={name} key={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </Box>
+          <Box mb={3}>
+            <LocalizationProvider dateAdapter={AdapterLuxon}>
+              <DesktopDatePicker
+                name="bookingDate"
+                label="Select your Appointment Date:"
+                inputFormat="yyyy/MM/dd"
+                minDate={DateTime.now()
+                  .plus({ days: 1 })
+                  .setLocale("zh")
+                  .toLocaleString()}
+                onChange={handleDateChange}
+                value={apptDate.bookingDate}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <div style={{ marginBottom: "1em", fontSize: "small" }}>
+                Please select from tomorrow's date onwards
+              </div>
+            </LocalizationProvider>
+          </Box>
           <Box mb={3}>
             <Controller
               name="email" //actual input
