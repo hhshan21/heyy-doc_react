@@ -7,8 +7,12 @@ import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import "./ApptForm.css";
 import "bootstrap";
+
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
 
 const ApptForm = (props) => {
   const navigate = useNavigate();
@@ -29,18 +33,19 @@ const ApptForm = (props) => {
     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
-  //http://localhost:8000/api/v1/doctors
+  const token = localStorage.getItem("user_token");
+  const userInfo = jwt_decode(token);
+  const userId = userInfo.data.userId;
+
+  ///api/v1/doctors
   // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
 
   // fetching doctors api here
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/doctors`,
-        {
-          headers: headerOptions,
-        }
-      );
+      const res = await axios.get(`${BASE_API_URL}/api/v1/doctors`, {
+        headers: headerOptions,
+      });
       const data = await res.data;
       // console.log("data: ", data);
       setDoctors(data);
@@ -54,7 +59,7 @@ const ApptForm = (props) => {
   }, []);
 
   const handleDateChange = (newApptDate) => {
-    setApptDate({ ...apptDate, bookingDate: newApptDate });
+    setApptDate(newApptDate);
   };
 
   const handleSymptomsChange = (e) => {
@@ -70,13 +75,11 @@ const ApptForm = (props) => {
   //   props.data(data);
   // };
 
-  console.log("headerOptions: ", headerOptions);
-
   const selectedDoctorTimeSlots = doctors
     .find((doctor) => doctor.id === selectedDoctorId)
     ?.doctorTime.split(",");
 
-  // console.log("selectedDoctorTimeSlots: ", selectedDoctorTimeSlots);
+  console.log("apptDate: ", apptDate);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,16 +87,15 @@ const ApptForm = (props) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/bookings",
-        { headers: headerOptions },
+        `${BASE_API_URL}/api/v1/user/bookings`,
         {
-          data: {
-            doctorId: selectedDoctorId,
-            bookingDate: apptDate,
-            bookingTime: selectedDoctorTimeSlots,
-            symptoms: symptoms,
-          },
-        }
+          patientId: userId,
+          doctorId: selectedDoctorId,
+          bookingDate: apptDate.setLocale("zh").toLocaleString(),
+          bookingTime: selectedDoctorTimeSlots,
+          symptoms: symptoms,
+        },
+        { headers: headerOptions }
       );
       // console.log("Server Respond:", res);
 
