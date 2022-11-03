@@ -87,13 +87,13 @@ const BookingCard = (props) => {
           {!checkDate ? (
             <div className="container text-center">
               <h5 className="cardHeader">
-                <strong>Upcoming Appointments</strong>
+                <strong>Upcoming Heyy Doc Appointments</strong>
               </h5>
             </div>
           ) : (
             <div className="container text-center">
-              <h5 className="cardHeader">
-                <strong>Past Appointments</strong>
+              <h5>
+                <strong>Past Heyy Doc Appointments</strong>
               </h5>
             </div>
           )}
