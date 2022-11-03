@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
@@ -10,12 +10,22 @@ import "@fontsource/lexend-deca";
 const SiteHeader = (props) => {
   const navigate = useNavigate();
 
-  // const token = localStorage.getItem("user_token");
-  // const userInfo = jwt_decode(token);
-  // const userId = userInfo.data.userId;
+  // const [tokenState, setTokenState] = useState();
+  // const [user, setUser] = useState();
 
-  // console.log("userId: ", userId);
-  console.log("props.user: ", props.user);
+  // const token = localStorage.getItem("user_token");
+  // const tokenToSend = "Bearer " + token;
+
+  // const getToken = async () => {
+  //   setTokenState(token);
+  //   if (tokenState) {
+  //     setUser(jwt_decode(tokenState).data);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getToken();
+  // }, [tokenState]);
 
   const logout = () => {
     localStorage.removeItem("user_token");
@@ -94,6 +104,14 @@ const SiteHeader = (props) => {
           ) : (
             <span className="navbar-text">
               <ul className="navbar-nav mr-auto ml-4">
+                {/* <li className="nav-item">
+                  <Link
+                    to="/my/patientappointments"
+                    style={{ textDecoration: "none", color: "#0cb4ea" }}
+                  >
+                    PATIENT APPOINTMENTS
+                  </Link>
+                </li> */}
                 <li className="nav-item">
                   <Link
                     to="/my/profile"

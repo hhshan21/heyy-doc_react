@@ -27,6 +27,7 @@ const ApptForm = (props) => {
   const [selectedDoctorId, setSelectedDoctorId] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [apptDate, setApptDate] = useState(tomorrow);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -36,8 +37,6 @@ const ApptForm = (props) => {
   const token = localStorage.getItem("user_token");
   const userInfo = jwt_decode(token);
   const userId = userInfo.data.userId;
-
-  console.log("userId: ", userId);
 
   ///api/v1/doctors
   // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
@@ -72,6 +71,10 @@ const ApptForm = (props) => {
     setSelectedDoctorId(e.target.value);
   };
 
+  const handleTimeSlotChange = (e) => {
+    setSelectedTimeSlot(e.target.value);
+  };
+
   // const onSubmit = async (data) => {
   //   console.log("In appt form:", data);
   //   props.data(data);
@@ -80,6 +83,8 @@ const ApptForm = (props) => {
   const selectedDoctorTimeSlots = doctors
     .find((doctor) => doctor.id === selectedDoctorId)
     ?.doctorTime.split(",");
+
+  // console.log("selectedDoctorTimeSlots: ", selectedDoctorTimeSlots);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,7 +97,7 @@ const ApptForm = (props) => {
           patientId: userId,
           doctorId: selectedDoctorId,
           bookingDate: apptDate.setLocale("zh").toLocaleString(),
-          bookingTime: selectedDoctorTimeSlots,
+          bookingTime: selectedTimeSlot,
           symptoms: symptoms,
         },
         { headers: headerOptions }
@@ -167,7 +172,7 @@ const ApptForm = (props) => {
                   .setLocale("zh")
                   .toLocaleString()}
                 onChange={handleDateChange}
-                value={apptDate.bookingDate}
+                value={apptDate}
                 renderInput={(params) => <TextField {...params} />}
               />
               <div
@@ -188,6 +193,7 @@ const ApptForm = (props) => {
                 select
                 label="Appointment Time"
                 helperText="Please select a time"
+                onChange={handleTimeSlotChange}
               >
                 {selectedDoctorTimeSlots &&
                   selectedDoctorTimeSlots.map((timeslot) => {
