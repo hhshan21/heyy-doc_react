@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import jwt_decode from "jwt-decode";
 import logo from "../../../assets/images/LogoS.png";
 import "./siteHeader.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,6 +9,13 @@ import "@fontsource/lexend-deca";
 
 const SiteHeader = (props) => {
   const navigate = useNavigate();
+
+  // const token = localStorage.getItem("user_token");
+  // const userInfo = jwt_decode(token);
+  // const userId = userInfo.data.userId;
+
+  // console.log("userId: ", userId);
+  console.log("props.user: ", props.user);
 
   const logout = () => {
     localStorage.removeItem("user_token");

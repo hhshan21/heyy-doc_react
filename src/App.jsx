@@ -33,7 +33,7 @@ function App() {
   const getToken = async () => {
     setTokenState(token);
     if (tokenState) {
-      setUser(jwt_decode(tokenState).data.email);
+      setUser(jwt_decode(tokenState).data);
     }
   };
 

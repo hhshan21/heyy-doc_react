@@ -37,6 +37,8 @@ const ApptForm = (props) => {
   const userInfo = jwt_decode(token);
   const userId = userInfo.data.userId;
 
+  console.log("userId: ", userId);
+
   ///api/v1/doctors
   // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
 
@@ -78,8 +80,6 @@ const ApptForm = (props) => {
   const selectedDoctorTimeSlots = doctors
     .find((doctor) => doctor.id === selectedDoctorId)
     ?.doctorTime.split(",");
-
-  console.log("apptDate: ", apptDate);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
