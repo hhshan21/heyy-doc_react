@@ -20,8 +20,7 @@ import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import EditApptPage from "./pages/editApptPage/EditApptPage";
-
-import DocAppointments from "./pages/onlyDocView/OnlyDocView";
+import PatientAppt from "./pages/patientAppt/PatientAppt";
 
 function App() {
   // const [tokenState, setTokenState] = useState();
@@ -72,7 +71,7 @@ function App() {
         />
         <Route
           path="/my/patientappointments"
-          element={<Auth component={DocAppointments} />}
+          element={<Auth component={PatientAppt} />}
         />
       </Routes>
       <ToastContainer />
