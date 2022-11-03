@@ -20,33 +20,32 @@ import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import EditApptPage from "./pages/editApptPage/EditApptPage";
-
-import DocAppointments from "./pages/onlyDocView/OnlyDocView";
+import PatientAppt from "./pages/patientAppt/PatientAppt";
 
 function App() {
-  const [tokenState, setTokenState] = useState();
-  const [user, setUser] = useState();
+  // const [tokenState, setTokenState] = useState();
+  // const [user, setUser] = useState();
 
-  const token = localStorage.getItem("user_token");
-  const tokenToSend = "Bearer " + token;
+  // const token = localStorage.getItem("user_token");
+  // const tokenToSend = "Bearer " + token;
 
-  const getToken = async () => {
-    setTokenState(token);
-    if (tokenState) {
-      setUser(jwt_decode(tokenState).data.email);
-    }
-  };
+  // const getToken = async () => {
+  //   setTokenState(token);
+  //   if (tokenState) {
+  //     setUser(jwt_decode(tokenState).data);
+  //   }
+  // };
 
-  useEffect(() => {
-    getToken();
-  }, [tokenState]);
+  // useEffect(() => {
+  //   getToken();
+  // }, [tokenState]);
 
   return (
     <div className="App">
       <SiteHeader
-        tokenState={tokenState}
-        user={user}
-        setTokenState={setTokenState}
+      // tokenState={tokenState}
+      // user={user}
+      // setTokenState={setTokenState}
       />
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -72,7 +71,7 @@ function App() {
         />
         <Route
           path="/my/patientappointments"
-          element={<Auth component={DocAppointments} />}
+          element={<Auth component={PatientAppt} />}
         />
       </Routes>
       <ToastContainer />

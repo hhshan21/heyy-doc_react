@@ -67,14 +67,14 @@ const EditProfile = () => {
         { headers: headerOptions }
       );
 
-      console.log("res: ", res);
+      // console.log("res: ", res);
 
       toast.success("Profile updated!", {
         position: toast.POSITION.TOP_CENTER,
       });
       navigate("/my/profile");
     } catch (err) {
-      console.log("err: ", err);
+      // console.log("err: ", err);
       toast.error(err.message, { position: toast.POSITION.TOP_CENTER });
     }
   };

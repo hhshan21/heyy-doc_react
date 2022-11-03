@@ -17,7 +17,7 @@ const Auth = (props) => {
   // check if token expired, in unit 2 is like the max time thing in session
   // if expired, purge localstorage, redirect to login
   const user = jwt_decode(token);
-  //console.log(user)
+  // console.log(user);
   const now = DateTime.now().toUnixInteger();
 
   //this exp is issued with the token.....so we cant change it

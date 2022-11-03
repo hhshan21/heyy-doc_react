@@ -1,0 +1,23 @@
+.patientAppt {
+  font-family: "Lexend Deca";
+}
+
+.patientApptCards {
+  display: flex;
+  gap: 2em;
+  flex-flow: row wrap;
+  padding: 0 1em;
+  justify-content: center;
+}
+
+.patientName {
+  font-weight: bolder;
+}
+
+.delBtn {
+  text-align: center;
+}
+
+.cardHeader {
+  color: #0cb4ea;
+}

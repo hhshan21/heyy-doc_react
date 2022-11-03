@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
-import EditApptForm from "../editApptForm/EditApptForm";
-import "./ApptCard.css";
+import "./PatientApptCard.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const ApptCard = (props) => {
+const PatientApptCard = (props) => {
   const navigate = useNavigate();
   const params = useParams();
-  // console.log("hi from BookingCard props: ", props);
-  const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
+  console.log("hi from patient Appt Card props: ", props);
+  const { id, bookingDate, bookingTime, symptoms, patient } = props.data;
 
   // compare dates to determine if its past booking or not
   const currentDate = new Date();
@@ -19,7 +18,6 @@ const ApptCard = (props) => {
   // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
   // console.log("checkDate: ", checkDate);
-  const [editAppt, setEditAppt] = useState([]);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -56,23 +54,9 @@ const ApptCard = (props) => {
     }
   };
 
-  // call to edit appt card
-  useEffect(() => {
-    const fetchApi = async () => {
-      const res = await axios.get(
-        `http://localhost:8000/api/v1/user/bookings/${params.id}`,
-        { headers: headerOptions }
-      );
-      const data = await res.data;
-
-      setEditAppt(data);
-    };
-    fetchApi();
-  }, []);
-
   return (
-    <div className="myBookings">
-      <div className="bookingCards">
+    <div className="patientAppt">
+      <div className="patientApptCards">
         <Paper
           sx={{
             p: 2,
@@ -87,13 +71,13 @@ const ApptCard = (props) => {
           {!checkDate ? (
             <div className="container text-center">
               <h5 className="cardHeader">
-                <strong>Upcoming Heyy Doc Appointments</strong>
+                <strong>Upcoming Patient Appointments</strong>
               </h5>
             </div>
           ) : (
             <div className="container text-center">
               <h5>
-                <strong>Past Heyy Doc Appointments</strong>
+                <strong>Past Patient Appointments</strong>
               </h5>
             </div>
           )}
@@ -102,7 +86,7 @@ const ApptCard = (props) => {
               <ButtonBase sx={{ width: 128, height: 128 }}>
                 <img
                   alt="complex"
-                  src={doctor.imageUrl}
+                  src={patient.imageUrl}
                   style={{
                     margin: "auto",
                     display: "block",
@@ -114,47 +98,19 @@ const ApptCard = (props) => {
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
-                <Grid item xs>
-                  <div className="doctorName">
-                    Dr. {doctor.lastName} {doctor.firstName}
-                  </div>
-                  <div>{doctor.doctorInfo.doctorType}</div>
-                  <div>{doctor.doctorInfo.address}</div>
-                </Grid>
                 <Grid item>
-                  <div className="apptInfo">Appointment Info</div>
+                  <div>
+                    Patient Name: {patient.lastName} {patient.firstName}
+                  </div>
                   <div>Date: {bookingDate}</div>
                   <div>Time: {bookingTime}</div>
                   <div>Symptoms: {symptoms}</div>
                 </Grid>
               </Grid>
-              {/* <Grid item>
-                <div className="apptInfo">Appointment Info</div>
-                <div>Date: {bookingDate}</div>
-                <div>Time: {bookingTime}</div>
-                <div>Symptoms: {symptoms}</div>
-              </Grid> */}
             </Grid>
           </Grid>
           {!checkDate ? (
-            <div className="bookingBtn">
-              {/* <div> */}
-              <Button
-                onClick={() => navigate(`/my/appointments/edit/${params.id}`)}
-                variant="contained"
-                style={{
-                  backgroundColor: "#0cb4ea",
-                  fontFamily: "Lexend Deca",
-                  fontWeight: "900",
-                  width: "15%",
-                  fontSize: "medium",
-                  color: "white",
-                }}
-              >
-                EDIT
-              </Button>
-              {/* <EditApptForm data={editTrip} /> */}
-              {/* </div> */}
+            <div className="delBtn">
               <Button
                 onClick={delConfirmation}
                 variant="contained"
@@ -181,4 +137,4 @@ const ApptCard = (props) => {
   );
 };
 
-export default ApptCard;
+export default PatientApptCard;

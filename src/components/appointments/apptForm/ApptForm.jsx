@@ -1,255 +1,229 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { TextField, Button, Box } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { TextField, Button, Box, MenuItem } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
-import dayjs from "dayjs";
 import { DateTime } from "luxon";
+import { toast } from "react-toastify";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 import "./ApptForm.css";
 import "bootstrap";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const ApptForm = (props) => {
   const navigate = useNavigate();
+  const [catchError, setCatchError] = useState(null);
 
-  // console.log("ApptForm props data: ", props.data);
-
-  const doctors = props.info;
-  console.log("doctors: ", doctors);
-  const docFirstName = doctors.map((ele) => ele.firstName);
-  console.log("docFirstName: ", docFirstName);
-  const docLastName = doctors.map((ele) => ele.lastName);
-  console.log("docLastName: ", docLastName);
-  const docName = docLastName.map((ele, ind) => ele + " " + docFirstName[ind]);
-  console.log("docName: ", docName);
-  const doctorTime = doctors.map((ele) => ele.doctorTime);
-  console.log("doctorTime: ", doctorTime);
-  const slot = doctorTime.forEach((slot) => console.log("slot: ", slot));
-  // console.log("slot: ", slot);
-
-  const currentDate = DateTime.now().setLocale("zh").toLocaleString();
   const tomorrow = DateTime.now()
     .plus({ days: 1 })
     .setLocale("zh")
     .toLocaleString();
-  console.log("currentDate: ", currentDate);
-  console.log("tomorrow: ", tomorrow);
-  // const a = dayjs();
-  // console.log("a: ", a);
-  // const currentDate = dayjs().add(1, "day");
-  // console.log("b: ", currentDate);
-  const [selected, setSelected] = useState(docName[0]);
-  const [appointmentDate, setAppointmentDate] = useState(tomorrow);
 
-  console.log("appointmentDate: ", appointmentDate);
-  // console.log("appointmentDate: ", appointmentDate.format("YYYY//DD"));
+  const [doctors, setDoctors] = useState([]);
+  const [selectedDoctorId, setSelectedDoctorId] = useState("");
+  const [symptoms, setSymptoms] = useState("");
+  const [apptDate, setApptDate] = useState(tomorrow);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
 
-  const handleDateChange = (newAppointmentDate) => {
-    setAppointmentDate(newAppointmentDate);
+  const headerOptions = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
-  // console.log("doctors: ", doctors);
+  const token = localStorage.getItem("user_token");
+  const userInfo = jwt_decode(token);
+  const userId = userInfo.data.userId;
 
-  // form validation rules
-  const validationSchema = yup.object().shape({
-    // firstName: yup.string().min(1, "Mininum 1 character").required(),
-    // lastName: yup.string().min(2, "Mininum 2 characters").required(),
-    // appointmentDate: yup
-    //   .date()
-    //   .default(() => new Date(currentDate.getTime() + 86400000)),
-    symptoms: yup
-      .string()
-      .min(3, "Mininum 3 characters")
-      .required("Please indicate your symptoms"),
-  });
+  ///api/v1/doctors
+  // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
 
-  //actual input names
-  const defaultValues = {
-    firstName: "",
-    lastName: "",
-    // appointmentDate: new Date(currentDate.getTime() + 86400000),
-    appointmentTime: "",
-    symptoms: "",
+  // fetching doctors api here
+  useEffect(() => {
+    const fetchApi = async () => {
+      const res = await axios.get(`${BASE_API_URL}/api/v1/doctors`, {
+        headers: headerOptions,
+      });
+      const data = await res.data;
+      // console.log("data: ", data);
+      setDoctors(data);
+    };
+    fetchApi();
+    toast.promise(fetchApi, {
+      pending: "Please wait while we call our doctors!",
+      success: "Doctors' info have arrived!",
+      error: "error",
+    });
+  }, []);
+
+  const handleDateChange = (newApptDate) => {
+    setApptDate(newApptDate);
   };
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(validationSchema), defaultValues });
 
-  const onSubmit = async (data) => {
-    console.log("In reg form:", data);
-    props.data(data);
+  const handleSymptomsChange = (e) => {
+    setSymptoms(e.target.value);
+  };
+
+  const handleDoctorChange = (e) => {
+    setSelectedDoctorId(e.target.value);
+  };
+
+  const handleTimeSlotChange = (e) => {
+    setSelectedTimeSlot(e.target.value);
+  };
+
+  // const onSubmit = async (data) => {
+  //   console.log("In appt form:", data);
+  //   props.data(data);
+  // };
+
+  const selectedDoctorTimeSlots = doctors
+    .find((doctor) => doctor.id === selectedDoctorId)
+    ?.doctorTime.split(",");
+
+  // console.log("selectedDoctorTimeSlots: ", selectedDoctorTimeSlots);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setCatchError(null);
+
+    try {
+      const res = await axios.post(
+        `${BASE_API_URL}/api/v1/user/bookings`,
+        {
+          patientId: userId,
+          doctorId: selectedDoctorId,
+          bookingDate: apptDate.setLocale("zh").toLocaleString(),
+          bookingTime: selectedTimeSlot,
+          symptoms: symptoms,
+        },
+        { headers: headerOptions }
+      );
+      // console.log("Server Respond:", res);
+
+      toast.success("Successfully booked!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+
+      navigate("/my/appointments");
+    } catch (error) {
+      // console.log("error: ", error);
+      // display an error
+      // console.log("error.response.data: ", error.response.data);
+      toast.error(error.response.data);
+      setCatchError(error.response.data.error);
+    }
   };
 
   const handleCancel = (e) => {
     navigate("/");
   };
 
-  // const docNameOptions = () => {
-  //   return docName.map((doc) => {
-  //     return (
-  //       <option value={doc} key={doc}>
-  //         {doc}
-  //       </option>
-  //     );
-  //   });
-  // };
-
   return (
     <div className="apptForm">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        {catchError && (
+          <div>
+            <p
+              style={{
+                color: "red",
+                textAlign: "center",
+                marginBottom: "1em",
+              }}
+            >
+              {catchError}
+            </p>
+          </div>
+        )}
+      </div>
+      <form onSubmit={handleSubmit}>
         <div>
-          <select
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-          >
-            {docName.map((name) => (
-              <option value={name} key={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-          <LocalizationProvider dateAdapter={AdapterLuxon}>
-            <DesktopDatePicker
-              name="bookingDate"
-              label="Select your Appointment Date:"
-              inputFormat="yyyy/MM/dd"
-              minDate={appointmentDate}
-              onChange={handleDateChange}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
           <Box mb={3}>
-            <Controller
-              name="email" //actual input
-              control={control} //take place of the register RHF
-              render={({
-                field, //this error will be displyed in formstate errors
-              }) => (
-                <TextField
-                  label={"Email:"} //label in the box
-                  variant="outlined"
-                  fullWidth
-                  autoComplete="email"
-                  autoFocus
-                  // error={!!error} //convert obj into a bool
-                  // helperText={error ? error.message : null}
-                  error={errors.email ? true : false}
-                  helperText={errors.email?.message}
-                  {...field}
-                />
-              )}
-            />
+            <div>
+              <TextField
+                id="doctorId"
+                select
+                label="Doctor Name"
+                value={selectedDoctorId}
+                onChange={handleDoctorChange}
+                helperText="Please select a Doctor"
+              >
+                {doctors.map((doctor) => {
+                  return (
+                    <MenuItem value={doctor.id} key={doctor.id}>
+                      {`Dr. ${doctor.lastName} ${doctor.firstName}`}
+                    </MenuItem>
+                  );
+                })}
+              </TextField>
+            </div>
           </Box>
           <Box mb={3}>
-            <Controller
-              name="symptoms" //actual input
-              control={control} //take place of the register RHF
-              render={({ field }) => (
-                <TextField
-                  label={"Symptoms:"} //label in the box
-                  variant="outlined"
-                  rows={4}
-                  //multiline={true}
-                  fullWidth
-                  autoFocus
-                  // error={!!error} //convert obj into a bool
-                  // helperText={error ? error.message : null}
-                  // error={errors.drugAllergies ? true : false}
-                  // helperText={errors.drugAllergies?.message}
-                  {...field}
-                  error={errors.symptoms ? true : false}
-                  helperText={errors.symptoms?.message}
-                />
-              )}
-            />
+            <LocalizationProvider dateAdapter={AdapterLuxon}>
+              <DesktopDatePicker
+                name="bookingDate"
+                label="Select your Appointment Date"
+                inputFormat="yyyy/MM/dd"
+                minDate={DateTime.now()
+                  .plus({ days: 1 })
+                  .setLocale("zh")
+                  .toLocaleString()}
+                onChange={handleDateChange}
+                value={apptDate}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <div
+                style={{
+                  marginBottom: "1em",
+                  fontSize: "small",
+                  color: "rgba(0, 0, 0, 0.6)",
+                }}
+              >
+                Please select from tomorrow's date onwards
+              </div>
+            </LocalizationProvider>
           </Box>
-          {/* <Box mb={3}>
-            <Controller
-              name="firstName" //actual input
-              control={control} //take place of the register RHF
-              render={({
-                //takes a function and return a react element
-                field, //this error will be displyed in formstate errors
-              }) => (
-                <TextField
-                  // onChange={onChange} // send value to hook form
-                  // value={value}
-                  label={"Doctor's Name:"} //label in the box
-                  variant="outlined"
-                  fullWidth
-                  autoComplete="firstName"
-                  autoFocus
-                  // error={!!error} //convert obj into a bool
-                  // helperText={error ? error.message : null}
-                  error={errors.firstName ? true : false}
-                  helperText={errors.firstName?.message}
-                  {...field}
-                />
-              )}
-            />
-          </Box> */}
-          {/* <Box mb={3}>
-            <Controller
-              control={control}
-              name={doc}
-              render={({ field: { onChange, value } }) => (
-                <select onChange={onChange} value={value}>
-                  {docNameOptions()}
-                </select>
-              )}
-            />
-          </Box> */}
-          {/* <Box mb={3}>
-            <Controller
-              name="lastName" //actual input
-              control={control} //take place of the register RHF
-              render={({
-                field, //this error will be displyed in formstate errors
-              }) => (
-                <TextField
-                  label={"Last Name:"} //label in the box
-                  variant="outlined"
-                  fullWidth
-                  autoComplete="lastName"
-                  autoFocus
-                  // error={!!error} //convert obj into a bool
-                  // helperText={error ? error.message : null}
-                  error={errors.lastName ? true : false}
-                  helperText={errors.lastName?.message}
-                  {...field}
-                />
-              )}
-            />
-          </Box> */}
-
-          {/* <Box mb={3}>
-            <Controller
-              name="bookingDate" //actual input
-              control={control} //take place of the register RHF
-              render={({
-                field, //this error will be displyed in formstate errors
-              }) => (
-                <TextField
-                  label={"Select your appointment Date"} //label in the box
-                  variant="outlined"
-                  fullWidth
-                  autoComplete="bookingDate"
-                  autoFocus
-                  // error={!!error} //convert obj into a bool
-                  // helperText={error ? error.message : null}
-                  error={errors.bookingDate ? true : false}
-                  helperText={errors.bookingDate?.message}
-                  {...field}
-                />
-              )}
-            />
-          </Box> */}
-
+          <Box mb={3}>
+            <div>
+              <TextField
+                id="bookingTime"
+                select
+                label="Appointment Time"
+                helperText="Please select a time"
+                onChange={handleTimeSlotChange}
+              >
+                {selectedDoctorTimeSlots &&
+                  selectedDoctorTimeSlots.map((timeslot) => {
+                    return (
+                      <MenuItem value={timeslot} key={timeslot}>
+                        {timeslot}
+                      </MenuItem>
+                    );
+                  })}
+              </TextField>
+            </div>
+          </Box>
+          <Box mb={3}>
+            <div className="symptoms">
+              <TextField
+                sx={{ m: 1 }}
+                value={symptoms}
+                onChange={handleSymptomsChange}
+                id="symptoms"
+                label="Please key in your symptoms"
+                multiline
+                rows={4}
+                helperText="Min. 3 characters"
+                style={{
+                  width: "25em",
+                  marginBottom: "1em",
+                }}
+              />
+            </div>
+          </Box>
           <div className="apptFormBtn">
             <Button
               onClick={handleCancel}
