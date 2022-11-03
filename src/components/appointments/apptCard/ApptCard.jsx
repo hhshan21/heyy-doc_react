@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
-import EditApptForm from "../editApptForm/EditApptForm";
 import "./ApptCard.css";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -19,7 +18,7 @@ const ApptCard = (props) => {
   // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
   // console.log("checkDate: ", checkDate);
-  const [editAppt, setEditAppt] = useState([]);
+  // const [editAppt, setEditAppt] = useState([]);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -57,22 +56,22 @@ const ApptCard = (props) => {
   };
 
   // call to edit appt card
-  useEffect(() => {
-    const fetchApi = async () => {
-      const res = await axios.get(
-        `http://localhost:8000/api/v1/user/bookings/${params.id}`,
-        { headers: headerOptions }
-      );
-      const data = await res.data;
+  // useEffect(() => {
+  //   const fetchApi = async () => {
+  //     const res = await axios.get(
+  //       `http://localhost:8000/api/v1/user/bookings`,
+  //       { headers: headerOptions }
+  //     );
+  //     const data = await res.data;
 
-      setEditAppt(data);
-    };
-    fetchApi();
-  }, []);
+  //     setEditAppt(data);
+  //   };
+  //   fetchApi();
+  // }, []);
 
   return (
-    <div className="myBookings">
-      <div className="bookingCards">
+    <div className="myAppts">
+      <div className="apptCards">
         <Paper
           sx={{
             p: 2,
@@ -137,7 +136,7 @@ const ApptCard = (props) => {
             </Grid>
           </Grid>
           {!checkDate ? (
-            <div className="bookingBtn">
+            <div className="apptBtn">
               {/* <div> */}
               <Button
                 onClick={() => navigate(`/my/appointments/edit/${params.id}`)}

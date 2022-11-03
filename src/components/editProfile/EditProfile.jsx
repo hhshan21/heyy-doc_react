@@ -10,6 +10,7 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
 
+  // initial state of form capture by react-hook form
   const {
     reset,
     control,
@@ -58,7 +59,6 @@ const EditProfile = () => {
     try {
       const res = await axios.patch(
         `https://heyy-doc-backend.herokuapp.com/api/v1/user/profile`,
-
         {
           firstName: getValues().firstName,
           lastName: getValues().lastName,

@@ -8,16 +8,13 @@ import axios from "axios";
 const PatientApptCard = (props) => {
   const navigate = useNavigate();
   const params = useParams();
-  console.log("hi from patient Appt Card props: ", props);
   const { id, bookingDate, bookingTime, symptoms, patient } = props.data;
 
   // compare dates to determine if its past booking or not
   const currentDate = new Date();
   const nextDate = new Date(currentDate.getTime() + 86400000);
   const isNextDate = nextDate.toISOString().substring(0, 10);
-  // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
-  // console.log("checkDate: ", checkDate);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -85,7 +82,7 @@ const PatientApptCard = (props) => {
             <Grid item>
               <ButtonBase sx={{ width: 128, height: 128 }}>
                 <img
-                  alt="complex"
+                  alt="patient's profile"
                   src={patient.imageUrl}
                   style={{
                     margin: "auto",
@@ -102,6 +99,7 @@ const PatientApptCard = (props) => {
                   <div>
                     Patient Name: {patient.lastName} {patient.firstName}
                   </div>
+                  <div>Patient Email: {patient.email}</div>
                   <div>Date: {bookingDate}</div>
                   <div>Time: {bookingTime}</div>
                   <div>Symptoms: {symptoms}</div>
@@ -119,8 +117,7 @@ const PatientApptCard = (props) => {
                   fontFamily: "Lexend Deca",
                   fontWeight: "900",
                   fontSize: "medium",
-                  marginLeft: "15%",
-                  marginRight: "10%",
+                  marginTop: "1em",
                 }}
               >
                 DELETE
