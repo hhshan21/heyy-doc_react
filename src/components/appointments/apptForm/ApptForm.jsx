@@ -75,11 +75,6 @@ const ApptForm = (props) => {
     setSelectedTimeSlot(e.target.value);
   };
 
-  // const onSubmit = async (data) => {
-  //   console.log("In appt form:", data);
-  //   props.data(data);
-  // };
-
   const selectedDoctorTimeSlots = doctors
     .find((doctor) => doctor.id === selectedDoctorId)
     ?.doctorTime.split(",");

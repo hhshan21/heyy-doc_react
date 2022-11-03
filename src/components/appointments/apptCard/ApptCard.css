@@ -1,8 +1,8 @@
-.myBookings {
+.myAppts {
   font-family: "Lexend Deca";
 }
 
-.bookingCards {
+.apptCards {
   display: flex;
   gap: 2em;
   flex-flow: row wrap;
@@ -18,7 +18,7 @@
   font-weight: bold;
 }
 
-.bookingBtn {
+.apptBtn {
   margin-top: 1em;
   text-align: center;
 }
