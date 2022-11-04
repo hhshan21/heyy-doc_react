@@ -33,7 +33,7 @@ How to use Figma
 ## Improvements I might make
 
 1. Add search function for doctors by name
-2. Have a map to indicate the item request location
+2. Not allowing patients to click on "patient appts link"
 
 # Getting Started with Create React App
 
