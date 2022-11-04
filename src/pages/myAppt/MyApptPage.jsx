@@ -23,7 +23,7 @@ const AppointmentsPage = () => {
         }
       );
       const data = await res.data;
-      // console.log("data: ", data);
+      // console.log("data in MyApptPage: ", data);
       setAppointments(data.bookings);
     };
     fetchApi();
