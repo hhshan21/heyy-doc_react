@@ -55,7 +55,6 @@ const ApptForm = (props) => {
     toast.promise(fetchApi, {
       pending: "Please wait while we call our doctors!",
       success: "Doctors' info have arrived!",
-      error: "error",
     });
   }, []);
 
@@ -79,6 +78,7 @@ const ApptForm = (props) => {
     .find((doctor) => doctor.id === selectedDoctorId)
     ?.doctorTime.split(",");
 
+  // console.log("doctors: ", doctors);
   // console.log("selectedDoctorTimeSlots: ", selectedDoctorTimeSlots);
 
   const handleSubmit = async (e) => {

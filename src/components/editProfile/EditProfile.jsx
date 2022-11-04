@@ -34,7 +34,7 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/user/profile`,
+        `http://localhost:8000/api/v1/user/profile`,
 
         { headers: headerOptions }
       );
@@ -49,6 +49,10 @@ const EditProfile = () => {
       });
     };
     fetchApi();
+    toast.promise(fetchApi, {
+      pending: "Please wait for your info!",
+      success: "Your info is here!",
+    });
   }, []);
 
   const onSubmit = async (e) => {
@@ -58,7 +62,7 @@ const EditProfile = () => {
     // "http://localhost:8000/api/v1/user/profile",
     try {
       const res = await axios.patch(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/user/profile`,
+        `http://localhost:8000/api/v1/user/profile`,
         {
           firstName: getValues().firstName,
           lastName: getValues().lastName,

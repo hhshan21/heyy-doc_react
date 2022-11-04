@@ -7,49 +7,70 @@ import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import "bootstrap";
 import "./EditApptPage.css";
 
-const EditApptPage = () => {
+const EditApptPage = (props) => {
   const navigate = useNavigate();
+  const params = useParams();
   const [catchError, setCatchError] = useState(null);
+
+  console.log("hi from EditApptPage props.data: ", props.data);
 
   const tomorrow = DateTime.now()
     .plus({ days: 1 })
     .setLocale("zh")
     .toLocaleString();
 
-  const [editAppt, setEditAppt] = useState([]);
+  // const [booking, setBooking] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctorId, setSelectedDoctorId] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [apptDate, setApptDate] = useState(tomorrow);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
-  const [userId, setUserId] = useState("");
 
   const headerOptions = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
   };
 
+  const token = localStorage.getItem("user_token");
+  const userInfo = jwt_decode(token);
+  const userId = userInfo.data.userId;
+
   // https://heyy-doc-backend.herokuapp.com/api/v1/user/profile
   // "http://localhost:8000/api/v1/user/bookings",
+
+  // useEffect(() => {
+  //   const fetchApi = async () => {
+  //     const res = await axios.get(
+  //       `http://localhost:8000/api/v1/user/bookings`,
+  //       {
+  //         headers: headerOptions,
+  //       }
+  //     );
+  //     const data = await res.data;
+  //     console.log("Booking data: ", data);
+  //     setBooking(data);
+  //   };
+  //   fetchApi();
+  // }, []);
 
   // retrieve data from db to edit appt card
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get(
-        `http://localhost:8000/api/v1/user/bookings`,
-        { headers: headerOptions }
-      );
+      const res = await axios.get(`http://localhost:8000/api/v1/doctors`, {
+        headers: headerOptions,
+      });
       const data = await res.data;
-      console.log("data: ", data);
-      setEditAppt(data);
+      // console.log("data: ", data);
+      setDoctors(data);
     };
     fetchApi();
   }, []);
 
-  // console.log("editAppt.bookings: ", editAppt.bookings);
+  // console.log("doctors: ", doctors);
 
   const handleDateChange = (newApptDate) => {
     setApptDate(newApptDate);
@@ -79,7 +100,7 @@ const EditApptPage = () => {
     // "http://localhost:8000/api/v1/user/bookings/${editAppt.bookings.id}",
     try {
       const res = await axios.patch(
-        `https://heyy-doc-backend.herokuapp.com/api/v1/user/bookings/${editAppt.bookings.id}`,
+        `http://localhost:8000/api/v1/user/bookings/${doctors.id}`,
         {
           patientId: userId,
           doctorId: selectedDoctorId,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
+import EditApptPage from "../../../pages/editApptPage/EditApptPage";
 import "./ApptCard.css";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -18,7 +19,7 @@ const ApptCard = (props) => {
   // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
   // console.log("checkDate: ", checkDate);
-  // const [editAppt, setEditAppt] = useState([]);
+  const [editAppt, setEditAppt] = useState([]);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -56,18 +57,16 @@ const ApptCard = (props) => {
   };
 
   // call to edit appt card
-  // useEffect(() => {
-  //   const fetchApi = async () => {
-  //     const res = await axios.get(
-  //       `http://localhost:8000/api/v1/user/bookings`,
-  //       { headers: headerOptions }
-  //     );
-  //     const data = await res.data;
-
-  //     setEditAppt(data);
-  //   };
-  //   fetchApi();
-  // }, []);
+  const handleEdit = async () => {
+    const response = await axios.get(
+      `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
+      { headers: headerOptions }
+    );
+    const data = await response.data;
+    console.log("Edit data: ", data);
+    setEditAppt(data);
+    navigate(`/my/appointments/edit/${props.data.id}`);
+  };
 
   return (
     <div className="myAppts">
@@ -139,7 +138,7 @@ const ApptCard = (props) => {
             <div className="apptBtn">
               {/* <div> */}
               <Button
-                onClick={() => navigate(`/my/appointments/edit/${params.id}`)}
+                onClick={handleEdit}
                 variant="contained"
                 style={{
                   backgroundColor: "#0cb4ea",
@@ -150,6 +149,7 @@ const ApptCard = (props) => {
                   color: "white",
                 }}
               >
+                {/* <EditApptPage data={editAppt} /> */}
                 EDIT
               </Button>
               {/* <EditApptForm data={editTrip} /> */}
