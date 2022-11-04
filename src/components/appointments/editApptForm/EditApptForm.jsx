@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { TextField, Button, Box, MenuItem } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+} from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -132,22 +141,26 @@ const EditApptForm = (props) => {
         <div>
           <Box mb={3}>
             <div>
-              <TextField
-                id="doctorId"
-                select
-                label="Doctor Name"
-                value={selectedDoctorId}
-                onChange={handleDoctorChange}
-                helperText="Please select a Doctor"
-              >
-                {doctors.map((doctor) => {
-                  return (
-                    <MenuItem value={doctor.id} key={doctor.id}>
-                      {`Dr. ${doctor.lastName} ${doctor.firstName}`}
-                    </MenuItem>
-                  );
-                })}
-              </TextField>
+              <FormControl style={{ width: "14.5em" }}>
+                <InputLabel id="doctorName">Doctor's Name</InputLabel>
+                <Select
+                  id="doctorId"
+                  label="Doctor Name"
+                  value={selectedDoctorId}
+                  onChange={handleDoctorChange}
+                >
+                  {doctors.map((doctor) => {
+                    return (
+                      <MenuItem value={doctor.id} key={doctor.id}>
+                        {`Dr. ${doctor.lastName} ${doctor.firstName}`}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText id="docEditHelperText">
+                  Please select a Doctor
+                </FormHelperText>
+              </FormControl>
             </div>
           </Box>
           <Box mb={3}>
@@ -177,23 +190,27 @@ const EditApptForm = (props) => {
           </Box>
           <Box mb={3}>
             <div>
-              <TextField
-                id="bookingTime"
-                value={selectedTimeSlot}
-                select
-                label="Appointment Time"
-                helperText="Please select a time"
-                onChange={handleTimeSlotChange}
-              >
-                {selectedDoctorTimeSlots &&
-                  selectedDoctorTimeSlots.map((timeslot) => {
-                    return (
-                      <MenuItem value={timeslot} key={timeslot}>
-                        {timeslot}
-                      </MenuItem>
-                    );
-                  })}
-              </TextField>
+              <FormControl style={{ width: "14.5em" }}>
+                <InputLabel id="apptSlot">Appointment Slot</InputLabel>
+                <Select
+                  id="bookingTime"
+                  value={selectedTimeSlot}
+                  label="Appointment Time"
+                  onChange={handleTimeSlotChange}
+                >
+                  {selectedDoctorTimeSlots &&
+                    selectedDoctorTimeSlots.map((timeslot) => {
+                      return (
+                        <MenuItem value={timeslot} key={timeslot}>
+                          {timeslot}
+                        </MenuItem>
+                      );
+                    })}
+                </Select>
+                <FormHelperText id="apptEditHelperText">
+                  Please select a slot
+                </FormHelperText>
+              </FormControl>
             </div>
           </Box>
           <Box mb={2}>
