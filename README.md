@@ -1,3 +1,38 @@
+# Buy4Me :man_health_worker: :woman_health_worker:
+
+Heyy Doc is a scheduling app for users, where you can make an arrangement to see a doctor anytime, anywhere at your own convenience.
+
+## App link
+
+- https://heyy-doc.netlify.app
+
+## Techstack
+
+PERN stack:
+
+- Postgres
+- Express
+- React
+- Node(.js)
+
+## Model
+
+![Relationship Model]!
+
+## Technical challenges
+
+- Doing the backend
+
+## One new thing learnt
+
+Postgres and connecting to ElephantSql
+Learning how to read the network tab (req and response)
+
+## Improvements I might make
+
+1. Add search function for doctors by name
+2. Have a map to indicate the item request location
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
