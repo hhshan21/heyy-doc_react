@@ -17,7 +17,8 @@ PERN stack:
 
 ## Model
 
-![Relationship Model]!
+![Relationship Model]!![Relationship Model](https://user-images.githubusercontent.com/91120548/200069777-99beb385-6bcd-4e5e-b2e1-fa337d51a6fa.png)
+
 
 ## Technical challenges
 
