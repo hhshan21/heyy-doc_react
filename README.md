@@ -24,10 +24,11 @@ PERN stack:
 
 - Doing the backend
 
-## One new thing learnt
+## New things learnt
 
 Postgres and connecting to ElephantSql
 Learning how to read the network tab (req and response)
+How to use Figma
 
 ## Improvements I might make
 
