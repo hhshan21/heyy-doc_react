@@ -19,7 +19,7 @@ const ApptCard = (props) => {
   // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
   // console.log("checkDate: ", checkDate);
-  const [editAppt, setEditAppt] = useState([]);
+  // const [editAppt, setEditAppt] = useState([]);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -57,14 +57,18 @@ const ApptCard = (props) => {
   };
 
   // call to edit appt card
-  const handleEdit = async () => {
-    const response = await axios.get(
-      `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
-      { headers: headerOptions }
-    );
-    const data = await response.data;
-    console.log("Edit data: ", data);
-    setEditAppt(data);
+  // const handleEdit = async () => {
+  //   const response = await axios.get(
+  //     `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
+  //     { headers: headerOptions }
+  //   );
+  //   const data = await response.data;
+  //   console.log("Edit data: ", data.booking);
+  //   setEditAppt(data.booking);
+  //   navigate(`/my/appointments/edit/${props.data.id}`);
+  // };
+
+  const handleEdit = (e) => {
     navigate(`/my/appointments/edit/${props.data.id}`);
   };
 
@@ -126,19 +130,13 @@ const ApptCard = (props) => {
                   <div>Symptoms: {symptoms}</div>
                 </Grid>
               </Grid>
-              {/* <Grid item>
-                <div className="apptInfo">Appointment Info</div>
-                <div>Date: {bookingDate}</div>
-                <div>Time: {bookingTime}</div>
-                <div>Symptoms: {symptoms}</div>
-              </Grid> */}
             </Grid>
           </Grid>
           {!checkDate ? (
             <div className="apptBtn">
-              {/* <div> */}
               <Button
                 onClick={handleEdit}
+                // data={editAppt}
                 variant="contained"
                 style={{
                   backgroundColor: "#0cb4ea",
@@ -152,8 +150,6 @@ const ApptCard = (props) => {
                 {/* <EditApptPage data={editAppt} /> */}
                 EDIT
               </Button>
-              {/* <EditApptForm data={editTrip} /> */}
-              {/* </div> */}
               <Button
                 onClick={delConfirmation}
                 variant="contained"
