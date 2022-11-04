@@ -23,29 +23,29 @@ import EditApptPage from "./pages/editApptPage/EditApptPage";
 import PatientAppt from "./pages/patientAppt/PatientAppt";
 
 function App() {
-  // const [tokenState, setTokenState] = useState();
-  // const [user, setUser] = useState();
+  const [tokenState, setTokenState] = useState();
+  const [user, setUser] = useState();
 
-  // const token = localStorage.getItem("user_token");
-  // const tokenToSend = "Bearer " + token;
+  const token = localStorage.getItem("user_token");
+  const tokenToSend = "Bearer " + token;
 
-  // const getToken = async () => {
-  //   setTokenState(token);
-  //   if (tokenState) {
-  //     setUser(jwt_decode(tokenState).data);
-  //   }
-  // };
+  const getToken = async () => {
+    setTokenState(token);
+    if (tokenState) {
+      setUser(jwt_decode(tokenState).data);
+    }
+  };
 
-  // useEffect(() => {
-  //   getToken();
-  // }, [tokenState]);
+  useEffect(() => {
+    getToken();
+  }, [tokenState]);
 
   return (
     <div className="App">
       <SiteHeader
-      // tokenState={tokenState}
-      // user={user}
-      // setTokenState={setTokenState}
+        tokenState={tokenState}
+        user={user}
+        setTokenState={setTokenState}
       />
       <Routes>
         <Route path="/" element={<Homepage />} />

@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
-import EditApptPage from "../../../pages/editApptPage/EditApptPage";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Grid, Paper, ButtonBase, Button } from "@mui/material";
 import "./ApptCard.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const ApptCard = (props) => {
   const navigate = useNavigate();
-  const params = useParams();
-  // console.log("hi from BookingCard props: ", props);
   const { id, bookingDate, bookingTime, symptoms, doctor } = props.data;
 
   // compare dates to determine if its past booking or not
   const currentDate = new Date();
   const nextDate = new Date(currentDate.getTime() + 86400000);
   const isNextDate = nextDate.toISOString().substring(0, 10);
-  // console.log("isNextDate: ", isNextDate);
   const checkDate = isNextDate > bookingDate;
-  // console.log("checkDate: ", checkDate);
-  // const [editAppt, setEditAppt] = useState([]);
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -30,7 +27,7 @@ const ApptCard = (props) => {
   const handleDelete = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
+        `${BASE_API_URL}/api/v1/user/bookings/${props.data.id}`,
         { headers: headerOptions }
       );
 
@@ -55,18 +52,6 @@ const ApptCard = (props) => {
       return false;
     }
   };
-
-  // call to edit appt card
-  // const handleEdit = async () => {
-  //   const response = await axios.get(
-  //     `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
-  //     { headers: headerOptions }
-  //   );
-  //   const data = await response.data;
-  //   console.log("Edit data: ", data.booking);
-  //   setEditAppt(data.booking);
-  //   navigate(`/my/appointments/edit/${props.data.id}`);
-  // };
 
   const handleEdit = (e) => {
     navigate(`/my/appointments/edit/${props.data.id}`);
@@ -136,7 +121,6 @@ const ApptCard = (props) => {
             <div className="apptBtn">
               <Button
                 onClick={handleEdit}
-                // data={editAppt}
                 variant="contained"
                 style={{
                   backgroundColor: "#0cb4ea",
@@ -147,7 +131,6 @@ const ApptCard = (props) => {
                   color: "white",
                 }}
               >
-                {/* <EditApptPage data={editAppt} /> */}
                 EDIT
               </Button>
               <Button

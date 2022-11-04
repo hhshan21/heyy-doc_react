@@ -10,6 +10,9 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import "./EditApptForm.css";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const EditApptForm = (props) => {
   const navigate = useNavigate();
   const params = useParams();
@@ -65,7 +68,7 @@ const EditApptForm = (props) => {
   // retrieve data from db to edit appt card
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get(`http://localhost:8000/api/v1/doctors`, {
+      const res = await axios.get(`${BASE_API_URL}/api/v1/doctors`, {
         headers: headerOptions,
       });
       const data = await res.data;
@@ -79,11 +82,11 @@ const EditApptForm = (props) => {
     e.preventDefault();
     setCatchError(null);
 
-    //https://heyy-doc-backend.herokuapp.com/api/v1/user/bookings/${editAppt.bookings.id}
+    // https://heyy-doc-backend.herokuapp.com/api/v1/user/bookings/${editAppt.bookings.id}
     // "http://localhost:8000/api/v1/user/bookings/${editAppt.bookings.id}",
     try {
       const res = await axios.patch(
-        `http://localhost:8000/api/v1/user/bookings/${params.id}`,
+        `${BASE_API_URL}/api/v1/user/bookings/${params.id}`,
         {
           patientId: userId,
           doctorId: selectedDoctorId,

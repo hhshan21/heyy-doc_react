@@ -5,6 +5,9 @@ import "./PatientApptCard.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const PatientApptCard = (props) => {
   const navigate = useNavigate();
   const params = useParams();
@@ -25,7 +28,7 @@ const PatientApptCard = (props) => {
   const handleDelete = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
+        `${BASE_API_URL}/api/v1/user/bookings/${props.data.id}`,
         { headers: headerOptions }
       );
 
