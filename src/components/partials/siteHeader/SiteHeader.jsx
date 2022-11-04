@@ -95,6 +95,7 @@ const SiteHeader = (props) => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  {user}
                   <Link
                     to="/login"
                     style={{ textDecoration: "none", color: "#0cb4ea" }}
