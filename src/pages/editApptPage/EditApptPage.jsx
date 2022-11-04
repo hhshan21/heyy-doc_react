@@ -5,6 +5,9 @@ import EditApptForm from "../../components/appointments/editApptForm/EditApptFor
 import "bootstrap";
 import "./EditApptPage.css";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const EditApptPage = () => {
   const params = useParams();
   const [editAppt, setEditAppt] = useState(null);
@@ -19,7 +22,7 @@ const EditApptPage = () => {
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        `http://localhost:8000/api/v1/user/bookings/${params.id}`,
+        `${BASE_API_URL}/api/v1/user/bookings/${params.id}`,
         {
           headers: headerOptions,
         }

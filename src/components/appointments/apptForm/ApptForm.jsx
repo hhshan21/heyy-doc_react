@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Box, MenuItem } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+} from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -48,7 +57,7 @@ const ApptForm = (props) => {
         headers: headerOptions,
       });
       const data = await res.data;
-      console.log("data in ApptForm: ", data);
+      // console.log("data in ApptForm: ", data);
       setDoctors(data);
     };
     fetchApi();
@@ -88,7 +97,7 @@ const ApptForm = (props) => {
         {
           patientId: userId,
           doctorId: selectedDoctorId,
-          bookingDate: apptDate.setLocale("zh").toLocaleString(),
+          bookingDate: apptDate,
           bookingTime: selectedTimeSlot,
           symptoms: symptoms,
         },
@@ -104,9 +113,8 @@ const ApptForm = (props) => {
     } catch (error) {
       // console.log("error: ", error);
       // display an error
-      // console.log("error.response.data: ", error.response.data);
-      toast.error(error.response.data);
-      setCatchError(error.response.data.error);
+      toast.error(error.response.data.err);
+      setCatchError(error.response.error);
     }
   };
 
@@ -133,24 +141,29 @@ const ApptForm = (props) => {
       </div>
       <form onSubmit={handleSubmit}>
         <div>
-          <Box mb={3}>
+          <Box mb={3} sx={{ minWidth: 120 }}>
             <div>
-              <TextField
-                id="doctorId"
-                select
-                label="Doctor Name"
-                value={selectedDoctorId}
-                onChange={handleDoctorChange}
-                helperText="Please select a Doctor"
-              >
-                {doctors.map((doctor) => {
-                  return (
-                    <MenuItem value={doctor.id} key={doctor.id}>
-                      {`Dr. ${doctor.lastName} ${doctor.firstName}`}
-                    </MenuItem>
-                  );
-                })}
-              </TextField>
+              <FormControl style={{ width: "14.5em" }}>
+                <InputLabel id="doctorName">Doctor's Name</InputLabel>
+                <Select
+                  id="doctorId"
+                  required
+                  label="Doctor's Name"
+                  value={selectedDoctorId}
+                  onChange={handleDoctorChange}
+                >
+                  {doctors.map((doctor) => {
+                    return (
+                      <MenuItem value={doctor.id} key={doctor.id}>
+                        {`Dr. ${doctor.lastName} ${doctor.firstName}`}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText id="docHelperText">
+                  Please select a Doctor
+                </FormHelperText>
+              </FormControl>
             </div>
           </Box>
           <Box mb={3}>
@@ -172,6 +185,7 @@ const ApptForm = (props) => {
                   marginBottom: "1em",
                   fontSize: "small",
                   color: "rgba(0, 0, 0, 0.6)",
+                  marginTop: "0.5em",
                 }}
               >
                 Please select from tomorrow's date onwards
@@ -180,22 +194,27 @@ const ApptForm = (props) => {
           </Box>
           <Box mb={3}>
             <div>
-              <TextField
-                id="bookingTime"
-                select
-                label="Appointment Time"
-                helperText="Please select a time"
-                onChange={handleTimeSlotChange}
-              >
-                {selectedDoctorTimeSlots &&
-                  selectedDoctorTimeSlots.map((timeslot) => {
-                    return (
-                      <MenuItem value={timeslot} key={timeslot}>
-                        {timeslot}
-                      </MenuItem>
-                    );
-                  })}
-              </TextField>
+              <FormControl style={{ width: "14.5em" }}>
+                <InputLabel id="apptSlot">Appointment Slot</InputLabel>
+                <Select
+                  id="apptTime"
+                  required
+                  label="Appointment Slot"
+                  onChange={handleTimeSlotChange}
+                >
+                  {selectedDoctorTimeSlots &&
+                    selectedDoctorTimeSlots.map((timeslot) => {
+                      return (
+                        <MenuItem value={timeslot} key={timeslot}>
+                          {timeslot}
+                        </MenuItem>
+                      );
+                    })}
+                </Select>
+                <FormHelperText id="apptHelperText">
+                  Please select a slot
+                </FormHelperText>
+              </FormControl>
             </div>
           </Box>
           <Box mb={3}>
@@ -207,6 +226,7 @@ const ApptForm = (props) => {
                 id="symptoms"
                 label="Please key in your symptoms"
                 multiline
+                required
                 rows={4}
                 helperText="Min. 3 characters"
                 style={{

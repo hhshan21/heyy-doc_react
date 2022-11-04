@@ -4,25 +4,23 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const LoginPage = (props) => {
   // props.tokenState
   const [catchError, setCatchError] = useState(null);
   const navigate = useNavigate();
 
   // http://localhost:8000/api/v1/user/login
+  //https://heyy-doc-backend.herokuapp.com/api/v1/user/login
 
   const onSubmit = async (data) => {
     // console.log("from loginpage:", data);
     setCatchError(null);
 
-    //http://localhost:8000/api/v1/user/doctors
-    //https://heyy-doc-backend.herokuapp.com/api/v1/user/login
-
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/user/login",
-        data
-      );
+      const res = await axios.post(`${BASE_API_URL}/api/v1/user/login`, data);
       // console.log("Server Respond:", res);
       // console.log("token", res.data.token);
 

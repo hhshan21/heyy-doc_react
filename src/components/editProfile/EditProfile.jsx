@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
 import "./EditProfile.css";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const EditProfile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
@@ -34,7 +37,7 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchApi = async () => {
       const res = await axios.get(
-        `http://localhost:8000/api/v1/user/profile`,
+        `${BASE_API_URL}/api/v1/user/profile`,
 
         { headers: headerOptions }
       );
@@ -62,7 +65,7 @@ const EditProfile = () => {
     // "http://localhost:8000/api/v1/user/profile",
     try {
       const res = await axios.patch(
-        `http://localhost:8000/api/v1/user/profile`,
+        `${BASE_API_URL}/api/v1/user/profile`,
         {
           firstName: getValues().firstName,
           lastName: getValues().lastName,

@@ -3,6 +3,9 @@ import axios from "axios";
 import PatientApptCard from "../../components/patientApptCard/PatientApptCard";
 import "./PatientAppt.css";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const PatientAppt = () => {
   const [patientappts, setPatientAppts] = useState([]);
 
@@ -16,12 +19,9 @@ const PatientAppt = () => {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get(
-        "http://localhost:8000/api/v1/user/appointments",
-        {
-          headers: headerOptions,
-        }
-      );
+      const res = await axios.get(`${BASE_API_URL}/api/v1/user/appointments`, {
+        headers: headerOptions,
+      });
       const data = await res.data;
       // console.log("data: ", data);
       setPatientAppts(data);

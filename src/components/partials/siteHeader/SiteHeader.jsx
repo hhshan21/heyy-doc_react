@@ -10,26 +10,29 @@ import "@fontsource/lexend-deca";
 const SiteHeader = (props) => {
   const navigate = useNavigate();
 
-  const [tokenState, setTokenState] = useState();
-  const [user, setUser] = useState();
+  // const [tokenState, setTokenState] = useState();
+  // const [user, setUser] = useState();
 
-  const token = localStorage.getItem("user_token");
-  const tokenToSend = "Bearer " + token;
+  // const token = localStorage.getItem("user_token");
+  // const tokenToSend = "Bearer " + token;
 
-  const getToken = async () => {
-    setTokenState(token);
-    if (tokenState) {
-      setUser(jwt_decode(tokenState).data);
-    }
-  };
+  // const getToken = async () => {
+  //   setTokenState(token);
+  //   if (tokenState) {
+  //     setUser(jwt_decode(tokenState).data);
+  //   }
+  // };
 
-  useEffect(() => {
-    getToken();
-  }, [tokenState]);
+  // useEffect(() => {
+  //   getToken();
+  // }, [tokenState]);
+
+  console.log("props.tokenState: ", props.tokenState);
+  console.log("props.user: ", props.user);
 
   const logout = () => {
     localStorage.removeItem("user_token");
-    setTokenState(null);
+    props.setTokenState(null);
     if (localStorage.getItem("user_token") !== null) {
       toast.error("Logout unsuccessful, please try again");
     } else {
@@ -80,7 +83,7 @@ const SiteHeader = (props) => {
               </Link>
             </li>
           </ul>
-          {!tokenState ? (
+          {!props.tokenState ? (
             <span className="navbar-text">
               <ul className="navbar-nav mr-auto ml-4">
                 <li className="nav-item">

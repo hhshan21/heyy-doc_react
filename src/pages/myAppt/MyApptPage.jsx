@@ -3,6 +3,9 @@ import axios from "axios";
 import ApptCard from "../../components/appointments/apptCard/ApptCard";
 import "./MyApptPage.css";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
 
@@ -16,12 +19,9 @@ const AppointmentsPage = () => {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get(
-        "http://localhost:8000/api/v1/user/bookings",
-        {
-          headers: headerOptions,
-        }
-      );
+      const res = await axios.get(`${BASE_API_URL}/api/v1/user/bookings`, {
+        headers: headerOptions,
+      });
       const data = await res.data;
       // console.log("data in MyApptPage: ", data);
       setAppointments(data.bookings);

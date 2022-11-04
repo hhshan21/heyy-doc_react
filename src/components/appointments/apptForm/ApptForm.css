@@ -5,6 +5,20 @@
   text-align: center;
 }
 
+#docHelperText {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Lexend Deca";
+  text-align: center;
+  font-size: small;
+}
+
+#apptHelperText {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Lexend Deca";
+  text-align: center;
+  font-size: small;
+}
+
 .apptFormBtn {
   margin-top: 1em;
   text-align: center;

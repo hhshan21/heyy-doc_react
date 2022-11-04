@@ -4,6 +4,9 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const ShowProfile = () => {
   const [profile, setProfile] = useState([]);
   const navigate = useNavigate();
@@ -18,7 +21,7 @@ const ShowProfile = () => {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await axios.get("http://localhost:8000/api/v1/user/profile", {
+      const res = await axios.get(`${BASE_API_URL}/api/v1/user/profile`, {
         headers: headerOptions,
       });
       const data = await res.data;
