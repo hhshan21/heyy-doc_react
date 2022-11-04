@@ -8,9 +8,12 @@ import { toast } from "react-toastify";
 const BASE_API_URL = window.BASE_API_URL;
 
 const LoginPage = (props) => {
-  // props.tokenState
+  // console.log("props.tokenState in Login Page: ", props.tokenState);
+  // console.log("props.user in Login Page: ", props.user);
+
   const [catchError, setCatchError] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // http://localhost:8000/api/v1/user/login
   //https://heyy-doc-backend.herokuapp.com/api/v1/user/login
@@ -22,7 +25,10 @@ const LoginPage = (props) => {
     try {
       const res = await axios.post(`${BASE_API_URL}/api/v1/user/login`, data);
       // console.log("Server Respond:", res);
-      // console.log("token", res.data.token);
+      // props.tokenState = res.data.token;
+      // props.user = res.data.user.isDoctor;
+      // console.log("res.data", res.data);
+      // console.log("token - res.data.token", res.data.token);
 
       toast.success("Login successful!", {
         position: toast.POSITION.TOP_CENTER,
@@ -30,11 +36,13 @@ const LoginPage = (props) => {
       if (res.status === 200 || res.status === 201) {
         // store the token into localstorage / cookie
         localStorage.setItem("user_token", res.data.token);
-
-        navigate("/");
+        if (location.pathname === "/login") {
+          location.length > 0 ? navigate(-1) : navigate("/");
+        }
       }
     } catch (error) {
       // display an error
+      console.log("error: ", error);
       toast.error(error.response.data.error);
 
       setCatchError(error.response.data.error);
