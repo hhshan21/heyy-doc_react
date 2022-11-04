@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, MenuItem, Box, TextField } from "@mui/material";
+import { Button, Box, TextField, FormHelperText } from "@mui/material";
 import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
 import "./EditProfile.css";
@@ -24,6 +24,7 @@ const EditProfile = () => {
       firstName: "",
       lastName: "",
       drugAllergies: "",
+      imageUrl: "",
     },
   });
 
@@ -49,6 +50,7 @@ const EditProfile = () => {
         firstName: data.firstName,
         lastName: data.lastName,
         drugAllergies: data.drugAllergies,
+        imageUrl: data.imageUrl,
       });
     };
     fetchApi();
@@ -70,6 +72,7 @@ const EditProfile = () => {
           firstName: getValues().firstName,
           lastName: getValues().lastName,
           drugAllergies: getValues().drugAllergies,
+          imageUrl: getValues().imageUrl,
         },
         { headers: headerOptions }
       );
@@ -166,6 +169,22 @@ const EditProfile = () => {
                 />
               )}
             />
+          </Box>
+          <Box mb={3}>
+            <Controller
+              name="imageUrl"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  // name={"about_me"}
+                  label={"Image Url:"}
+                  fullWidth
+                  variant="outlined"
+                />
+              )}
+            />
+            <FormHelperText>Please input URL only</FormHelperText>
           </Box>
           <p style={{ fontSize: "110%" }}>
             If you wish to change your email, please email us at
