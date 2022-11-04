@@ -11,12 +11,9 @@ import axios from "axios";
 import "./EditApptForm.css";
 
 const EditApptForm = (props) => {
-  const [editAppt, setEditAppt] = useState([]);
   const navigate = useNavigate();
   const params = useParams();
   const [catchError, setCatchError] = useState(null);
-
-  // console.log("hi from EditApptForm props.data: ", props.data);
 
   // setting a constant to the bookingDate to convert the date format
   const isoStrApptDate = props.data.bookingDate;
@@ -35,20 +32,6 @@ const EditApptForm = (props) => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(
     props.data.bookingTime
   );
-
-  // console.log("docFirstName: ", docFirstName);
-  // console.log("docLastName: ", docLastName);
-  // console.log("selectedDocName: ", selectedDocName);
-
-  // setting the state of the form data
-  // const [formData, setFormData] = useState({
-  //   doctorId: `Dr. ${docLastName} ${docFirstName}`,
-  //   bookingDate: new Date(isoStrApptDate),
-  //   bookingTime: props.data.bookingTime,
-  //   symptoms: props.data.symptoms,
-  // });
-
-  // console.log("formData: ", formData);
 
   const handleDateChange = (newApptDate) => {
     setApptDate(newApptDate);
@@ -79,20 +62,6 @@ const EditApptForm = (props) => {
   const userInfo = jwt_decode(token);
   const userId = userInfo.data.userId;
 
-  // call to edit appt card
-  // useEffect(() => {
-  //   const fetchApi = async () => {
-  //     const res = await axios.get(
-  //       `http://localhost:8000/api/v1/user/bookings`,
-  //       { headers: headerOptions }
-  //     );
-  //     const data = await res.data;
-
-  //     setEditAppt(data);
-  //   };
-  //   fetchApi();
-  // }, []);
-
   // retrieve data from db to edit appt card
   useEffect(() => {
     const fetchApi = async () => {
@@ -118,14 +87,12 @@ const EditApptForm = (props) => {
         {
           patientId: userId,
           doctorId: selectedDoctorId,
-          bookingDate: apptDate.setLocale("zh").toLocaleString(),
+          bookingDate: apptDate,
           bookingTime: selectedTimeSlot,
           symptoms: symptoms,
         },
         { headers: headerOptions }
       );
-
-      // console.log("res: ", res);
 
       toast.success("Appointment successfully updated!", {
         position: toast.POSITION.TOP_CENTER,

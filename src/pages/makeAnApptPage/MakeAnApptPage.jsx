@@ -1,48 +1,9 @@
-import { useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import ApptForm from "../../components/appointments/apptForm/ApptForm";
 import "./MakeAnApptPage.css";
-import { toast } from "react-toastify";
 
 const MakeAnApptPage = () => {
   const [catchError, setCatchError] = useState(null);
-  // const location = useLocation();
-  // const navigate = useNavigate();
-
-  // const headerOptions = {
-  //   "Content-Type": "application/json",
-  //   Authorization: `Bearer ${localStorage.getItem("user_token")}`,
-  // };
-
-  //http://localhost:8000/api/v1/doctors
-  // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
-
-  // const onSubmit = async (data) => {
-  //   console.log("From appt form compononent in appt page:", data);
-  //   setCatchError(null);
-
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:8000/api/v1/user/bookings",
-  //       { headers: headerOptions },
-  //       data
-  //     );
-  //     // console.log("Server Respond:", res);
-
-  //     toast.success("Successfully booked!", {
-  //       position: toast.POSITION.TOP_CENTER,
-  //     });
-
-  //     navigate("/my/appointments");
-  //   } catch (error) {
-  //     // console.log("error: ", error);
-  //     // display an error
-  //     // console.log("error.response.data: ", error.response.data);
-  //     toast.error(error.response.data);
-  //     setCatchError(error.response.data.error);
-  //   }
-  // };
 
   return (
     <div>
@@ -64,7 +25,6 @@ const MakeAnApptPage = () => {
               </p>
             </div>
           )}
-          {/* <ApptForm data={onSubmit} /> */}
           <ApptForm />
         </div>
       </div>

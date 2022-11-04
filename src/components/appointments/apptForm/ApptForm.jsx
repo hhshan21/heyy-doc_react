@@ -48,7 +48,7 @@ const ApptForm = (props) => {
         headers: headerOptions,
       });
       const data = await res.data;
-      // console.log("data: ", data);
+      console.log("data in ApptForm: ", data);
       setDoctors(data);
     };
     fetchApi();
@@ -77,9 +77,6 @@ const ApptForm = (props) => {
   const selectedDoctorTimeSlots = doctors
     .find((doctor) => doctor.id === selectedDoctorId)
     ?.doctorTime.split(",");
-
-  // console.log("doctors: ", doctors);
-  // console.log("selectedDoctorTimeSlots: ", selectedDoctorTimeSlots);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
