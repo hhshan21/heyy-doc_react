@@ -10,8 +10,8 @@ import "@fontsource/lexend-deca";
 const SiteHeader = (props) => {
   const navigate = useNavigate();
 
-  // const [tokenState, setTokenState] = useState();
-  // const [user, setUser] = useState();
+  const [tokenState, setTokenState] = useState();
+  const [user, setUser] = useState();
 
   // const token = localStorage.getItem("user_token");
   // const tokenToSend = "Bearer " + token;
@@ -27,8 +27,8 @@ const SiteHeader = (props) => {
   //   getToken();
   // }, [tokenState]);
 
-  console.log("props.tokenState: ", props.tokenState);
-  console.log("props.user: ", props.user);
+  // console.log("props.tokenState: ", props.tokenState);
+  // console.log("props.user: ", props.user);
 
   const logout = () => {
     localStorage.removeItem("user_token");
