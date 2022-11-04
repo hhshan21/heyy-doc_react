@@ -1,62 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { TextField, Button, Box, MenuItem } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
-import { DateTime } from "luxon";
 import { toast } from "react-toastify";
-import axios from "axios";
+import { DateTime } from "luxon";
 import jwt_decode from "jwt-decode";
-import "./ApptForm.css";
-import "bootstrap";
+import axios from "axios";
+import "./EditApptForm.css";
 
-// const BASE_API_URL = "http://localhost:8000";
-const BASE_API_URL = window.BASE_API_URL;
-
-const ApptForm = (props) => {
+const EditApptForm = (props) => {
   const navigate = useNavigate();
+  const params = useParams();
   const [catchError, setCatchError] = useState(null);
 
-  const tomorrow = DateTime.now()
-    .plus({ days: 1 })
-    .setLocale("zh")
-    .toLocaleString();
+  // setting a constant to the bookingDate to convert the date format
+  const isoStrApptDate = props.data.bookingDate;
 
+  const docFirstName = props.data.doctor.firstName;
+  const docLastName = props.data.doctor.lastName;
+  const selectedDocName = `Dr. ${docLastName} ${docFirstName}`;
+
+  // const [booking, setBooking] = useState([]);
   const [doctors, setDoctors] = useState([]);
-  const [selectedDoctorId, setSelectedDoctorId] = useState("");
-  const [symptoms, setSymptoms] = useState("");
-  const [apptDate, setApptDate] = useState(tomorrow);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
-
-  const headerOptions = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
-  };
-
-  const token = localStorage.getItem("user_token");
-  const userInfo = jwt_decode(token);
-  const userId = userInfo.data.userId;
-
-  ///api/v1/doctors
-  // https://heyy-doc-backend.herokuapp.com/api/v1/doctors
-
-  // fetching doctors api here
-  useEffect(() => {
-    const fetchApi = async () => {
-      const res = await axios.get(`${BASE_API_URL}/api/v1/doctors`, {
-        headers: headerOptions,
-      });
-      const data = await res.data;
-      console.log("data in ApptForm: ", data);
-      setDoctors(data);
-    };
-    fetchApi();
-    toast.promise(fetchApi, {
-      pending: "Please wait while we call our doctors!",
-      success: "Doctors' info have arrived!",
-    });
-  }, []);
+  const [selectedDoctorId, setSelectedDoctorId] = useState(
+    `Dr. ${docLastName} ${docFirstName}`
+  );
+  const [symptoms, setSymptoms] = useState(props.data.symptoms);
+  const [apptDate, setApptDate] = useState(new Date(isoStrApptDate));
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(
+    props.data.bookingTime
+  );
 
   const handleDateChange = (newApptDate) => {
     setApptDate(newApptDate);
@@ -78,44 +53,63 @@ const ApptForm = (props) => {
     .find((doctor) => doctor.id === selectedDoctorId)
     ?.doctorTime.split(",");
 
+  const headerOptions = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+  };
+
+  const token = localStorage.getItem("user_token");
+  const userInfo = jwt_decode(token);
+  const userId = userInfo.data.userId;
+
+  // retrieve data from db to edit appt card
+  useEffect(() => {
+    const fetchApi = async () => {
+      const res = await axios.get(`http://localhost:8000/api/v1/doctors`, {
+        headers: headerOptions,
+      });
+      const data = await res.data;
+      // console.log("data: ", data);
+      setDoctors(data);
+    };
+    fetchApi();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCatchError(null);
 
+    //https://heyy-doc-backend.herokuapp.com/api/v1/user/bookings/${editAppt.bookings.id}
+    // "http://localhost:8000/api/v1/user/bookings/${editAppt.bookings.id}",
     try {
-      const res = await axios.post(
-        `${BASE_API_URL}/api/v1/user/bookings`,
+      const res = await axios.patch(
+        `http://localhost:8000/api/v1/user/bookings/${params.id}`,
         {
           patientId: userId,
           doctorId: selectedDoctorId,
-          bookingDate: apptDate.setLocale("zh").toLocaleString(),
+          bookingDate: apptDate,
           bookingTime: selectedTimeSlot,
           symptoms: symptoms,
         },
         { headers: headerOptions }
       );
-      // console.log("Server Respond:", res);
 
-      toast.success("Successfully booked!", {
+      toast.success("Appointment successfully updated!", {
         position: toast.POSITION.TOP_CENTER,
       });
-
       navigate("/my/appointments");
-    } catch (error) {
-      // console.log("error: ", error);
-      // display an error
-      // console.log("error.response.data: ", error.response.data);
-      toast.error(error.response.data);
-      setCatchError(error.response.data.error);
+    } catch (err) {
+      // console.log("err: ", err);
+      toast.error(err.message, { position: toast.POSITION.TOP_CENTER });
     }
   };
 
   const handleCancel = (e) => {
-    navigate("/");
+    navigate("/my/appointments");
   };
 
   return (
-    <div className="apptForm">
+    <div>
       <div>
         {catchError && (
           <div>
@@ -182,6 +176,7 @@ const ApptForm = (props) => {
             <div>
               <TextField
                 id="bookingTime"
+                value={selectedTimeSlot}
                 select
                 label="Appointment Time"
                 helperText="Please select a time"
@@ -198,7 +193,7 @@ const ApptForm = (props) => {
               </TextField>
             </div>
           </Box>
-          <Box mb={3}>
+          <Box mb={2}>
             <div className="symptoms">
               <TextField
                 sx={{ m: 1 }}
@@ -216,7 +211,7 @@ const ApptForm = (props) => {
               />
             </div>
           </Box>
-          <div className="apptFormBtn">
+          <div className="editApptFormBtn">
             <Button
               onClick={handleCancel}
               variant="contained"
@@ -242,7 +237,7 @@ const ApptForm = (props) => {
                 fontSize: "medium",
               }}
             >
-              BOOK
+              UPDATE
             </Button>
           </div>
         </div>
@@ -251,4 +246,4 @@ const ApptForm = (props) => {
   );
 };
 
-export default ApptForm;
+export default EditApptForm;

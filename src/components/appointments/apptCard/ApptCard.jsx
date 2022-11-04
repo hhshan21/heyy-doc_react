@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Paper, Typography, ButtonBase, Button } from "@mui/material";
+import EditApptPage from "../../../pages/editApptPage/EditApptPage";
 import "./ApptCard.css";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -56,18 +57,20 @@ const ApptCard = (props) => {
   };
 
   // call to edit appt card
-  // useEffect(() => {
-  //   const fetchApi = async () => {
-  //     const res = await axios.get(
-  //       `http://localhost:8000/api/v1/user/bookings`,
-  //       { headers: headerOptions }
-  //     );
-  //     const data = await res.data;
+  // const handleEdit = async () => {
+  //   const response = await axios.get(
+  //     `http://localhost:8000/api/v1/user/bookings/${props.data.id}`,
+  //     { headers: headerOptions }
+  //   );
+  //   const data = await response.data;
+  //   console.log("Edit data: ", data.booking);
+  //   setEditAppt(data.booking);
+  //   navigate(`/my/appointments/edit/${props.data.id}`);
+  // };
 
-  //     setEditAppt(data);
-  //   };
-  //   fetchApi();
-  // }, []);
+  const handleEdit = (e) => {
+    navigate(`/my/appointments/edit/${props.data.id}`);
+  };
 
   return (
     <div className="myAppts">
@@ -127,19 +130,13 @@ const ApptCard = (props) => {
                   <div>Symptoms: {symptoms}</div>
                 </Grid>
               </Grid>
-              {/* <Grid item>
-                <div className="apptInfo">Appointment Info</div>
-                <div>Date: {bookingDate}</div>
-                <div>Time: {bookingTime}</div>
-                <div>Symptoms: {symptoms}</div>
-              </Grid> */}
             </Grid>
           </Grid>
           {!checkDate ? (
             <div className="apptBtn">
-              {/* <div> */}
               <Button
-                onClick={() => navigate(`/my/appointments/edit/${params.id}`)}
+                onClick={handleEdit}
+                // data={editAppt}
                 variant="contained"
                 style={{
                   backgroundColor: "#0cb4ea",
@@ -150,10 +147,9 @@ const ApptCard = (props) => {
                   color: "white",
                 }}
               >
+                {/* <EditApptPage data={editAppt} /> */}
                 EDIT
               </Button>
-              {/* <EditApptForm data={editTrip} /> */}
-              {/* </div> */}
               <Button
                 onClick={delConfirmation}
                 variant="contained"
