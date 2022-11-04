@@ -16,19 +16,39 @@ const EditApptForm = (props) => {
   const params = useParams();
   const [catchError, setCatchError] = useState(null);
 
-  console.log("hi from EditApptForm props.data: ", props.data);
+  // console.log("hi from EditApptForm props.data: ", props.data);
 
-  const tomorrow = DateTime.now()
-    .plus({ days: 1 })
-    .setLocale("zh")
-    .toLocaleString();
+  // setting a constant to the bookingDate to convert the date format
+  const isoStrApptDate = props.data.bookingDate;
+
+  const docFirstName = props.data.doctor.firstName;
+  const docLastName = props.data.doctor.lastName;
+  const selectedDocName = `Dr. ${docLastName} ${docFirstName}`;
 
   // const [booking, setBooking] = useState([]);
   const [doctors, setDoctors] = useState([]);
-  const [selectedDoctorId, setSelectedDoctorId] = useState("");
-  const [symptoms, setSymptoms] = useState("");
-  const [apptDate, setApptDate] = useState(tomorrow);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  const [selectedDoctorId, setSelectedDoctorId] = useState(
+    `Dr. ${docLastName} ${docFirstName}`
+  );
+  const [symptoms, setSymptoms] = useState(props.data.symptoms);
+  const [apptDate, setApptDate] = useState(new Date(isoStrApptDate));
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(
+    props.data.bookingTime
+  );
+
+  // console.log("docFirstName: ", docFirstName);
+  // console.log("docLastName: ", docLastName);
+  // console.log("selectedDocName: ", selectedDocName);
+
+  // setting the state of the form data
+  // const [formData, setFormData] = useState({
+  //   doctorId: `Dr. ${docLastName} ${docFirstName}`,
+  //   bookingDate: new Date(isoStrApptDate),
+  //   bookingTime: props.data.bookingTime,
+  //   symptoms: props.data.symptoms,
+  // });
+
+  // console.log("formData: ", formData);
 
   const handleDateChange = (newApptDate) => {
     setApptDate(newApptDate);
@@ -94,7 +114,7 @@ const EditApptForm = (props) => {
     // "http://localhost:8000/api/v1/user/bookings/${editAppt.bookings.id}",
     try {
       const res = await axios.patch(
-        `http://localhost:8000/api/v1/user/bookings/${doctors.id}`,
+        `http://localhost:8000/api/v1/user/bookings/${params.id}`,
         {
           patientId: userId,
           doctorId: selectedDoctorId,
@@ -189,6 +209,7 @@ const EditApptForm = (props) => {
             <div>
               <TextField
                 id="bookingTime"
+                value={selectedTimeSlot}
                 select
                 label="Appointment Time"
                 helperText="Please select a time"

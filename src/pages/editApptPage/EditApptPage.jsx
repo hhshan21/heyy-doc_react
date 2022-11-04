@@ -40,10 +40,6 @@ const EditApptPage = () => {
       setEditAppt(data.booking);
     };
     fetchApi();
-    toast.promise(fetchApi, {
-      pending: "Please wait while we retrieve your appt info!",
-      success: "Appt info loaded!",
-    });
   }, []);
 
   // console.log("editAppt: ", editAppt);
