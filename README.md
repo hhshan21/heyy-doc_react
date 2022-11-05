@@ -21,8 +21,8 @@ PERN stack:
 
 ## New things learnt
 
-Figma
-Learning Sequelize
+1. Figma
+2. Learning Sequelize
 
 ## Improvements I might make
 
