@@ -21,6 +21,7 @@ PERN stack:
 
 ## New things learnt
 
+Figma
 Learning Sequelize
 
 ## Improvements I might make
