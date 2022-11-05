@@ -28,7 +28,7 @@ PERN stack:
 ## Improvements I might make
 
 1. Add search function for doctors by name
-2. Allow notifications to the patients and doctors
+2. Use React cookie
 
 # Getting Started with Create React App
 
