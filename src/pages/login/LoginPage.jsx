@@ -34,7 +34,6 @@ const LoginPage = (props) => {
       toast.success("Login successful!", {
         position: toast.POSITION.TOP_CENTER,
       });
-
       navigate("/");
       if (res.status === 200 || res.status === 201) {
         // store the token into localstorage / cookie
