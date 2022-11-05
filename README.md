@@ -6,6 +6,10 @@ Heyy Doc is a scheduling app for users, where you can make an arrangement to see
 
 - https://heyy-doc.netlify.app
 
+## Figma
+
+- https://www.figma.com/file/QfyXvhWGrisi2fpepVB7Ry/Heyy-Doc?node-id=4%3A0
+
 ## Techstack
 
 PERN stack:
