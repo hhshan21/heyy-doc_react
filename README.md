@@ -21,9 +21,7 @@ PERN stack:
 
 ## New things learnt
 
-Postgres and connecting to ElephantSql
-Learning how to read the network tab (req and response)
-How to use Figma
+Learning Sequelize
 
 ## Technical challenges
 
