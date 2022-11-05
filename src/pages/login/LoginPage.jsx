@@ -34,7 +34,8 @@ const LoginPage = (props) => {
       toast.success("Login successful!", {
         position: toast.POSITION.TOP_CENTER,
       });
-      window.location.reload();
+
+      navigate("/");
       if (res.status === 200 || res.status === 201) {
         // store the token into localstorage / cookie
         localStorage.setItem("user_token", res.data.token);
