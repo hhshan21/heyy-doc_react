@@ -1,4 +1,4 @@
-# Buy4Me :man_health_worker: :woman_health_worker:
+# Heyy Doc! :man_health_worker: :woman_health_worker:
 
 Heyy Doc is a scheduling app for users, where you can make an arrangement to see a doctor anytime, anywhere at your own convenience.
 
@@ -23,6 +23,7 @@ PERN stack:
 
 1. Figma
 2. Sequelize
+3. MUI
 
 ## Improvements I might make
 
