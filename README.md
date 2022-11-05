@@ -23,10 +23,6 @@ PERN stack:
 
 Learning Sequelize
 
-## Technical challenges
-
-- Doing the backend
-
 ## Improvements I might make
 
 1. Add search function for doctors by name
