@@ -4,6 +4,9 @@ import axios from "axios";
 import RegisterForm from "../../components/registerForm/RegisterForm";
 import { toast } from "react-toastify";
 
+// const BASE_API_URL = "http://localhost:8000";
+const BASE_API_URL = window.BASE_API_URL;
+
 const RegisterPage = () => {
   const [catchError, setCatchError] = useState(null);
   const location = useLocation();
@@ -18,7 +21,7 @@ const RegisterPage = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/register",
+        `${BASE_API_URL}/api/v1/user/register`,
         data
       );
       console.log("Server Respond:", res);
@@ -33,7 +36,7 @@ const RegisterPage = () => {
         }
       }
     } catch (error) {
-      // console.log("error: ", error);
+      console.log("error: ", error);
       // display an error
       // console.log("error.response.data: ", error.response.data);
       toast.error(error.response.data);
